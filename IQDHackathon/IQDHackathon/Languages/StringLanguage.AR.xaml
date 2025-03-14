@@ -1,0 +1,40 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                     xmlns:local="clr-namespace:IQDHackathon">
+
+    <FlowDirection x:Key="AppFlowDirection">RightToLeft</FlowDirection>
+    <FlowDirection x:Key="SPAppFlowDirection">LeftToRight</FlowDirection>
+
+    <system:String x:Key="rdDebts">الديـون</system:String>
+    <system:String x:Key="rdSales">المبيعات</system:String>
+    <system:String x:Key="rdPurchases">المشتريات</system:String>
+    <system:String x:Key="rdRevenue">الإيرادات</system:String>
+    <system:String x:Key="rdSetting">الاعدادات</system:String>
+    <system:String x:Key="rdNotifications">الاشعارات</system:String>
+    <system:String x:Key="rdUsers">المستخدمين</system:String>
+    <system:String x:Key="rdInventory">الجرد</system:String>
+    <system:String x:Key="rdLedger">الحسابات</system:String>
+    <system:String x:Key="rdStorage">المخزن</system:String>
+    <system:String x:Key="rdHome">الرئيسية</system:String>
+    <system:String x:Key="lbLanguage">اللغة</system:String>
+    <system:String x:Key="UserName">اسم المستخدم</system:String>
+    <system:String x:Key="Pasword">كلمة السر</system:String>
+    <system:String x:Key="company">شركة يووووووسف</system:String>
+    <system:String x:Key="ThemeTitle">الثيم</system:String>
+    <system:String x:Key="LanguageTitle">اللغة</system:String>
+    <system:String x:Key="rdDark">ليلي</system:String>
+    <system:String x:Key="rdLight">نهاري</system:String>
+    <system:String x:Key="rdArabic">العربية</system:String>
+    <system:String x:Key="rdEnglish">الانكليزية</system:String>
+    <system:String x:Key="addsalesmenue">اصدار قائمة بيع</system:String>
+    <system:String x:Key="addpurchesmenue">اضافة قائمة شراء</system:String>
+    <system:String x:Key="debitmangment">ادارة الديون</system:String>
+
+    <system:String x:Key="StorageContain">محتويات المخزن</system:String>
+    <system:String x:Key="AddMenuetoStorage">اضافة قائمة للمخزن</system:String>
+    <system:String x:Key="Suppliers">الموردون</system:String>
+    <system:String x:Key="ReturnItemToStorage">مرجعات المخزن</system:String>
+   
+</ResourceDictionary>
