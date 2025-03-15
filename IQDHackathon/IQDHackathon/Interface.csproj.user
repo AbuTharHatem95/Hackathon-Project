@@ -7,7 +7,63 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Pages\EducationMaterialPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\FinancialAnalyzerPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\ImageGeneratorPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\MaintenanceAssistantPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\PresentationGeneratorPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\ReportAssistantPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\StoryCharacterPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\TestScenarioGeneratorPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\UIDesignerPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\EducationMaterialPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\FinancialAnalyzerPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\ImageGeneratorPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MaintenanceAssistantPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\PresentationGeneratorPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\ReportAssistantPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\StoryCharacterPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\TestScenarioGeneratorPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\UIDesignerPage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
