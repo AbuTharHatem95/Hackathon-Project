@@ -17,5 +17,10 @@ namespace Interface.Pages
             mainWindow.Show();
             Window.GetWindow(this).Close();
         }
+
+        private void Border_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+         
+        }
     }
 }
