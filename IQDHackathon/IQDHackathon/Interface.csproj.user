@@ -34,6 +34,9 @@
     <Compile Update="Pages\UIDesignerPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\UserControles\ctrlCheckBoxBoxes.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">

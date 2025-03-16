@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using Interface.Pages;
+using IQD_UI_Library;
 
 namespace IQDHackathon
 {
@@ -105,18 +106,18 @@ namespace IQDHackathon
 
         private void SmartFinancialAnalysis_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            IQD_UI_Library.IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
+          // IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
         }
 
         private void Presentations_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            IQD_UI_Library.IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
+           // IQD_UI_Library.IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
 
         }
 
         private void ReportingAssistant_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            IQD_UI_Library.IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
+           // IQD_UI_Library.IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
 
         }
 
@@ -127,31 +128,31 @@ namespace IQDHackathon
 
         private void CharacterCreator_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            IQD_UI_Library.IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
+           // IQD_UI_Library.IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
 
         }
 
         private void MaintenanceAssistant_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            IQD_UI_Library.IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
+           // IQD_UI_Library.IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
 
         }
 
         private void InterfaceDesignAssistant_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            IQD_UI_Library.IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
+           // IQD_UI_Library.IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
 
         }
 
         private void EducationalMaterialCreator_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            IQD_UI_Library.IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
+          //  IQD_UI_Library.IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
 
         }
 
         private void ImageGeneration_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            IQD_UI_Library.IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
+           // IQD_UI_Library.IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
 
         }
     }

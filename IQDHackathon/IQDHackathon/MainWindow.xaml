@@ -5,9 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IQD_UI_Library;assembly=IQD_UI_Library"
         Title="MainWindow" Height="720" Width="1100"
-        WindowStartupLocation="CenterScreen" WindowStyle="None"
-        Background="Transparent" AllowsTransparency="True"
-        ResizeMode="NoResize" WindowState="Maximized" FontFamily="Poppins"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        WindowState="Maximized" 
+        FontFamily="Poppins"
         FlowDirection="{DynamicResource AppFlowDirection}">
 
   
