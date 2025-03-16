@@ -17,6 +17,9 @@
 
   <ItemGroup>
     <None Remove="Assets\Logo.png" />
+    <None Remove="Assets\logout %281%29.png" />
+    <None Remove="Assets\logout.png" />
+    <None Remove="Assets\undo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,12 +31,15 @@
 
   <ItemGroup>
     <Reference Include="IQD_UI_Library">
-      <HintPath>..\..\..\..\MyLibraries\WPF_UI_Library\IQD UI Library\bin\Debug\net8.0-windows\IQD_UI_Library.dll</HintPath>
+      <HintPath>..\..\..\..\OurProject\WPF_UI_Library\IQD UI Library\bin\Debug\net8.0-windows\IQD_UI_Library.dll</HintPath>
     </Reference>
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Assets\Logo.png" />
+    <Resource Include="Assets\logout (1).png" />
+    <Resource Include="Assets\logout.png" />
+    <Resource Include="Assets\undo.png" />
     <Resource Include="Languages\StringLanguage.AR.xaml" />
     <Resource Include="Languages\StringLanguage.EN.xaml" />
     <Resource Include="Themes\DarkTheme.xaml" />

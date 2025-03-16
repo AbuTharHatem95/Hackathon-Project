@@ -1,32 +1,40 @@
 ﻿<Page x:Class="Interface.Pages.ImageGeneratorPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      Title="Image Generator" Height="600" Width="800">
+      Title="Image Generator" >
 
-    <Grid>
+    <Grid Background="LightYellow">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition  Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
         <!-- Button to Go Back to Main Window -->
-        <Button Content="الرجوع إلى الصفحة الرئيسية" Width="200" Height="40"
-                HorizontalAlignment="Center" VerticalAlignment="Bottom"
-                Margin="0,0,0,20" FontSize="16" Click="BackToMainWindowButton_Click"/>
+        <Button Grid.Row="4" Style="{StaticResource BackButtonStyle}" 
+            Margin="0,240,0,0" Click="BackToMainWindowButton_Click"/>
 
-        <TextBlock Text="توليد الصور باستخدام الذكاء الاصطناعي"
+        <TextBlock Grid.Row="0" Text="توليد الصور باستخدام الذكاء الاصطناعي"
                    HorizontalAlignment="Center" VerticalAlignment="Top" 
                    FontSize="24" FontWeight="Bold" Foreground="Black"
-                   Margin="0,20,0,0"/>
+                 Margin="0,50,0,0" />
+        
+        <Image Grid.Row="1" Name="GeneratedImage" Width="655" Height="300" 
+         HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,50,0,0"
+       />
 
         <!-- Input TextBox for Image Description -->
-        <TextBox Name="ImageDescriptionTextBox" Width="300" Height="30" 
+        <TextBox Grid.Row="2" Name="ImageDescriptionTextBox" Width="300" Height="30" 
                  HorizontalAlignment="Center" VerticalAlignment="Top" 
-                 Margin="0,427,0,0" FontSize="16"/>
+                FontSize="16"/>
 
         <!-- Button to Generate Image -->
-        <Button Content="توليد الصورة" Width="200" Height="40" 
+        <Button Grid.Row="3" Content="توليد الصورة" Width="200" Height="40" 
                 HorizontalAlignment="Center" VerticalAlignment="Top" 
-                Margin="0,493,0,0" FontSize="16" Click="GenerateImageButton_Click"/>
+            Margin="0,30,0,0"   FontSize="16" Click="GenerateImageButton_Click"/>
 
         <!-- Image Display Area -->
-        <Image Name="GeneratedImage" Width="655" Height="300" 
-               HorizontalAlignment="Left" VerticalAlignment="Top" 
-               Margin="68,86,0,0"/>
+      
     </Grid>
 </Page>
