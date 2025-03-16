@@ -35,7 +35,23 @@ namespace IQDHackathon
             WindowState = WindowState.Minimized;
         }
 
+        private void OnMouseEnter(object sender, MouseEventArgs e)
+        {
+            Border border = (Border)sender;
+            if (border != null)
+            {
+                border.RenderTransform = new ScaleTransform(1.05, 1.05);
+            }
+        }
 
+        private void OnMouseLeave(object sender, MouseEventArgs e)
+        {
+            Border border = (Border)sender;
+            if (border != null)
+            {
+                border.RenderTransform = new ScaleTransform(1, 1);
+            }
+        }
 
         //private void OpenPresentationGenerator(object sender, MouseButtonEventArgs e)
         //{
@@ -106,7 +122,7 @@ namespace IQDHackathon
 
         private void TestScenarioGenerator_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            Content = new TestScenarioGeneratorPage();
         }
 
         private void CharacterCreator_MouseDown(object sender, MouseButtonEventArgs e)

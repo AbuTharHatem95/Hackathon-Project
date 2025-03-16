@@ -12,6 +12,402 @@
                 <ResourceDictionary Source="Languages/StringLanguage.AR.xaml"/>
                 <ResourceDictionary Source="/IQD_UI_Library;component/Themes/Generic.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <ImageBrush x:Key="kpkp" ImageSource="/Assets/Logo.png"/>
+            <Style x:Key="ModrenTextBox1" TargetType="TextBox">
+
+                <Setter Property="FontSize" Value="11"/>
+                <Setter Property="FontFamily" Value="Segoe UI"/>
+                <Setter Property="FontSize" Value="11"/>
+                <Setter Property="Height" Value="35"/>
+                <Setter Property="Width" Value="{Binding Width}"/>
+                <Setter Property="Background" Value="LightSkyBlue"/>
+                <Setter Property="Foreground" Value="Beige"/>
+                <Setter Property="Padding" Value="0 5 5 4"/>
+                <Setter Property="Margin" Value="0 10 0 0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TextBox}">
+                            <Border x:Name="Txtborder"
+                         BorderBrush="DarkBlue"
+                         BorderThickness="2"
+                         CornerRadius="5"
+                         SnapsToDevicePixels="True">
+
+                                <Grid Margin="0 5 5 4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="25"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <ScrollViewer x:Name="PART_ContentHost"
+                                       Focusable="False"
+                                       Grid.Column="1"
+                                       Margin=" 5 0 0 0"
+                                       HorizontalScrollBarVisibility="Hidden"
+                                       VerticalScrollBarVisibility="Hidden"/>
+                                    <Border Background="{StaticResource kpkp}"
+                                 BorderThickness="0"
+                                
+                                 Margin="5 0 0 3"
+                                 Height="25"
+                                 ToolTip="Name"
+                                 Cursor="Arrow"
+                                 Grid.Column="0"/>
+                                    <Label x:Name="watermark"
+                                Opacity="0.2"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left"
+                                Foreground="White"
+                                Visibility="Collapsed"
+                                Padding="5,0,20,5"
+                                Content="{TemplateBinding Tag}"
+                                Grid.Column="1"/>
+                                </Grid>
+
+
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="BorderBrush" Value="Orange" TargetName="Txtborder"/>
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                    <Setter Property="BorderBrush" Value="Orange" TargetName="Txtborder"/>
+                                    <Setter Property="BorderThickness" Value="0.5 0.5 0.5 3" TargetName="Txtborder"/>
+                                </Trigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property ="Text" Value=""/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Visibility" Value="Visible" TargetName="watermark"/>
+                                </MultiTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+
+
+
+            </Style>
+
+
+
+
+
+
+
+
+
+            <Style x:Key="ModernCheckBox" TargetType="{x:Type CheckBox}">
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="Foreground" Value="#333333"/>
+                <Setter Property="FlowDirection" Value="{Binding FlowDirection, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type CheckBox}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Check Box (يتحرك تلقائيًا حسب الاتجاه) -->
+                                <Border x:Name="border"
+                             Grid.Column="0"
+                             Background="Transparent"
+                             BorderThickness="2"
+                             CornerRadius="4"
+                             Width="20"
+                             Height="20"
+                             SnapsToDevicePixels="True">
+
+                                    <Border.BorderBrush>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                            <GradientStop Color="#FF0066CC" Offset="0"/>
+                                            <GradientStop Color="#FF004499" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.BorderBrush>
+
+                                    <!-- Checkmark (ثابتة الاتجاه دائمًا) -->
+                                    <Viewbox x:Name="checkMark" 
+                                 Margin="2" 
+                                 Opacity="0"
+                                 FlowDirection="LeftToRight">
+                                        <Path Data="M0,5 L3,8 8,0" 
+                                   Stroke="{DynamicResource PrimaryTextColor}" 
+                                   StrokeThickness="2"
+                                   Stretch="Fill"/>
+                                    </Viewbox>
+                                </Border>
+
+                                <!-- المحتوى (يتكيف مع الاتجاه) -->
+                                <ContentPresenter x:Name="contentPresenter"
+                                     Grid.Column="1"
+                                     Content="{TemplateBinding Content}"
+                                     Margin="10,0,10,0"
+                                     VerticalAlignment="Center"
+                                     HorizontalAlignment="Stretch"
+                                     FlowDirection="{TemplateBinding FlowDirection}">
+
+                                    <ContentPresenter.ContentTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding}" 
+                                             TextWrapping="Wrap" 
+                                             VerticalAlignment="Center" 
+                                             HorizontalAlignment="Stretch"/>
+                                        </DataTemplate>
+                                    </ContentPresenter.ContentTemplate>
+                                </ContentPresenter>
+                            </Grid>
+
+                            <ControlTemplate.Triggers>
+                                <!-- Checked/Unchecked -->
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="checkMark"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="1" Duration="0:0:0.2"/>
+                                                <ColorAnimation Storyboard.TargetName="border"
+                                                     Storyboard.TargetProperty="(Border.BorderBrush).(LinearGradientBrush.GradientStops)[0].Color"
+                                                     To="#FF00CC66" Duration="0:0:0.3"/>
+                                                <ColorAnimation Storyboard.TargetName="border"
+                                                     Storyboard.TargetProperty="(Border.BorderBrush).(LinearGradientBrush.GradientStops)[1].Color"
+                                                     To="#FF00994D" Duration="0:0:0.3"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="checkMark"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="0" Duration="0:0:0.2"/>
+                                                <ColorAnimation Storyboard.TargetName="border"
+                                                     Storyboard.TargetProperty="(Border.BorderBrush).(LinearGradientBrush.GradientStops)[0].Color"
+                                                     To="#FF0066CC" Duration="0:0:0.3"/>
+                                                <ColorAnimation Storyboard.TargetName="border"
+                                                     Storyboard.TargetProperty="(Border.BorderBrush).(LinearGradientBrush.GradientStops)[1].Color"
+                                                     To="#FF004499" Duration="0:0:0.3"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+
+                                <!-- Mouse Over -->
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#200066CC"/>
+                                    <Setter TargetName="border" Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect BlurRadius="5" ShadowDepth="0" Color="#400066CC"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+
+                                <!-- Pressed -->
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="border" Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="0.9" ScaleY="0.9"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter TargetName="border" Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                                </Trigger>
+
+                                <!-- Disabled -->
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="border" Property="Opacity" Value="0.5"/>
+                                    <Setter TargetName="contentPresenter" Property="Opacity" Value="0.5"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="BackButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="ToolTip" Value="رجوع"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <!-- تأثير الظل -->
+                                <Border Background="Transparent" 
+                                Opacity="0.5"
+                                Margin="3"
+                                CornerRadius="10">
+                                   
+                                </Border>
+
+                                <!-- الصورة الأساسية -->
+                                <Image Source="/Assets/logout (1).png" Width="50" Height="50"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <ControlTemplate  x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border x:Name="Border" 
+                  Grid.ColumnSpan="2"
+                  CornerRadius="5"
+                  BorderBrush="DarkBlue"
+                  BorderThickness="2" 
+                  SnapsToDevicePixels="true">
+                    </Border>
+
+                    <Border Grid.Column="1">
+                        <Path x:Name="Arrow"
+                          Data="F1 M 0,0 L 2.667,2.66665 L 5.3334,0 L 5.3334,-1.78168 L 2.6667,0.88501 L0,-1.78168 L0,0 Z" 
+                          Fill="LightSkyBlue"
+                          HorizontalAlignment="Center"
+                          Stretch="Fill" Height="7"
+                          Width="10"
+                          VerticalAlignment="Center"/>
+                    </Border>
+
+                </Grid>
+
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="BorderBrush" Value="Orange" TargetName="Border"/>
+                        <Setter Property="Fill" Value="Orange" TargetName="Arrow"/>
+                    </Trigger>
+                    <Trigger Property="IsKeyboardFocused" Value="True">
+                        <Setter Property="BorderBrush" Value="Orange" TargetName="Border"/>
+                        <Setter Property="BorderThickness" Value="0.5 0.5 0.5 3" TargetName="Border"/>
+                    </Trigger>
+
+
+                </ControlTemplate.Triggers>
+
+
+            </ControlTemplate>
+
+
+            <ControlTemplate x:Key="ComboBoxTextBox" TargetType="{x:Type TextBox}">
+
+                <Border x:Name="PART_ContentHost"
+              Focusable="False"
+              Background="{TemplateBinding Background}"/>
+
+            </ControlTemplate>
+
+
+            <Style x:Key="ComboBoxStyle1" TargetType="{x:Type ComboBox}">
+                <Setter  Property="Height" Value="35" />
+                <Setter  Property="Width" Value="{Binding Width}" />
+                <Setter  Property="Cursor" Value="Hand" />
+                <Setter  Property="FontFamily" Value="Segoe UI" />
+                <Setter  Property="FontSize" Value="11" />
+                <Setter  Property="Foreground" Value="{DynamicResource PrimaryTextColor}" />
+                <Setter  Property="HorizontalAlignment" Value="Center" />
+                <Setter  Property="Margin" Value="0 10 0 0" />
+
+                <Setter  Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ComboBox}">
+                            <Grid>
+                                <ToggleButton  x:Name="ToggleButton"
+                                     Template="{StaticResource ComboBoxToggleButton}"
+                                     Grid.Column="2"
+                                     Focusable="False"
+                                     ClickMode="Press"
+                                     IsChecked="{Binding IsDropDownOpen  ,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <ContentPresenter x:Name="ContentSite"
+                                        IsHitTestVisible="false"
+                                        Content="{TemplateBinding SelectionBoxItem}"
+                                        ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                        ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                        Margin="11,0,25,0"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Left"
+                                        IsEnabled="True"/>
+                                <Label x:Name="watermark"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Left"
+                              Foreground="{DynamicResource PrimaryTextColor}"
+                              Visibility="Collapsed"
+                              Padding="8 5 0 0"
+                              Content="{TemplateBinding Tag}"
+                             FontFamily="Segoe UI"
+                             FontSize="20"/>
+                                <TextBox x:Name="PART_EditableTextBox"
+                               Template="{StaticResource ComboBoxTextBox}"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Focusable="True"
+                               Visibility="Hidden"/>
+
+                                <Popup x:Name="Popup"
+                             Placement="Bottom"
+                             IsOpen="{TemplateBinding IsDropDownOpen}"
+                             AllowsTransparency="True"
+                             Focusable="False"
+                             PopupAnimation="Slide"
+                             >
+                                    <Grid x:Name="DropDown"
+                                SnapsToDevicePixels="True"
+                                 MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ComboBox}}}"
+                                MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                        <Border x:Name="DropDownBorder"
+                                      BorderThickness="1"
+                                      BorderBrush="{DynamicResource TertiaryBackgroundColor}"
+                                      Background="{DynamicResource PrimaryBackgroundColor}"/>
+                                        <ScrollViewer Margin=" 4 6 4 6"
+                                            SnapsToDevicePixels="True"
+                                            OverridesDefaultStyle="True"
+                                            Foreground="#ff333333"
+                                            FontFamily="Segoe UI"
+                                            FontSize="11"/>
+                                        <StackPanel IsItemsHost="True"
+                                          KeyboardNavigation.DirectionalNavigation="Contained">
+
+                                        </StackPanel>
+
+                                    </Grid>
+
+                                </Popup>
+
+                            </Grid>
+
+                            <ControlTemplate.Triggers>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="Text" Value=""/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Visibility" Value="Visible" TargetName="watermark"/>
+                                </MultiTrigger>
+                                <Trigger Property="HasItems" Value="False">
+                                    <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+                                </Trigger>
+
+                                <Trigger Property="IsGrouping" Value="True">
+                                    <Setter Property="ScrollViewer.CanContentScroll"  Value="False"/>
+                                </Trigger>
+                                <Trigger SourceName="Popup" Property="AllowsTransparency" Value="True">
+                                    <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="4"/>
+                                    <Setter TargetName="DropDownBorder" Property="Margin" Value="0 2 0 0"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
     

@@ -16,6 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Assets\export.png" />
+    <None Remove="Assets\Generate.png" />
     <None Remove="Assets\Logo.png" />
     <None Remove="Assets\logout %281%29.png" />
     <None Remove="Assets\logout.png" />
@@ -31,11 +33,13 @@
 
   <ItemGroup>
     <Reference Include="IQD_UI_Library">
-      <HintPath>..\..\..\WPF_UI_Library\IQD UI Library\bin\Debug\net8.0-windows\IQD_UI_Library.dll</HintPath>
+      <HintPath>..\..\..\..\OurProject\WPF_UI_Library\IQD UI Library\bin\Debug\net8.0-windows\IQD_UI_Library.dll</HintPath>
     </Reference>
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\export.png" />
+    <Resource Include="Assets\Generate.png" />
     <Resource Include="Assets\Logo.png" />
     <Resource Include="Assets\logout (1).png" />
     <Resource Include="Assets\logout.png" />
