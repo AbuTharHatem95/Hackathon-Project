@@ -7,8 +7,7 @@
 
         <!-- زر الرجوع -->
         <!-- Button to Go Back to Main Window -->
-        <Button Content="الرجوع إلى الصفحة الرئيسية" Width="200" Height="40"
-                HorizontalAlignment="Center" VerticalAlignment="Bottom"
-                Margin="0,0,0,20" FontSize="16" Click="BackToMainWindowButton_Click"/>
+        <Button Style="{StaticResource BackButtonStyle}" 
+         Click="BackToMainWindowButton_Click"/>
     </Grid>
 </Page>

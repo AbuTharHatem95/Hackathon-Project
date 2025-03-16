@@ -10,8 +10,8 @@
         ResizeMode="NoResize" WindowState="Maximized" FontFamily="Poppins"
         FlowDirection="{DynamicResource AppFlowDirection}">
 
-    <Window.Resources>
-        <!-- ستايل الظل العام -->
+    <!--<Window.Resources>
+        --><!-- ستايل الظل العام --><!--
         <Style x:Key="ShadowEffectStyle" TargetType="Control">
             <Setter Property="Effect">
                 <Setter.Value>
@@ -20,7 +20,7 @@
             </Setter>
         </Style>
 
-        <!-- ستايل البطاقات مع الظل -->
+        --><!-- ستايل البطاقات مع الظل --><!--
         <Style TargetType="Border" x:Key="ThreeDCardStyle">
             <Setter Property="Width" Value="220"/>
             <Setter Property="Height" Value="120"/>
@@ -36,7 +36,7 @@
             <EventSetter Event="MouseLeave" Handler="OnMouseLeave"/>
         </Style>
 
-        <!-- ستايل النصوص مع الظل -->
+        --><!-- ستايل النصوص مع الظل --><!--
         <Style TargetType="TextBlock" x:Key="TextWithShadow">
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -51,7 +51,7 @@
             </Setter>
         </Style>
 
-        <!-- ستايل الليبل مع الظل -->
+        --><!-- ستايل الليبل مع الظل --><!--
         <Style TargetType="Label" x:Key="LabelWithShadow">
             <Setter Property="FontSize" Value="28"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -64,7 +64,7 @@
             </Setter>
         </Style>
 
-        <!-- ستايل الزر مع الظل -->
+        --><!-- ستايل الزر مع الظل --><!--
         <Style x:Key="ButtonWithShadow" TargetType="Button">
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -81,7 +81,7 @@
             </Setter>
         </Style>
 
-    </Window.Resources>
+    </Window.Resources>-->
 
     <Border CornerRadius="10" Background="{DynamicResource PrimaryBackgroundColor}" MouseLeftButtonDown="Border_MouseLeftButtonDown">
         <Grid>
