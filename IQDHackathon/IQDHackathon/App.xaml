@@ -12,6 +12,33 @@
                 <ResourceDictionary Source="Languages/StringLanguage.AR.xaml"/>
                 <ResourceDictionary Source="/IQD_UI_Library;component/Themes/Generic.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            
+            
+            <Style x:Key="BackButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="ToolTip" Value="رجوع"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <!-- تأثير الظل -->
+                                <Border Background="Black" 
+                                Opacity="0.5"
+                                Margin="3"
+                                CornerRadius="10">
+
+                                </Border>
+
+                                <!-- الصورة الأساسية -->
+                                <Image Source="/Assets/logout (1).png" Width="50" Height="50"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+         
         </ResourceDictionary>
     </Application.Resources>
     
