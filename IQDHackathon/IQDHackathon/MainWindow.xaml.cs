@@ -155,5 +155,12 @@ namespace IQDHackathon
            // IQD_UI_Library.IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
 
         }
+
+        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+       
     }
 }
