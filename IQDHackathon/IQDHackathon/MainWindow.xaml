@@ -14,14 +14,16 @@
         FontFamily="Poppins"
         FlowDirection="{DynamicResource AppFlowDirection}">
 
-  
-
     <Border CornerRadius="10" Background="{DynamicResource PrimaryBackgroundColor}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
+            <!-- عنوان الترحيب -->
+            <Label Content="مولدات الذكاء الاصطناعي" FontSize="40" Style="{StaticResource CustomLabelWithShadow}" Foreground="White"
+                    Margin="0,60,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="55"/>
+
             <!--Header-->
             <Grid Grid.Column="0" Grid.Row="0">
                  <!--Start: Button Close | Restore | Minimize--> 
