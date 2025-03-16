@@ -10,80 +10,9 @@
         ResizeMode="NoResize" WindowState="Maximized" FontFamily="Poppins"
         FlowDirection="{DynamicResource AppFlowDirection}">
 
-    <!--<Window.Resources>
-        --><!-- ستايل الظل العام --><!--
-        <Style x:Key="ShadowEffectStyle" TargetType="Control">
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect Color="Black" BlurRadius="20" ShadowDepth="7.5" Opacity="0.5"/>
-                </Setter.Value>
-            </Setter>
-        </Style>
+  
 
-        --><!-- ستايل البطاقات مع الظل --><!--
-        <Style TargetType="Border" x:Key="ThreeDCardStyle">
-            <Setter Property="Width" Value="220"/>
-            <Setter Property="Height" Value="120"/>
-            <Setter Property="CornerRadius" Value="15"/>
-            <Setter Property="Padding" Value="15"/>
-            <Setter Property="Margin" Value="17.5"/>
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect Color="Black" BlurRadius="20" ShadowDepth="7.5" Opacity="0.5"/>
-                </Setter.Value>
-            </Setter>
-            <EventSetter Event="MouseEnter" Handler="OnMouseEnter"/>
-            <EventSetter Event="MouseLeave" Handler="OnMouseLeave"/>
-        </Style>
-
-        --><!-- ستايل النصوص مع الظل --><!--
-        <Style TargetType="TextBlock" x:Key="TextWithShadow">
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="TextAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="7.5" Opacity="0.5"/>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        --><!-- ستايل الليبل مع الظل --><!--
-        <Style TargetType="Label" x:Key="LabelWithShadow">
-            <Setter Property="FontSize" Value="28"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect Color="Black" BlurRadius="8" ShadowDepth="7" Opacity="0.5"/>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        --><!-- ستايل الزر مع الظل --><!--
-        <Style x:Key="ButtonWithShadow" TargetType="Button">
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Width" Value="200"/>
-            <Setter Property="Height" Value="50"/>
-            <Setter Property="Background" Value="#42A5F5"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="BorderBrush" Value="#1E88E5"/>
-            <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="0.5"/>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-    </Window.Resources>-->
-
-    <Border CornerRadius="10" Background="{DynamicResource PrimaryBackgroundColor}" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+    <Border CornerRadius="10" Background="{DynamicResource PrimaryBackgroundColor}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
@@ -111,337 +40,78 @@
                  <!--End: Button Close | Restore | Minimize--> 
             </Grid>
 
-            <!-- عنوان الترحيب -->
-            <Label Content="مولدات الذكاء الاصطناعي" FontSize="40" Style="{StaticResource LabelWithShadow}" Foreground="White"
-                    Margin="0,60,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="55"/>
-
-            <!-- الحاوية الرئيسية -->
-            <Viewbox Grid.Row="1" Stretch="Uniform" Margin="30,60,30,30">
-                <UniformGrid Rows="3" Columns="3" Height="473">
-
-                    <!-- بطاقة - التحليل المالي -->
-                    <Border Style="{StaticResource ThreeDCardStyle}" MouseDown="OpenFinancialAnalyzer">
-                        <Border.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#E3F2FD" Offset="0"/>
-                                <GradientStop Color="#1E88E5" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <TextBlock Text="التحليل المالي الذكي" Style="{StaticResource TextWithShadow}"/>
-                    </Border>
-
-                    <!-- بطاقة - مولد العروض التقديمية -->
-                    <Border Style="{StaticResource ThreeDCardStyle}" MouseDown="OpenPresentationGenerator">
-                        <Border.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#E3F2FD" Offset="0"/>
-                                <GradientStop Color="#42A5F5" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <TextBlock Text="مولد العروض التقديمية" Style="{StaticResource TextWithShadow}"/>
-                    </Border>
-
-                    <!-- بطاقة - مساعد التقارير -->
-                    <Border Style="{StaticResource ThreeDCardStyle}" MouseDown="OpenReportAssistant">
-                        <Border.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#E8F5E9" Offset="0"/>
-                                <GradientStop Color="#66BB6A" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <TextBlock Text="مساعد التقارير" Style="{StaticResource TextWithShadow}"/>
-                    </Border>
-
-                    <!-- بطاقة - منشئ المواد التعليمية -->
-                    <Border Style="{StaticResource ThreeDCardStyle}" MouseDown="OpenEducationMaterialGenerator">
-                        <Border.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#FFFDE7" Offset="0"/>
-                                <GradientStop Color="#FFD54F" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <TextBlock Text="منشئ المواد التعليمية" Style="{StaticResource TextWithShadow}"/>
-                    </Border>
-
-                    <!-- بطاقة - مولد سيناريوهات الاختبار -->
-                    <Border Style="{StaticResource ThreeDCardStyle}" MouseDown="OpenTestScenarioGenerator">
-                        <Border.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#FFF3E0" Offset="0"/>
-                                <GradientStop Color="#FFB74D" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <TextBlock Text="مولد سيناريوهات الاختبار" Style="{StaticResource TextWithShadow}"/>
-                    </Border>
-
-                    <!-- بطاقة - منشئ الشخصيات القصصية -->
-                    <Border Style="{StaticResource ThreeDCardStyle}" MouseDown="OpenStoryCharacterGenerator">
-                        <Border.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#FFEBEE" Offset="0"/>
-                                <GradientStop Color="#E57373" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <TextBlock Text="منشئ الشخصيات القصصية" Style="{StaticResource TextWithShadow}"/>
-                    </Border>
-
-                    <!-- بطاقة - مساعد الصيانة -->
-                    <Border Style="{StaticResource ThreeDCardStyle}" MouseDown="OpenMaintenanceAssistant">
-                        <Border.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#EEEEEE" Offset="0"/>
-                                <GradientStop Color="#616161" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <TextBlock Text="مساعد الصيانة" Style="{StaticResource TextWithShadow}"/>
-                    </Border>
-
-                    <!-- بطاقة - مساعد تصميم الواجهات -->
-                    <Border Style="{StaticResource ThreeDCardStyle}" MouseDown="OpenUIDesigner">
-                        <Border.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#F3E5F5" Offset="0"/>
-                                <GradientStop Color="#BA68C8" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <TextBlock Text="مساعد تصميم واجهات المستخدم" Style="{StaticResource TextWithShadow}"/>
-                    </Border>
-
-                    <!-- بطاقة - توليد الصور -->
-                    <Border Style="{StaticResource ThreeDCardStyle}" MouseDown="OpenImageGenerator">
-                        <Border.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#F3E5F5" Offset="0"/>
-                                <GradientStop Color="#8E24AA" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <TextBlock Text="توليد الصور" Style="{StaticResource TextWithShadow}"/>
-                    </Border>
-
-                </UniformGrid>
-            </Viewbox>
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            <!--<Grid>-->
-             
-            
-            
-            
-            <!-- عنوان الترحيب --><!--
-            <Label Content="مولدات الذكاء الاصطناعي" Style="{StaticResource LabelWithShadow}" Foreground="Black"
-       Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="55"/>
-
-            --><!-- الحاوية الرئيسية --><!--
+            <!-- الحاوية الرئيسية-->
             <Viewbox Stretch="Uniform" Margin="30,130,30,30">
                 <UniformGrid Rows="3" Columns="3" Height="473">
 
-                    --><!-- بطاقة - التحليل المالي --><!--
-                    <Border Style="{StaticResource ThreeDCardStyle}" MouseDown="OpenFinancialAnalyzer">
-                        <Border.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#E3F2FD" Offset="0"/>
-                                <GradientStop Color="#1E88E5" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <TextBlock Text="التحليل المالي الذكي" Style="{StaticResource TextWithShadow}"/>
-                    </Border>
+                    <!--بطاقة - التحليل المالي الذكي-->
+                    <StackPanel  Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <local:IQD_FinancialAnalyzerCard x:Name="SmartFinancialAnalysis"  StartPoint="0,0" EndPoint="1,1" Text="التحليل المالي الذكي"
+                                                             GradientColor1="WhiteSmoke" GradientColor2="DarkBlue" 
+                                                              Width="350" Height="250" MouseDown="SmartFinancialAnalysis_MouseDown" />
+                    </StackPanel>
 
-                    --><!-- بطاقة - مولد العروض التقديمية --><!--
-                    <Border Style="{StaticResource ThreeDCardStyle}" MouseDown="OpenPresentationGenerator">
-                        <Border.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#E3F2FD" Offset="0"/>
-                                <GradientStop Color="#42A5F5" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <TextBlock Text="مولد العروض التقديمية" Style="{StaticResource TextWithShadow}"/>
-                    </Border>
+                    <!--بطاقة - العروض التقديمية-->
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <local:IQD_FinancialAnalyzerCard x:Name="Presentations" Text="العروض التقديمية" StartPoint="0,0" EndPoint="1,1" 
+                                                             GradientColor1="#FFEBEE" GradientColor2="#E57373"
+                                                             Width="350" Height="250" MouseDown="Presentations_MouseDown"/>
+                    </StackPanel>
 
-                    --><!-- بطاقة - مساعد التقارير --><!--
-                    <Border Style="{StaticResource ThreeDCardStyle}" MouseDown="OpenReportAssistant">
-                        <Border.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#E8F5E9" Offset="0"/>
-                                <GradientStop Color="#66BB6A" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <TextBlock Text="مساعد التقارير" Style="{StaticResource TextWithShadow}"/>
-                    </Border>
+                    <!--  بطاقة - مساعد التقارير-->
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <local:IQD_FinancialAnalyzerCard x:Name="ReportingAssistant" Text="مساعد التقارير" StartPoint="0,0" EndPoint="1,1" 
+                                                             GradientColor1="#EEEEEE" GradientColor2="#616161"
+                                                             Width="350" Height="250" MouseDown="ReportingAssistant_MouseDown"/>
+                    </StackPanel>
 
-                    --><!-- بطاقة - منشئ المواد التعليمية --><!--
-                    <Border Style="{StaticResource ThreeDCardStyle}" MouseDown="OpenEducationMaterialGenerator">
-                        <Border.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#FFFDE7" Offset="0"/>
-                                <GradientStop Color="#FFD54F" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <TextBlock Text="منشئ المواد التعليمية" Style="{StaticResource TextWithShadow}"/>
-                    </Border>
+                    <!--بطاقة - مولد سيناريوهات الاختبار-->
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <local:IQD_FinancialAnalyzerCard x:Name="TestScenarioGenerator" Text="مولد سيناريوهات الاختبار" StartPoint="0,0" EndPoint="1,1" 
+                                                             GradientColor1="#FFFDE7" GradientColor2="#FFD54F"
+                                                             Width="350" Height="250" MouseDown="TestScenarioGenerator_MouseDown"/>
+                    </StackPanel>
 
-                    --><!-- بطاقة - مولد سيناريوهات الاختبار --><!--
-                    <Border Style="{StaticResource ThreeDCardStyle}" MouseDown="OpenTestScenarioGenerator">
-                        <Border.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#FFF3E0" Offset="0"/>
-                                <GradientStop Color="#FFB74D" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <TextBlock Text="مولد سيناريوهات الاختبار" Style="{StaticResource TextWithShadow}"/>
-                    </Border>
+                    <!--  بطاقة - منشئ الشخصيات القصصية-->
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <local:IQD_FinancialAnalyzerCard x:Name="CharacterCreator" Text="منشئ الشخصيات القصصية" StartPoint="0,0" EndPoint="1,1" 
+                                                             GradientColor1="#FFF3E0" GradientColor2="#FFB74D"
+                                                             Width="350" Height="250" MouseDown="CharacterCreator_MouseDown"/>
+                    </StackPanel>
 
-                    --><!-- بطاقة - منشئ الشخصيات القصصية --><!--
-                    <Border Style="{StaticResource ThreeDCardStyle}" MouseDown="OpenStoryCharacterGenerator">
-                        <Border.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#FFEBEE" Offset="0"/>
-                                <GradientStop Color="#E57373" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <TextBlock Text="منشئ الشخصيات القصصية" Style="{StaticResource TextWithShadow}"/>
-                    </Border>
+                    <!--  بطاقة - مساعد الصيانة-->
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <local:IQD_FinancialAnalyzerCard x:Name="MaintenanceAssistant" Text="مساعد الصيانة" StartPoint="0,0" EndPoint="1,1" 
+                                                             GradientColor1="#FFEBEE" GradientColor2="#E57373" 
+                                                             Width="350" Height="250" MouseDown="MaintenanceAssistant_MouseDown"/>
+                    </StackPanel>
 
-                    --><!-- بطاقة - مساعد الصيانة --><!--
-                    <Border Style="{StaticResource ThreeDCardStyle}" MouseDown="OpenMaintenanceAssistant">
-                        <Border.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#EEEEEE" Offset="0"/>
-                                <GradientStop Color="#616161" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <TextBlock Text="مساعد الصيانة" Style="{StaticResource TextWithShadow}"/>
-                    </Border>
+                    <!--  بطاقة - مساعد تصميم الواجهات-->
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <local:IQD_FinancialAnalyzerCard x:Name="InterfaceDesignAssistant"  Text="مساعد تصميم الواجهات" StartPoint="0,0" EndPoint="1,1" 
+                                                             GradientColor1="#EEEEEE" GradientColor2="#616161" 
+                                                             Width="350" Height="250" MouseDown="InterfaceDesignAssistant_MouseDown"/>
+                    </StackPanel>
 
-                    --><!-- بطاقة - مساعد تصميم الواجهات --><!--
-                    <Border Style="{StaticResource ThreeDCardStyle}" MouseDown="OpenUIDesigner">
-                        <Border.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#F3E5F5" Offset="0"/>
-                                <GradientStop Color="#BA68C8" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <TextBlock Text="مساعد تصميم واجهات المستخدم" Style="{StaticResource TextWithShadow}"/>
-                    </Border>
 
-                    --><!-- بطاقة - توليد الصور --><!--
-                    <Border Style="{StaticResource ThreeDCardStyle}" MouseDown="OpenImageGenerator">
-                        <Border.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#F3E5F5" Offset="0"/>
-                                <GradientStop Color="#8E24AA" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <TextBlock Text="توليد الصور" Style="{StaticResource TextWithShadow}"/>
-                    </Border>
+                    <!-- بطاقة - توليد الصور-->
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <local:IQD_FinancialAnalyzerCard x:Name="ImageGeneration" Text="توليد الصور" StartPoint="0,0" EndPoint="1,1" 
+                                                             GradientColor1="#F3E5F5" GradientColor2="#BA68C8"
+                                                             Width="350" Height="250" MouseDown="ImageGeneration_MouseDown"/>
+                    </StackPanel>
+
+                    <!--بطاقة - منشئ المواد التعليمية-->
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <local:IQD_FinancialAnalyzerCard x:Name="EducationalMaterialCreator" Text="منشئ المواد التعليمية" StartPoint="0,0" EndPoint="1,1" 
+                                                             GradientColor1="#F3E5F5" GradientColor2="#8E24AA"
+                                                             Width="350" Height="250" MouseDown="EducationalMaterialCreator_MouseDown"/>
+                    </StackPanel>
 
                 </UniformGrid>
             </Viewbox>
-            </Grid>-->
 
-            <!--<Grid >
-                 --><!--عنوان الترحيب--><!-- 
-                <Label Content="مولدات الذكاء الاصطناعي" Style="{StaticResource CustomLabelWithShadowStyle}" Foreground="Black"
-                       Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="55"/>
 
-                 --><!--الحاوية الرئيسية--><!--
-                <Viewbox Stretch="Uniform" Margin="30,130,30,30">
-                    <UniformGrid Rows="3" Columns="3" Height="473">
-
-                        --><!--بطاقة - التحليل المالي الذكي--><!--
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="التحليل المالي الذكي" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
-                            <local:IQD_FinancialAnalyzerCard StartPoint="0,0" EndPoint="1,1" 
-                                                             GradientColor1="#E3F2FD" GradientColor2="#1E88E5" 
-                                                             Width="350" Height="250"/>
-                        </StackPanel>
-
-                        --><!--بطاقة - العروض التقديمية--><!--
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="العروض التقديمية" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
-                            <local:IQD_FinancialAnalyzerCard StartPoint="0,0" EndPoint="1,1" 
-                                                             GradientColor1="#FFEBEE" GradientColor2="#E57373"
-                                                             Width="350" Height="250"/>
-                        </StackPanel>
-
-                        --><!--بطاقة - مساعد التقارير--><!--
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="مساعد التقارير" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
-                            <local:IQD_FinancialAnalyzerCard StartPoint="0,0" EndPoint="1,1" 
-                                                             GradientColor1="#EEEEEE" GradientColor2="#616161"
-                                                             Width="350" Height="250"/>
-                        </StackPanel>
-
-                        --><!--بطاقة - مولد سيناريوهات الاختبار--><!--
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="مولد سيناريوهات الاختبار" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
-                            <local:IQD_FinancialAnalyzerCard StartPoint="0,0" EndPoint="1,1" 
-                                                             GradientColor1="#FFFDE7" GradientColor2="#FFD54F"
-                                                             Width="350" Height="250"/>
-                        </StackPanel>
-
-                        --><!--بطاقة - منشئ الشخصيات القصصية--><!--
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="منشئ الشخصيات القصصية" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
-                            <local:IQD_FinancialAnalyzerCard StartPoint="0,0" EndPoint="1,1" 
-                                                             GradientColor1="#FFF3E0" GradientColor2="#FFB74D"
-                                                             Width="350" Height="250"/>
-                        </StackPanel>
-
-                        --><!--بطاقة - مساعد الصيانة--><!--
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="مساعد الصيانة" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
-                            <local:IQD_FinancialAnalyzerCard StartPoint="0,0" EndPoint="1,1" 
-                                                             GradientColor1="#FFEBEE" GradientColor2="#E57373" 
-                                                             Width="350" Height="250"/>
-                        </StackPanel>
-
-                        --><!--بطاقة - مساعد تصميم الواجهات--><!--
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="مساعد تصميم الواجهات" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
-                            <local:IQD_FinancialAnalyzerCard StartPoint="0,0" EndPoint="1,1" 
-                                                             GradientColor1="#EEEEEE" GradientColor2="#616161" 
-                                                             Width="350" Height="250"/>
-                        </StackPanel>
-
-                        --><!--بطاقة - توليد الصور--><!--
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="توليد الصور" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
-                            <local:IQD_FinancialAnalyzerCard StartPoint="0,0" EndPoint="1,1" 
-                                                             GradientColor1="#F3E5F5" GradientColor2="#BA68C8"
-                                                             Width="350" Height="250"/>
-                        </StackPanel>
-
-                        --><!--بطاقة - منشئ المواد التعليمية--><!--
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="منشئ المواد التعليمية" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
-                            <local:IQD_FinancialAnalyzerCard StartPoint="0,0" EndPoint="1,1" 
-                                                             GradientColor1="#F3E5F5" GradientColor2="#8E24AA"
-                                                             Width="350" Height="250"/>
-                        </StackPanel>
-
-                    </UniformGrid>
-                </Viewbox>
-                
-            </Grid>-->
-            
         </Grid>
     </Border>
     
