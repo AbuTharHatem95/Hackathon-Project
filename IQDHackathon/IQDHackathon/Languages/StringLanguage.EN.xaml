@@ -7,22 +7,15 @@
     <FlowDirection x:Key="SPAppFlowDirection">RightToLeft</FlowDirection>
 
 
-    <system:String x:Key="rdDebts">Debts</system:String>
-    <system:String x:Key="rdSales">Sales</system:String>
-    <system:String x:Key="rdPurchases">Purchases</system:String>
-    <system:String x:Key="rdRevenue">Revenue</system:String>
+   
 
     <system:String x:Key="rdSetting">Setting</system:String>
     <system:String x:Key="rdNotifications">Notifications</system:String>
     <system:String x:Key="rdUsers">Users</system:String>
-    <system:String x:Key="rdInventory">Inventory</system:String>
-    <system:String x:Key="rdLedger">Ledger</system:String>
-    <system:String x:Key="rdStorage">Storage</system:String>
     <system:String x:Key="rdHome">Home</system:String>
     <system:String x:Key="lbLanguage">Language</system:String>
     <system:String x:Key="UserName">UserName</system:String>
     <system:String x:Key="Pasword">Password</system:String>
-    <system:String x:Key="company">Yoseffffff company</system:String>
     <system:String x:Key="ThemeTitle">Theme</system:String>
     <system:String x:Key="LanguageTitle">Language</system:String>
     <system:String x:Key="rdDark">Dark</system:String>
@@ -30,12 +23,7 @@
     <system:String x:Key="rdArabic">Arabic</system:String>
     <system:String x:Key="rdEnglish">English</system:String>
 
-    <system:String x:Key="addsalesmenue">Deploy Sales Menue </system:String>
-    <system:String x:Key="addpurchesmenue">Add Purcases Menue</system:String>
-    <system:String x:Key="debitmangment">Debits Mangment</system:String>
-    <system:String x:Key="StorageContain">Storage Content</system:String>
-    <system:String x:Key="AddMenuetoStorage">Add Menue To Storage</system:String>
-    <system:String x:Key="Suppliers">Suppliers</system:String>
-    <system:String x:Key="ReturnItemToStorage">Returned Items</system:String>
-    
+    <system:String x:Key="rdSaveDataText">SaveData</system:String>
+    <system:String x:Key="rdCheckSaveData">SaveData</system:String>
+
 </ResourceDictionary>

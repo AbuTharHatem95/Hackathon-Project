@@ -17,5 +17,10 @@ namespace Interface.Pages
             mainWindow.Show();
             Window.GetWindow(this).Close();
         }
+
+        private void Gentet_Click(object sender, RoutedEventArgs e)
+        {
+            Content = new QuestionsPage();
+        }
     }
 }

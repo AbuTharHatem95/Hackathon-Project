@@ -32,6 +32,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="itext7" Version="9.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="IQD_UI_Library">
       <HintPath>..\..\..\WPF_UI_Library\IQD UI Library\bin\Debug\net8.0-windows\IQD_UI_Library.dll</HintPath>
     </Reference>
