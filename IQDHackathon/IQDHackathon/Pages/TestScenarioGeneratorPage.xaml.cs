@@ -18,9 +18,10 @@ namespace Interface.Pages
             Window.GetWindow(this).Close();
         }
 
-        private void Border_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+
+        private void Gentet_Click(object sender, RoutedEventArgs e)
         {
-         
+            Content = new QuestionsPage();
         }
-    }
+   }
 }

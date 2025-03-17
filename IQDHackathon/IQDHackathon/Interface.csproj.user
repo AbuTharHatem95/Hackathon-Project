@@ -22,7 +22,13 @@
     <Compile Update="Pages\PresentationGeneratorPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\QuestionsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\ReportAssistantPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\SettingPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\StoryCharacterPage.xaml.cs">
@@ -35,6 +41,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\UserControles\ctrlCheckBoxBoxes.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\UserControles\ctrlDynamicListControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

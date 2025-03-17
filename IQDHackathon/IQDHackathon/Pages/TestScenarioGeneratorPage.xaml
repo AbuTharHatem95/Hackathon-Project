@@ -223,7 +223,7 @@
                             </Button>
                         </Grid>
                         <Grid Grid.Row="1">
-                            <Button ToolTip="انشاء اسئلة" Background="{DynamicResource PrimaryBackgroundColor}" BorderBrush="{x:Null}">
+                            <Button x:Name="Gentet" Click="Gentet_Click" ToolTip="انشاء اسئلة" Background="{DynamicResource PrimaryBackgroundColor}" BorderBrush="{x:Null}">
                                 <Image Source="/Assets/Generate.png" Height="70" HorizontalAlignment="Center" />
                             </Button>
                         </Grid>
