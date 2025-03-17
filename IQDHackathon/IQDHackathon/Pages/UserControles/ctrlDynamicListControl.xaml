@@ -5,23 +5,25 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Interface.Pages.UserControles"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+             d:DesignHeight="350" d:DesignWidth="800">
 
-        <!-- عنوان الـ ListBox -->
-        <TextBlock Text="{Binding qustionStyles}" FontSize="16" FontWeight="Bold" Margin="10" />
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-        <!-- ListBox لعرض العناصر -->
-        <ListBox x:Name="ItemsListBox" Grid.Row="1" Margin="10">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <!--<local:ctrlCheckBoxBoxes />-->
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-    </Grid>
+            <!-- عنوان القائمة -->
+            <TextBlock x:Name="txtTitle" FontSize="18" Foreground="{StaticResource TertiaryTextColor}" FontWeight="Bold" Margin="10"/>
+
+            <!-- ListBox داخل Grid -->
+            <ListBox x:Name="ItemsListBox" 
+                 Background="{StaticResource PrimaryBackgroundColor}" 
+                 Grid.Row="1" 
+                 Height="Auto"
+                 Margin="10"/>
+        </Grid>
+    </ScrollViewer>
+
 </UserControl>

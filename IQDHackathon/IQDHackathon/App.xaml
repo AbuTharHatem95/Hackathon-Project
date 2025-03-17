@@ -12,8 +12,26 @@
                 <ResourceDictionary Source="Languages/StringLanguage.AR.xaml"/>
                 <ResourceDictionary Source="/IQD_UI_Library;component/Themes/Generic.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            
-            
+
+
+            <Style x:Key="ScrolStyle" TargetType="ScrollBar">
+                <Setter Property="Background" Value="DarkSlateBlue"/>
+                <Setter Property="Foreground" Value="SkyBlue"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ScrollBar">
+                            <Grid>
+                                <Track Name="PART_Track" IsDirectionReversed="True">
+                                    <Track.Thumb>
+                                        <Thumb Background="WhiteSmoke"/>
+                                    </Track.Thumb>
+                                </Track>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
             <Style x:Key="BackButtonStyle" TargetType="Button">
                 <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="BorderThickness" Value="0"/>

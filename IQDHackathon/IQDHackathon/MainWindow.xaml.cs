@@ -161,6 +161,9 @@ namespace IQDHackathon
             DragMove();
         }
 
-       
+        private void btnSetting_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

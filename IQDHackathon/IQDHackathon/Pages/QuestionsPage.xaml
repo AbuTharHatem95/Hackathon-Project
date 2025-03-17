@@ -9,6 +9,14 @@
       Title="QuestionsPage">
 
     <Grid>
-        
+        <ScrollViewer HorizontalScrollBarVisibility="Auto">
+            <ListBox x:Name="ItemsListBox" Background="{StaticResource PrimaryBackgroundColor}"  Margin="10">
+            <!--<ListBox.ItemTemplate>
+                <DataTemplate>
+                    --><!--<local: />--><!--
+                </DataTemplate>
+            </ListBox.ItemTemplate>-->
+        </ListBox>
+        </ScrollViewer>
     </Grid>
 </Page>
