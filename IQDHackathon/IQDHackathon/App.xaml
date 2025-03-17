@@ -23,7 +23,7 @@
                         <ControlTemplate TargetType="Button">
                             <Grid>
                                 <!-- تأثير الظل -->
-                                <Border Background="Black" 
+                                <Border Background="Transparent" 
                                 Opacity="0.5"
                                 Margin="3"
                                 CornerRadius="10">
@@ -38,7 +38,31 @@
                 </Setter>
             </Style>
 
-         
+            <Style x:Key="BackButtonStyle1" TargetType="Button">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="ToolTip" Value="الاعدادات"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <!-- تأثير الظل -->
+                                <Border Background="Transparent" 
+                      Opacity="0.5"
+                      Margin="3"
+                      CornerRadius="10">
+
+                                </Border>
+
+                                <!-- الصورة الأساسية -->
+                                <Image Source="/Assets/settings.png" Width="50" Height="50"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+
         </ResourceDictionary>
     </Application.Resources>
     
