@@ -1,7 +1,7 @@
 ﻿using Interface.Pages.UserControles;
 using IQD_UI_Library;
+using IQDHackathon;
 using Microsoft.Win32;
-using Newtonsoft.Json;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -16,39 +16,99 @@ namespace Interface.Pages
     public partial class QuestionsPage : Page
     {
         //يحتوي على البيج على ليست فيو الرئيسية
-
         private Dictionary<string, List<string>> qustiones;
 
         public QuestionsPage(Dictionary<string, List<string>> dict)
         {
             InitializeComponent();
-            // qustiones = dict;
             GentetListViewComponat(dict);
         }
-        
-
-
 
         private void GentetListViewComponat(Dictionary<string, List<string>> qustiones)
         {
-
-            foreach(var Style in qustiones )
+            foreach (var style in qustiones)
             {
-                //sub List View
-                ctrlDynamicListControl listview = new ctrlDynamicListControl(Style.Key, Style.Value);
+                // إنشاء عنصر تحكم ديناميكي
+                ctrlDynamicListControl listView = new ctrlDynamicListControl(style.Key, style.Value);
 
+                // الاشتراك في الحدث الجديد
+                listView.QuestionStateChanged += ListView_QuestionStateChanged;
 
-                //يتم اضافة هذا الاوبجكت الى الواجهه
-                //ItemsListBox.ItemsSource = listview;
-                ItemsListBox.Items.Add(listview);
+                // إضافة العنصر إلى الواجهة
+                ItemsListBox.Items.Add(listView);
             }
+        }
 
+        private void ListView_QuestionStateChanged(object sender, (string QuestionStyle, bool IsChecked, string Score) e)
+        {
+            // هنا يمكنك معالجة البيانات الواردة
+            var questionStyle = e.QuestionStyle;
+            var isChecked = e.IsChecked;
+            var score = e.Score;
+
+            // عرض البيانات في MessageBox (أو حفظها في قائمة أو أي شيء آخر)
+            MessageBox.Show($"نمط السؤال: {questionStyle}\nالتحديد: {isChecked}\nالدرجة: {score}");
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.NavigationService != null)
+            {
+                if (this.NavigationService.CanGoBack)
+                {
+                    this.NavigationService.GoBack(); 
+                }
+                else
+                {
+                    MainWindow.CloseWindow = true;
+                }
+            }
+        }
+
+        private void btnRestore_Click(object sender, RoutedEventArgs e)
+        {
+            // الوصول إلى النافذة التي تحتوي على الصفحة
+            var window = Window.GetWindow(this);
+            if (window != null)
+            {
+                // تغيير حالة النافذة بين التكبير والتصغير
+                if (window.WindowState == WindowState.Normal)
+                    window.WindowState = WindowState.Maximized;
+                else
+                    window.WindowState = WindowState.Normal;
+            }
+        }
+
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            // الوصول إلى النافذة التي تحتوي على الصفحة
+            var window = Window.GetWindow(this);
+            if (window != null)
+                window.WindowState = WindowState.Minimized; // تصغير النافذة
+        }
+
+        private void BackToMainWindowButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCreateQustion1_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnPrintQustion_Click(object sender, RoutedEventArgs e)
+        {
 
         }
 
 
 
-
+        //// تنفيذ دالة GetEnumerator من واجهة IEnumerable
+        //public IEnumerator GetEnumerator()
+        //{
+        //    return ItemsListBox.Items.GetEnumerator(); // إرجاع مكرر لعناصر ItemsListBox
+        //}
 
 
 
@@ -213,24 +273,6 @@ namespace Interface.Pages
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //public class Title
     //{
     //    public byte Number { get; set; }
@@ -289,11 +331,4 @@ namespace Interface.Pages
     //}
 
 }
-
-
-
-
-
-
-
 

@@ -7,14 +7,14 @@
              mc:Ignorable="d" 
              >
 
-    <Grid >
+    <Grid FlowDirection="{StaticResource AppFlowDirection}" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!-- عنوان القائمة -->
-        <TextBlock x:Name="txtTitle" FontSize="18" Foreground="{StaticResource TertiaryTextColor}" FontWeight="Bold" Margin="10"/>
+        <TextBlock x:Name="txtTitle" FontSize="18" Foreground="{StaticResource TertiaryTextColor}" FontWeight="Bold" Margin="10" HorizontalAlignment="Center"/>
 
         <!-- ScrollViewer يحتوي على ListBox -->
         <ScrollViewer Grid.Row="1" 
