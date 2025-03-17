@@ -14,15 +14,16 @@ namespace Interface.Pages.UserControles
         //هل تم تحديدها
 
 
-        public event EventHandler<string>? ValueChanged;
-        //public event EventHandler<string> ValueChanged = delegate { }; // معالج افتراضي
+        public event EventHandler<string>? ScoreChanged;
+        //public event EventHandler<string> ScoreChanged = delegate { }; // معالج افتراضي
 
+        //private string _qustion;
 
-        public string question
-        {
-            get { return question; }
-            set { question = value; }
-        }
+        //public string question
+        //{
+        //    get { return _qustion; }
+        //    set { _qustion = value; }
+        //}
 
         private bool _isCheckedProperty;
         public bool IsCheckedProperty
@@ -45,14 +46,15 @@ namespace Interface.Pages.UserControles
         public ctrlCheckBoxBoxes(string Question)
         {
             InitializeComponent();
-            question = Question;
+            //question = Question;
+            checkBox.Content= Question;
 
         }
 
         private void txtScore_LostFocus(object sender, RoutedEventArgs e)
         {
-            ValueChanged?.Invoke(this, txtScore.Text);
-           // ValueChanged(this, Text); // لا حاجة لفحص `null`
+            ScoreChanged?.Invoke(this, txtScore.Text);
+           // ScoreChanged(this, Text); // لا حاجة لفحص `null`
 
         }
     }

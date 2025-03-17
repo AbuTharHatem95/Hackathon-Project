@@ -7,7 +7,14 @@
      
   FlowDirection="{DynamicResource AppFlowDirection}"
   FontFamily="Poppins">
-    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+    <Grid>
+
+        <Frame x:Name="InnerFrame" NavigationUIVisibility="Hidden" 
+      Panel.ZIndex="1" Background="Transparent"
+           HorizontalAlignment="Stretch" VerticalAlignment="Center"
+       />
+        
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
         <ScrollViewer.Resources>
         <Style TargetType="ScrollBar">
             <Setter Property="Background" Value="DarkSlateBlue"/>
@@ -27,7 +34,7 @@
             </Setter>
         </Style>
         </ScrollViewer.Resources>
-        <Border Background="{StaticResource PrimaryBackgroundColor}" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+        <Border Background="{StaticResource PrimaryBackgroundColor}" >
             <Grid Background="{DynamicResource PrimaryBackgroundColor}" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -223,6 +230,7 @@
                             </Button>
                         </Grid>
                         <Grid Grid.Row="1">
+                            
                             <Button x:Name="Gentet" Click="Gentet_Click" ToolTip="انشاء اسئلة" Background="{DynamicResource PrimaryBackgroundColor}" BorderBrush="{x:Null}">
                                 <Image Source="/Assets/Generate.png" Height="70" HorizontalAlignment="Center" />
                             </Button>
@@ -236,4 +244,6 @@
     </Grid>
         </Border>
     </ScrollViewer>
+
+    </Grid>
 </Page>
