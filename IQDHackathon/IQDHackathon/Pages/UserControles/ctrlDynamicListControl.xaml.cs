@@ -1,83 +1,49 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO.IsolatedStorage;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Interface.Pages.UserControles
 {
     /// <summary>
     /// Interaction logic for ctrlDynamicListControl.xaml
     /// </summary>
-    public partial class ctrlDynamicListControl : UserControl ,IEnumerable
+    public partial class ctrlDynamicListControl : UserControl
     {
-        //هذا الليست الداخلي يحتوي على يوزر كنترول الجيك بوكس
+        // حدث جديد لنقل البيانات إلى الصفحة الرئيسية
+        public event EventHandler<(string QuestionStyle, bool IsChecked, string Score)>? QuestionStateChanged;
 
-
-        //public string qustionStyles
-        //{
-        //    get { return qustionStyles; }
-        //    set { qustionStyles = value; }
-        //}
-
-
-        public ctrlDynamicListControl(string QustionStyles,List<string>Qustion)
+        public ctrlDynamicListControl(string questionStyles, List<string> questions)
         {
             InitializeComponent();
-           // qustionStyles= QustionStyles;
-           txtTitle.Text = QustionStyles;
-            LoadDataInUserContol(Qustion);
+            txtTitle.Text = questionStyles;
+            LoadDataInUserControl(questions);
         }
 
-
-
-
-        private void LoadDataInUserContol(List<string> questionList)
+        private void LoadDataInUserControl(List<string> questionList)
         {
-            foreach(var question in questionList)
+            foreach (var question in questionList)
             {
-                ctrlCheckBoxBoxes Box = new ctrlCheckBoxBoxes(question);
-                ItemsListBox.Items.Add(Box);
+                ctrlCheckBoxBoxes box = new ctrlCheckBoxBoxes(question);
+                ItemsListBox.Items.Add(box);
+                box.StateChanged += Box_StateChanged; // الاشتراك في الحدث الجديد
             }
-
         }
 
-
-
-
-
-
-
-
-
-
-
-
-        public IEnumerator GetEnumerator()
+        private void Box_StateChanged(object sender, (bool IsChecked, string Score) e)
         {
-            throw new NotImplementedException();
+            // هنا يتم نقل البيانات إلى الصفحة الرئيسية
+            var questionStyle = txtTitle.Text; // اسم النمط (Style) الحالي
+            var isChecked = e.IsChecked;
+            var score = e.Score;
+
+            // إطلاق الحدث مع البيانات
+            QuestionStateChanged?.Invoke(this, (questionStyle, isChecked, score));
         }
 
-
-
-        // خاصية لتعيين مصدر البيانات
-        public IEnumerable<List<string>> Questions
-        {
-            get { return (IEnumerable<List<string>>)ItemsListBox.ItemsSource; }
-            set { ItemsListBox.ItemsSource = value; }
-        }
 
     }
-   
+
+
+
+
 }

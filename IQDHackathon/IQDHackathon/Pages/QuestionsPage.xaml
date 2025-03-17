@@ -3,21 +3,94 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Interface.Pages"
+      xmlns:local="clr-namespace:IQD_UI_Library;assembly=IQD_UI_Library"
       mc:Ignorable="d" 
-      d:DesignHeight="450" 
-      d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="600"
       Title="QuestionsPage">
 
     <Grid>
-        <ScrollViewer>
-            <ListBox x:Name="ItemsListBox" 
-                     Background="LightBlue" 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="155"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--Header-->
+        <Grid  Grid.Row="0" Grid.Column="1" FlowDirection="{StaticResource AppFlowDirection}" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+
+            <!--Start: Button Close | Restore | Minimize-->
+            <StackPanel Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,10,0" Height="30" Orientation="Horizontal" >
+                <Button x:Name="btnClose" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton"/>
+                <Button x:Name="btnRestore" Margin="5 0" Click="btnRestore_Click">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonsStyle}">
+                            <Setter Property="Content" Value="{DynamicResource maximize}"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=home, Path=WindowState}" Value="Maximized">
+                                    <Setter Property="Content" Value="{StaticResource restore}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button x:Name="btnMinimize" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource minimize}" Click="btnMinimize_Click"/>
+            </StackPanel>
+            <!--End: Button Close | Restore | Minimize-->
+
+        </Grid>
+        <!-- الرجوع  -->
+        <Button Grid.Column="0" Grid.Row="0" Margin="4,0,0,0" HorizontalAlignment="Left"   Click="BackToMainWindowButton_Click" Style="{StaticResource BackButtonStyle}"  >
+        </Button>
+
+        <StackPanel Grid.Row="1"  Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+
+            <!--طباعة الاسئلة-->
+            <local:IQD_Button x:Name="btnPrintQustion"
+                              Margin="10,0,0,10" 
+                              Grid.Column="0"
+                              Grid.Row="1"
+                              Style="{StaticResource ButtonsWithIconStyle}"
+                              HorizontalAlignment="Stretch"
+                              Content="طباعة الاسئلة"
+                              Icon="/Assets/export.png"
+                              Click="btnPrintQustion_Click"
+                              >
+            </local:IQD_Button>
+
+            <!--انشاء الاسئلة-->
+            <local:IQD_Button x:Name="btnCreateQustion1"
+                              Margin="10,0,0,10" 
+                              Grid.Column="0"
+                              Grid.Row="1" 
+                              Style="{StaticResource ButtonsWithIconStyle}"
+                              HorizontalAlignment="Stretch"
+                              Content="إنشاء الاسئلة"
+                              Icon="/Assets/export.png"
+                              Click="btnCreateQustion1_Click"
+                            
+                              >
+
+            </local:IQD_Button>
+        </StackPanel>
+        
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Column="1" Grid.Row="1" Margin="10,0,0,0">
+            <ListBox x:Name="ItemsListBox" Width="auto" 
+                     Background="{StaticResource PrimaryBackgroundColor}"
+                     Margin="10"
                      HorizontalContentAlignment="Center"
-                     HorizontalAlignment="Stretch"
-                     >
-                
+                     HorizontalAlignment="Stretch" >
             </ListBox>
         </ScrollViewer>
+    
     </Grid>
 </Page>
+
+

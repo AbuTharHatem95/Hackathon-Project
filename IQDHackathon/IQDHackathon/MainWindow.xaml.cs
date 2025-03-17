@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -18,7 +19,25 @@ namespace IQDHackathon
 
         }
 
-        private void btnClose_Click(object sender, RoutedEventArgs e)
+        // خاصية لإغلاق النافذة
+        public static bool CloseWindow
+        {
+            get { return _closeWindow; }
+            set
+            {
+                _closeWindow = value;
+                if (_closeWindow)
+                {
+                    // إغلاق النافذة الحالية
+                    Application.Current.Windows.OfType<MainWindow>().FirstOrDefault()?.Close();
+                }
+            }
+        }
+        private static bool _closeWindow;
+
+
+
+        private  void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
