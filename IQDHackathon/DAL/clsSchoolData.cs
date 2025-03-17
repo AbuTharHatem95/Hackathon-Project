@@ -11,6 +11,7 @@ namespace DAL
 {
     public static class clsSchoolData
     {
+
         public static async Task<int?> AddAsync(string schoolName)
         {
             SqlParameter[] parameters =
@@ -19,7 +20,7 @@ namespace DAL
             };
             return await CRUD.AddAsync("Sp_Add", parameters);
         }
-        public static async Task<bool> UpdateAsync(int schoolId, string schoolName)
+        public static async Task<bool> UpdateAsync(int? schoolId, string schoolName)
         {
             SqlParameter[] parameters =
             {

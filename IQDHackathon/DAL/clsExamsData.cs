@@ -12,6 +12,7 @@ namespace DAL
 {
     public static class clsExamsData
     {
+
         public static async Task<int?> AddAsync(int stageInfoId, int teacherId, char branch, DateTime examDate, int examTypeId, TimeOnly examTime)
         {
             SqlParameter[] parameters =

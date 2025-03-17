@@ -7,6 +7,7 @@ namespace DAL
     public static  class clsSettingAiData
     {
 
+
         public static async Task<int?> AddAsync(string apiKey, string secretKey, string modelName)
         {
             SqlParameter[] parameters =
@@ -17,7 +18,7 @@ namespace DAL
             };
             return await CRUD.AddAsync("Sp_Add", parameters);
         }
-        public static async Task<bool> UpdateAsync(int settingsId, string apiKey, string secretKey, string modelName)
+        public static async Task<bool> UpdateAsync(int? settingsId, string apiKey, string secretKey, string modelName)
         {
             SqlParameter[] parameters =
             {

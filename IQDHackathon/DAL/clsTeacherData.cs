@@ -13,13 +13,14 @@ namespace DAL
     {
         public static async Task<int?> AddAsync(string teacherName)
         {
+
             SqlParameter[] parameters =
             {
                 new SqlParameter("@TeacherName", teacherName),
             };
             return await CRUD.AddAsync("Sp_Add", parameters);
         }
-        public static async Task<bool> UpdateAsync(int teacherId, string teacherName)
+        public static async Task<bool> UpdateAsync(int? teacherId, string teacherName)
         {
             SqlParameter[] parameters =
             {
