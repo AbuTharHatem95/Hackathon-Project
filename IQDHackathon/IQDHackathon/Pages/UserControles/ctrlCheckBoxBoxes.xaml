@@ -5,17 +5,34 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:IQD_UI_Library;assembly=IQD_UI_Library"
              mc:Ignorable="d" 
-      Background="{DynamicResource PrimaryBackgroundColor}" Width="700" Height="200">
+             Background="Gray" 
+             Width="800" 
+             Height="Auto"
+             FlowDirection="{DynamicResource AppFlowDirection}"
+             >
 
-    <StackPanel>
-        <Border  CornerRadius="20" Margin="10" Width="652" BorderThickness="2" BorderBrush="DarkBlue" Height="120">
-            <StackPanel Margin="0,0,0,26">
-                <CheckBox x:Name="checkBox" HorizontalAlignment="Center"  FontSize="15" Style="{StaticResource ModernCheckBox}" FlowDirection="{StaticResource AppFlowDirection}" 
-                           Foreground="Wheat" Width="618" Margin="10,5,6,7" Height="121"
-                         IsChecked="{Binding IsCheckedProperty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <local:IQD_TextBox x:Name="txtScore" LostFocus="txtScore_LostFocus" HorizontalAlignment="Center" Tag="Degree" Height="42" Width="119" />
+    <Grid Height="Auto">
+        <Border VerticalAlignment="Center"
+                CornerRadius="20" 
+                Margin="5, 2, 5, 2" 
+                BorderThickness="1" 
+                BorderBrush="White" 
+                Padding ="2"
+                >
+            <StackPanel Orientation="Horizontal" Height="Auto">
+                <local:IQD_TextBox x:Name="txtScore" LostFocus="txtScore_LostFocus" HorizontalAlignment="Center" Tag="Degree" Height="Auto" Width="90" Margin="12, 2, 2, 2" FontWeight="Bold"/>
+                <CheckBox x:Name="checkBox"  
+                          HorizontalAlignment="Right"  
+                          Width="665"
+                          FontSize="15" 
+                          Style="{StaticResource ModernCheckBox}" 
+                          FlowDirection="{StaticResource AppFlowDirection}" 
+                          Foreground="Wheat" 
+                          IsChecked="{Binding IsCheckedProperty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          />
+                
             </StackPanel>
         </Border>
 
-    </StackPanel>
+    </Grid>
 </UserControl>

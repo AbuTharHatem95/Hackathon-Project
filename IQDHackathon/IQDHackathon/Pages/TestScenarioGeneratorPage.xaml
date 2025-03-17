@@ -3,247 +3,203 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:local="clr-namespace:IQD_UI_Library;assembly=IQD_UI_Library"
       Title="Test Scenario Generator"
-      
-     
-  FlowDirection="{DynamicResource AppFlowDirection}"
-  FontFamily="Poppins">
-    <Grid>
+      FlowDirection="{DynamicResource AppFlowDirection}"
+      FontFamily="Poppins">
 
-        <Frame x:Name="InnerFrame" NavigationUIVisibility="Hidden" 
-      Panel.ZIndex="1" Background="Transparent"
-           HorizontalAlignment="Stretch" VerticalAlignment="Center"
-       />
-        
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-        <ScrollViewer.Resources>
-        <Style TargetType="ScrollBar">
-            <Setter Property="Background" Value="DarkSlateBlue"/>
-            <Setter Property="Foreground" Value="SkyBlue"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ScrollBar">
-                        <Grid>
-                            <Track Name="PART_Track" IsDirectionReversed="True">
-                                <Track.Thumb>
-                                    <Thumb Background="WhiteSmoke"/>
-                                </Track.Thumb>
-                            </Track>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        </ScrollViewer.Resources>
-        <Border Background="{StaticResource PrimaryBackgroundColor}" >
-            <Grid Background="{DynamicResource PrimaryBackgroundColor}" >
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <Grid Background="Gray">
+        <Grid x:Name="MainPageGrid" Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Center">
+            <Border Background="{StaticResource PrimaryBackgroundColor}"  >
+                <Grid Background="{DynamicResource PrimaryBackgroundColor}"  Margin="0,0,0,0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-        <!-- العمود الأول -->
-        <Grid Grid.Column="0" Margin="20" VerticalAlignment="Stretch" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-            <!-- اسم المدرسة -->
-            <Grid Grid.Row="0" Margin="0,10">
-                <local:IQD_TextBox  FontSize="20" 
-                   Height="55"
-                       BorderBrushes="DarkBlue"
-                     ToolTip="اسم المدرسة" 
-                   Tag="اسم المدرسة"
-                   HorizontalAlignment="Stretch"
-                                  
-                  />
-            </Grid>
-
-            <!-- المرحلة -->
-            <Grid Grid.Row="1" Margin="0,10">
-                <ComboBox x:Name="txtSubject" ToolTip="المرحلة"  FontSize="20" Style="{StaticResource ComboBoxStyle1 }"
-                 VerticalContentAlignment="Center" Height="55" Tag="المرحلة" Foreground="{DynamicResource PrimaryTextColor}"
-                  
-                   HorizontalAlignment="Stretch"
-                  >
-                    <ComboBoxItem>ابتدائية</ComboBoxItem>
-                    <ComboBoxItem>متوسطة</ComboBoxItem>
-                    <ComboBoxItem>ثانوية</ComboBoxItem>
-                    
-                   
-                </ComboBox>
-            </Grid>
-
-            <!-- الصف  -->
-            <Grid Grid.Row="2" Margin="0,10">
-                <ComboBox x:Name="txtStage" ToolTip="الصف"  FontSize="20" Style="{StaticResource ComboBoxStyle1 }"
-  VerticalContentAlignment="Center" Height="55"  Tag="الشعبة" Foreground="{DynamicResource PrimaryTextColor}"
-   
-    HorizontalAlignment="Stretch"
-   >
-                    <ComboBoxItem>اول</ComboBoxItem>
-                    <ComboBoxItem>ثاني</ComboBoxItem>
-                    <ComboBoxItem>ثالث</ComboBoxItem>
-                    <ComboBoxItem>رابع</ComboBoxItem>
-                </ComboBox>
-            </Grid>
-
-            <!-- الشعبة -->
-            <Grid Grid.Row="3" Margin="0,10">
-
-                <ComboBox x:Name="txtClass" ToolTip="الشعبة"  FontSize="20" Style="{StaticResource ComboBoxStyle1 }" 
-                  VerticalContentAlignment="Center" Height="55" Tag="الصف" Foreground="{DynamicResource PrimaryTextColor}" 
-                          HorizontalAlignment="Stretch"
- >
-                    <ComboBoxItem>ا</ComboBoxItem>
-                    <ComboBoxItem>ب</ComboBoxItem>
-                    <ComboBoxItem>ج</ComboBoxItem>
-                    <ComboBoxItem>د</ComboBoxItem>
-                </ComboBox>
-            </Grid>
-
-            <!-- اسم الاستاذ -->
-            <Grid Grid.Row="4" Margin="0,10">
-                <local:IQD_TextBox FontSize="20" ToolTip="اسم الاستاذ"
-                   Height="55"
-                   BorderBrushes="DarkBlue"
-                   Tag="اسم الاستاذ"
-                   HorizontalAlignment="Stretch"
-            />
-            </Grid>
-
-            <!-- وقت الامتحان -->
-            <Grid Grid.Row="5" Margin="0,10">
-                <local:IQD_TextBox FontSize="20" ToolTip="وقت الامتحان"
-                   BorderBrushes="DarkBlue"
-                   Height="55"
-                   Tag="وقت الامتحان"
-                   HorizontalAlignment="Stretch"
-                 />
-            </Grid>
-          
-            <!-- نوع الامتحان  -->
-            <Grid Grid.Row="6" Margin="0,10">
-                <local:IQD_TextBox FontSize="20" ToolTip="نوع الامتحان"
-                       BorderBrushes="DarkBlue"            
-                       Height="55"                            
-                       Tag="نوع الامتحان"
-                       HorizontalAlignment="Stretch"
-                      />
-            </Grid>
-            <!-- الملاحظه  -->
-            <Grid Grid.Row="7" Margin="0,10">
-                <local:IQD_TextBox FontSize="20" ToolTip="الملاحظة"
-                   BorderBrushes="DarkBlue"
-                   Height="55"                        
-                   Tag="الملاحظة"
-                   HorizontalAlignment="Stretch"
-                  />
-            </Grid>
-           
-            <!-- الرجوع  -->
-            <Button Margin="0,60,0,0" Click="BackToMainWindowButton_Click" Style="{StaticResource BackButtonStyle}" Grid.Row="8" >
-                
-            </Button>
-        </Grid>
-
-        <!-- العمود الثاني -->
-        <Grid Grid.Column="1" Margin="20">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-
-
-            <!-- انماط الاسئلة -->
-            <Grid Grid.Row="0" Margin="0,10">
-                <GroupBox BorderBrush="DarkBlue" BorderThickness="0.2" FontSize="20" Header="انماط يوسف" Foreground="{DynamicResource PrimaryTextColor}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Grid Grid.Column="0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-
-                            </Grid.RowDefinitions>
-                            <Grid Grid.Row="0">
-                                <CheckBox  x:Name="ch1"  FontSize="18" Style="{StaticResource ModernCheckBox}" FlowDirection="{DynamicResource AppFlowDirection}" Content="يوسف" HorizontalAlignment="Stretch"   Foreground="{DynamicResource PrimaryTextColor}"  VerticalAlignment="Stretch"/>
-                            </Grid>
-                            <Grid Grid.Row="1">
-                                <CheckBox  x:Name="ch2" FontSize="18" Style="{StaticResource ModernCheckBox}" FlowDirection="{DynamicResource AppFlowDirection}" Content="يوسف" HorizontalAlignment="Stretch"   Foreground="{DynamicResource PrimaryTextColor}"  VerticalAlignment="Stretch"/>
-                            </Grid>
-                            <Grid Grid.Row="2">
-                                <CheckBox x:Name="ch3" FontSize="18" Style="{StaticResource ModernCheckBox}" FlowDirection="{DynamicResource AppFlowDirection}" Content="يوسف" HorizontalAlignment="Stretch"   Foreground="{DynamicResource PrimaryTextColor}"  VerticalAlignment="Stretch"/>
-                            </Grid>
-                        </Grid>
-                        <Grid Grid.Column="1">
-
-                        </Grid>
-                        <Grid Grid.Column="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-
-                            </Grid.RowDefinitions>
-                            <Grid Grid.Row="0">
-                                <CheckBox x:Name="ch4" FontSize="18" Style="{StaticResource ModernCheckBox}" FlowDirection="{DynamicResource AppFlowDirection}" Content="يوسف" HorizontalAlignment="Stretch"   Foreground="{DynamicResource PrimaryTextColor}"  VerticalAlignment="Stretch"/>
-                            </Grid>
-                            <Grid Grid.Row="1">
-                                <CheckBox x:Name="ch5" FontSize="18" Style="{StaticResource ModernCheckBox}" FlowDirection="{DynamicResource AppFlowDirection}" Content="يوسف" HorizontalAlignment="Stretch"   Foreground="{DynamicResource PrimaryTextColor}"  VerticalAlignment="Stretch"/>
-                            </Grid>
-                            <Grid Grid.Row="2">
-
-                            </Grid>
-                        </Grid>
-                        <Grid Grid.Column="1">
-
-                        </Grid>
-                    </Grid>
-                </GroupBox>
-            </Grid>
-
-            <Grid Grid.Row="1"  Margin="0,10">
-                <GroupBox BorderBrush="DarkBlue" BorderThickness="0.2" FontSize="20" Header="الانشاء والتصدير" Foreground="{DynamicResource PrimaryTextColor}">
-                    <Grid>
+                    <!-- العمود الأول -->
+                    <Grid Grid.Column="0" Margin="20,20,20,20" >
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <Button ToolTip="رفع الاسئلة" Background="{DynamicResource PrimaryBackgroundColor}" BorderBrush="{x:Null}">
-                                <Image Source="/Assets/export.png" Height="70" HorizontalAlignment="Center" />
-                            </Button>
-                        </Grid>
-                        <Grid Grid.Row="1">
-                            
-                            <Button x:Name="Gentet" Click="Gentet_Click" ToolTip="انشاء اسئلة" Background="{DynamicResource PrimaryBackgroundColor}" BorderBrush="{x:Null}">
-                                <Image Source="/Assets/Generate.png" Height="70" HorizontalAlignment="Center" />
-                            </Button>
-                        </Grid>
-                    </Grid>
-                </GroupBox>
-            </Grid >
 
+                        <!-- اسم المدرسة -->
+                        <Grid Grid.Row="0" Margin="5">
+                            <local:IQD_TextBox  FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="اسم المدرسة" Tag="اسم المدرسة" HorizontalAlignment="Stretch"/>
+                        </Grid>
+
+
+                        <!-- اسم الاستاذ -->
+                        <Grid Grid.Row="1" Margin="5">
+                            <local:IQD_TextBox FontSize="20" ToolTip="اسم الاستاذ" Height="55" BorderBrushes="DarkBlue" Tag="اسم الاستاذ" HorizontalAlignment="Stretch"/>
+                        </Grid>
+
+                        <!-- وقت الامتحان -->
+                        <Grid Grid.Row="2" Margin="5">
+                            <local:IQD_TextBox FontSize="20" ToolTip="وقت الامتحان" BorderBrushes="DarkBlue" Height="55" Tag="وقت الامتحان" HorizontalAlignment="Stretch"/>
+                        </Grid>
+
+                        <!-- نوع الامتحان  -->
+                        <Grid Grid.Row="3" Margin="5">
+                            <local:IQD_TextBox FontSize="20" ToolTip="نوع الامتحان" BorderBrushes="DarkBlue" Height="55" Tag="نوع الامتحان" HorizontalAlignment="Stretch"/>
+                        </Grid>
+
+                        <!-- الملاحظه  -->
+                        <Grid Grid.Row="4" Margin="5">
+                            <local:IQD_TextBox FontSize="20" ToolTip="الملاحظة" BorderBrushes="DarkBlue" Height="55" Tag="الملاحظة" HorizontalAlignment="Stretch"/>
+                        </Grid>
+
+
+                    </Grid>
+
+                    <!-- العمود الثاني -->
+                    <Grid Grid.Column="1" Margin="20,20,20,20" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- المرحلة -->
+                        <Grid Grid.Row="1" Margin="5">
+                            <ComboBox x:Name="txtSubject" ToolTip="المرحلة"  FontSize="20" Style="{StaticResource ComboBoxStyle1 }" 
+                                        VerticalContentAlignment="Center" Height="55" Tag="المرحلة" Foreground="{DynamicResource PrimaryTextColor}" HorizontalAlignment="Stretch">
+
+                                <ComboBoxItem>ابتدائية</ComboBoxItem>
+                                <ComboBoxItem>متوسطة</ComboBoxItem>
+                                <ComboBoxItem>ثانوية</ComboBoxItem>
+                            </ComboBox>
+                        </Grid>
+
+                        <!-- الصف  -->
+                        <Grid Grid.Row="2" Margin="5">
+                            <ComboBox x:Name="txtStage" ToolTip="الصف"  FontSize="20" Style="{StaticResource ComboBoxStyle1 }" 
+                                        VerticalContentAlignment="Center" Height="55"  Tag="الصف" Foreground="{DynamicResource PrimaryTextColor}" HorizontalAlignment="Stretch">
+
+                                <ComboBoxItem>اول</ComboBoxItem>
+                                <ComboBoxItem>ثاني</ComboBoxItem>
+                                <ComboBoxItem>ثالث</ComboBoxItem>
+                                <ComboBoxItem>رابع</ComboBoxItem>
+                            </ComboBox>
+                        </Grid>
+
+
+                        <!-- الشعبة -->
+                        <Grid Grid.Row="3" Margin="5">
+                            <ComboBox x:Name="txtClass" ToolTip="الشعبة"  FontSize="20" Style="{StaticResource ComboBoxStyle1 }" 
+                                        VerticalContentAlignment="Center" Height="55" Tag="الشعبة" Foreground="{DynamicResource PrimaryTextColor}" HorizontalAlignment="Stretch"
+>
+                                <ComboBoxItem>ا</ComboBoxItem>
+                                <ComboBoxItem>ب</ComboBoxItem>
+                                <ComboBoxItem>ج</ComboBoxItem>
+                                <ComboBoxItem>د</ComboBoxItem>
+                            </ComboBox>
+                        </Grid>
+
+
+                        <!-- المادة -->
+                        <Grid Grid.Row="0" Margin="5">
+                            <ComboBox x:Name="txtSubject1" ToolTip="المادة"  FontSize="20" Style="{StaticResource ComboBoxStyle1 }" 
+                            VerticalContentAlignment="Center" Height="55" 
+                                      Tag="المادة" 
+                                      Foreground="{DynamicResource PrimaryTextColor}"
+                                      HorizontalAlignment="Stretch">
+
+                                <!--<ComboBoxItem>الرياضيات</ComboBoxItem>
+                                    <ComboBoxItem>الاحياء</ComboBoxItem>
+                                    <ComboBoxItem>ثالث</ComboBoxItem>
+                                    <ComboBoxItem>رابع</ComboBoxItem>-->
+                            </ComboBox>
+
+                        </Grid>
+
+                    </Grid>
+
+                    <!-- العمود الثالث -->
+                    <Grid Grid.Column="2" Margin="20,20,20,20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- انماط الاسئلة -->
+                        <Grid Grid.Row="0" Margin="0,9">
+                            <GroupBox BorderBrush="DarkBlue" BorderThickness="0.2" FontSize="20" Header="أنماط الأسئلة" Foreground="{DynamicResource PrimaryTextColor}" Margin="0,2,10,8">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- استخدام ItemsControl لعرض CheckBox بشكل ديناميكي -->
+                                    <ItemsControl x:Name="CheckBoxList" Grid.Column="0">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <CheckBox Content="{Binding Name}" IsChecked="{Binding IsSelected, Mode=TwoWay}" 
+                                  FontSize="18" Style="{StaticResource ModernCheckBox}" 
+                                  FlowDirection="{DynamicResource AppFlowDirection}" 
+                                  Foreground="{DynamicResource PrimaryTextColor}" 
+                                  Margin="0,5"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </Grid>
+                            </GroupBox>
+                        </Grid>
+
+                        <!--الانشاء والتصدير-->
+                        <Grid Grid.Row="1"  Margin="0">
+                            <GroupBox BorderBrush="DarkBlue" BorderThickness="0.2" FontSize="20" Header="الانشاء والتصدير" Foreground="{DynamicResource PrimaryTextColor}" Margin="-2,4,10,10">
+                                <Grid>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <Button ToolTip="رفع الاسئلة" Background="{DynamicResource PrimaryBackgroundColor}" BorderBrush="{x:Null}">
+                                            <Image Source="/Assets/export.png" Height="60" HorizontalAlignment="Center" />
+                                        </Button>
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+
+
+                                        <Button x:Name="Gentet" Click="Gentet_Click" ToolTip="انشاء اسئلة" Background="{DynamicResource PrimaryBackgroundColor}" BorderBrush="{x:Null}">
+                                            <Image Source="/Assets/Generate.png" Height="60" HorizontalAlignment="Center" />
+                                        </Button>
+                                    </Grid>
+                                </Grid>
+                            </GroupBox>
+                        </Grid >
+
+                    </Grid>
+
+                </Grid>
+            </Border>
+        </Grid>
+        
+        <Grid x:Name="QuestionsPage" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- الهدر مع زر الطباعة -->
+            <Grid Background="LightGray" Height="40" Grid.Row="0">
+                <TextBlock Text="الأسئلة" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" />
+                <Button Content="طباعة الأسئلة" HorizontalAlignment="Right" Padding="5,2" 
+                        Margin="10,0,0,0" Click="PrintQuestions_Click"/>
+            </Grid>
+
+            <Frame x:Name="ContentFrame" NavigationUIVisibility="Hidden" Grid.Row="1" />
         </Grid>
 
     </Grid>
-        </Border>
-    </ScrollViewer>
 
-    </Grid>
 </Page>
+
+

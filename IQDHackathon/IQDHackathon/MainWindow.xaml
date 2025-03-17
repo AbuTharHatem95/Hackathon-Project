@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IQD_UI_Library;assembly=IQD_UI_Library"
-        Title="MainWindow" Height="720" Width="1100"
+        Title="MainWindow" 
+        Height="720"
+        Width="1100"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Background="Transparent"
@@ -12,26 +14,24 @@
         ResizeMode="NoResize"
         WindowState="Maximized" 
         FontFamily="Poppins"
-        FlowDirection="{DynamicResource AppFlowDirection}">
+        FlowDirection="{DynamicResource AppFlowDirection}"
+        >
 
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto" MinHeight="655.238"></RowDefinition>
+            <RowDefinition Height="0*"></RowDefinition>
         </Grid.RowDefinitions>
-        <!-- عنوان الترحيب -->
-        <Grid Background="{StaticResource PrimaryBackgroundColor}">
+
+        <!--<Grid Background="{StaticResource PrimaryBackgroundColor}" Margin="0,0,0,-90" Grid.RowSpan="2">-->
+        <Grid Background="White" Margin="0,0,0,-90" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="43"/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Name="btnSetting" Click="btnSetting_Click" Style="{StaticResource BackButtonStyle1}" Grid.Column="0" HorizontalAlignment="Center" Width="50" Height="50" VerticalAlignment="Top" Margin="0,50,0,0" Background="{x:Null}">
-                <Image Source="/Assets/Generate.png" OpacityMask="Black" />
-            </Button>
-            <Label Grid.Column="1" Content="مولدات الذكاء الاصطناعي" FontSize="40" Style="{StaticResource CustomLabelWithShadow}" Foreground="White"
-                    Margin="0,60,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="55"/>
         </Grid>
+
         <!--Header-->
         <Grid Grid.Column="0" Grid.Row="0">
             <!--Start: Button Close | Restore | Minimize-->
@@ -54,9 +54,17 @@
             <!--End: Button Close | Restore | Minimize-->
         </Grid>
 
+        <Button Name="btnSetting" Click="btnSetting_Click" Style="{StaticResource BackButtonStyle1}" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,5,0,0" Background="{x:Null}">
+            <Image Source="/Assets/Generate.png" OpacityMask="Black" Width="28" Height="28"/>
+        </Button>
+
+        <!-- عنوان الترحيب -->
+        <Label Content="مولدات الذكاء الاصطناعي" FontSize="40" Style="{StaticResource CustomLabelWithShadow}" Foreground="Black"
+         Margin="0,60,0,0" VerticalAlignment="Top" Height="55" Width="432"/>
+
         <!-- الحاوية الرئيسية-->
         <Viewbox Stretch="Uniform" Margin="30,130,30,30">
-            <UniformGrid Rows="3" Columns="3" Height="473">
+            <UniformGrid Rows="3" Columns="3" Height="500">
 
                 <!--بطاقة - التحليل المالي الذكي-->
                 <StackPanel  Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -124,7 +132,6 @@
 
             </UniformGrid>
         </Viewbox>
-
 
     </Grid>
 

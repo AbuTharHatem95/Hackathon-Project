@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.ObjectModel;
+using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Windows;
@@ -8,15 +9,37 @@ using IQDHackathon;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 
-namespace Interface.Pages   
+namespace Interface.Pages
 {
     public partial class TestScenarioGeneratorPage : Page
     {
-        
+        public ObservableCollection<QuestionStyle> QuestionStyles { get; set; }
+        private List<QuestionItem> __generatedQuestions = new List<QuestionItem>();
+        private readonly string? __openAiApiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
+
+
         //بيج لاملائ معلومات المدرسه ومعلومات الاستاذ ورفع مادة الامتحان 
         public TestScenarioGeneratorPage()
         {
             InitializeComponent();
+            FillComboBox();
+
+            // جلب البيانات من قاعدة البيانات
+            //var databaseService = new DatabaseService();
+            //QuestionStyles = new ObservableCollection<QuestionStyle>(databaseService.GetQuestionStyles());
+
+            //// تعيين مصدر البيانات لـ ItemsControl
+            //CheckBoxList.ItemsSource = QuestionStyles;
+        }
+
+        private void FillComboBox()
+        {
+            // إضافة عناصر إلى ComboBox
+            txtSubject1.Items.Add("الرياضيات");
+            txtSubject1.Items.Add("الاحياء");
+            txtSubject1.Items.Add("ثالث");
+            txtSubject1.Items.Add("رابع");
+            txtSubject1.SelectedIndex = 0;
         }
 
         private void BackToMainWindowButton_Click(object sender, RoutedEventArgs e)
@@ -25,12 +48,6 @@ namespace Interface.Pages
             mainWindow.Show();
             Window.GetWindow(this).Close();
         }
-
-
-
-        private List<QuestionItem> generatedQuestions = new List<QuestionItem>();
-
-        private readonly string? OpenAiApiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
 
         private void LoadPdf_Click(object sender, RoutedEventArgs e)
         {
@@ -78,15 +95,14 @@ namespace Interface.Pages
 
             string questions = await GetQuestionsFromChatGPT(prompt);
 
-            generatedQuestions = new List<QuestionItem>();
+            __generatedQuestions = new List<QuestionItem>();
             foreach (string q in questions.Split('\n'))
             {
                 if (!string.IsNullOrWhiteSpace(q))
                 {
-                    generatedQuestions.Add(new QuestionItem { Question = q.Trim(), IsSelected = false });
+                    __generatedQuestions.Add(new QuestionItem { Question = q.Trim(), IsSelected = false });
                 }
             }
-
             //  QuestionsList.ItemsSource = generatedQuestions;
         }
 
@@ -97,10 +113,10 @@ namespace Interface.Pages
             {
                 using HttpClient client = new HttpClient();
 
-                if (string.IsNullOrEmpty(OpenAiApiKey))
+                if (string.IsNullOrEmpty(__openAiApiKey))
                     throw new Exception("API Key غير مضبوط! تأكد من إضافته.");
 
-                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {OpenAiApiKey}");
+                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {__openAiApiKey}");
 
                 // تقسيم النص إذا كان أكبر من 2000 حرف
                 const int maxChunkSize = 2000;
@@ -168,90 +184,59 @@ namespace Interface.Pages
 
             if (saveFileDialog.ShowDialog() == true)
             {
-                var selectedQuestions = generatedQuestions.FindAll(q => q.IsSelected);
+                var selectedQuestions = __generatedQuestions.FindAll(q => q.IsSelected);
                 File.WriteAllLines(saveFileDialog.FileName, selectedQuestions.ConvertAll(q => q.Question));
                 MessageBox.Show("تم حفظ الأسئلة بنجاح!");
             }
         }
 
+        //private void Gentet_Click(object sender, RoutedEventArgs e)
+        //{
+        //    GenretQuestiones();
+        //    if (QustionesDict.Count <= 0)
+        //    {
+        //        IQD_MessageBox.Show("Erorr", "الدشكنري فااارغ", MessageBoxType.Error);
+        //        return;
+        //    }
+        //    mainGrid.Visibility = Visibility.Collapsed;
+        //    FramGrid.Visibility=Visibility.Visible;
+        //    InnerFrame?.Navigate(new QuestionsPage(QustionesDict));
+        //}
 
 
         private void Gentet_Click(object sender, RoutedEventArgs e)
         {
             GenretQuestiones();
-            if(QustionesDict.Count<=0)
+
+            if (QustionesDict.Count == 0)
             {
-                IQD_MessageBox.Show("Erorr", "الدشكنري فااارغ",MessageBoxType.Error);
+                IQD_MessageBox.Show("Erorr", "الدشكنري فااارغ", MessageBoxType.Error);
                 return;
             }
-
-            InnerFrame?.Navigate(new QuestionsPage(QustionesDict));
-            InnerFrame.Visibility = Visibility.Visible ;
-       
-          
-
-        }
-
-
-
-
-
-        public class Title
-        {
-            public byte Number { get; set; }
-
-            public string? QuestionTitle { get; set; }
-
-            public byte Score { get; set; }
-
-            public List<Question> QuestionList { get; private set; }
-
-            public Title(byte number, byte score, string? questionTitle = null)
-            {
-                Number = number;
-                QuestionTitle = questionTitle;
-                Score = score;
-                QuestionList = new List<Question>();
-            }
-        }
-
-        public class Question
-        {
-            public char Branch { get; set; }
-
-            public string Text { get; set; }
-
-            public string QuestionStyle { get; set; }
-
-            public byte Score { get; set; }
-
-            public Question(char branch, string text, string questionStyle, byte score)
-            {
-                Branch = branch;
-                Text = text;
-                QuestionStyle = questionStyle;
-                Score = score;
-            }
+            MainPageGrid.Visibility = Visibility.Collapsed;
+            QuestionsPage.Visibility = Visibility.Visible;
+            ContentFrame.Navigate(new QuestionsPage(QustionesDict)); // استبدل QuestionsPage بالصفحة التي تريد فتحها
         }
 
         //السترنك الاول يحتوي على النمط
         //والليست تحتوي على الاسئلة المدرجة تحت النمط
-        public Dictionary<string,List<string>> QustionesDict= new Dictionary<string,List<string>>();
-
+        public Dictionary<string, List<string>> QustionesDict = new Dictionary<string, List<string>>();
 
         private void GenretQuestiones()
         {
-
-            QustionesDict.Add("تعريف", new List<string> 
+            QustionesDict.Add("تعريف", new List<string>
             {
                 "يوسف محمد",
                 "سعيد بن عمر",
                 "محمد الفاتح",
                 "سعيد ابن الجبير",
+                "يوسف محمد",
+                "سعيد بن عمر",
+                "محمد الفاتح",
+                "سعيد ابن الجبير سعيد ابن الجبير سعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبير"
 
             }
             );
-
             QustionesDict.Add("فراغات", new List<string>
             {
                 "يوسف ______هواي",
@@ -261,23 +246,91 @@ namespace Interface.Pages
 
             }
           );
-
         }
 
-
-
-
-
-
-
-
-
-        public class QuestionItem
+        private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            public string? Question { get; set; }
-            public bool IsSelected { get; set; }
+            // إغلاق الصفحة إذا كانت معروضة داخل NavigationWindow أو Frame
+            if (this.NavigationService != null)
+                this.NavigationService.GoBack(); // العودة إلى الصفحة السابقة
         }
 
+        private void btnRestore_Click(object sender, RoutedEventArgs e)
+        {
+            // الوصول إلى النافذة التي تحتوي على الصفحة
+            var window = Window.GetWindow(this);
+            if (window != null)
+            {
+                // تغيير حالة النافذة بين التكبير والتصغير
+                if (window.WindowState == WindowState.Normal)
+                    window.WindowState = WindowState.Maximized;
+                else
+                    window.WindowState = WindowState.Normal;
+            }
+        }
 
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            // الوصول إلى النافذة التي تحتوي على الصفحة
+            var window = Window.GetWindow(this);
+            if (window != null)
+                window.WindowState = WindowState.Minimized; // تصغير النافذة
+        }
+
+        private void PrintQuestions_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+    }
+
+    public class Title
+    {
+        public byte Number { get; set; }
+
+        public string? QuestionTitle { get; set; }
+
+        public byte Score { get; set; }
+
+        public List<Question> QuestionList { get; private set; }
+
+        public Title(byte number, byte score, string? questionTitle = null)
+        {
+            Number = number;
+            QuestionTitle = questionTitle;
+            Score = score;
+            QuestionList = new List<Question>();
+        }
+    }
+
+    public class Question
+    {
+        public char Branch { get; set; }
+
+        public string Text { get; set; }
+
+        public string QuestionStyle { get; set; }
+
+        public byte Score { get; set; }
+
+        public Question(char branch, string text, string questionStyle, byte score)
+        {
+            Branch = branch;
+            Text = text;
+            QuestionStyle = questionStyle;
+            Score = score;
+        }
+    }
+
+    public class QuestionStyle
+    {
+        public int Id { get; set; } // معرف النمط
+        public string Name { get; set; } // اسم النمط
+        public bool IsSelected { get; set; } // حالة التحديد
+    }
+
+    public class QuestionItem
+    {
+        public string? Question { get; set; }
+        public bool IsSelected { get; set; }
     }
 }
