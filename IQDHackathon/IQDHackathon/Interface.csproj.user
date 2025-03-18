@@ -22,7 +22,7 @@
     <Compile Update="Pages\PresentationGeneratorPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\QuestionsPage.xaml.cs">
+    <Compile Update="Pages\QuestionsStyles.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\ReportAssistantPage.xaml.cs">
@@ -40,10 +40,19 @@
     <Compile Update="Pages\UIDesignerPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\UserControles\ctrlAddBrach.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\UserControles\ctrlCheckBoxBoxes.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\UserControles\ctrlDynamicListControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\UserControles\ctrlQusetionCreater.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\UserControles\ctrlQustionListView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

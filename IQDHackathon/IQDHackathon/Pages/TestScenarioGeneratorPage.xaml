@@ -6,6 +6,7 @@
       FlowDirection="{DynamicResource AppFlowDirection}"
       FontFamily="Poppins">
 
+
     <Grid Background="{DynamicResource PrimaryBackgroundColor}">
        
 
@@ -27,6 +28,12 @@
             </Grid>
             <Border Grid.Row="1" Background="{DynamicResource PrimaryBackgroundColor}"  >
                 
+
+    <Grid Background="Gray">
+        
+        <Grid x:Name="MainPageGrid" Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Center">
+            <Border Background="{StaticResource PrimaryBackgroundColor}"  >
+
                 <Grid Background="{DynamicResource PrimaryBackgroundColor}"  Margin="0,0,0,0" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>

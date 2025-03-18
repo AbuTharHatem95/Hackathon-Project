@@ -10,7 +10,7 @@ namespace Interface.Pages.UserControles
     public partial class ctrlDynamicListControl : UserControl
     {
         // حدث جديد لنقل البيانات إلى الصفحة الرئيسية
-        public event EventHandler<(string QuestionStyle, bool IsChecked, string Score)>? QuestionStateChanged;
+        public event EventHandler<(string QuestionStyle, bool IsChecked, byte Score,string Qustion)>? QuestionStateChanged;
 
         public ctrlDynamicListControl(string questionStyles, List<string> questions)
         {
@@ -29,15 +29,16 @@ namespace Interface.Pages.UserControles
             }
         }
 
-        private void Box_StateChanged(object sender, (bool IsChecked, string Score) e)
+        private void Box_StateChanged(object sender, (bool IsChecked, byte Score,string Question) e)
         {
             // هنا يتم نقل البيانات إلى الصفحة الرئيسية
             var questionStyle = txtTitle.Text; // اسم النمط (Style) الحالي
             var isChecked = e.IsChecked;
             var score = e.Score;
+            var Qustion = e.Question;
 
             // إطلاق الحدث مع البيانات
-            QuestionStateChanged?.Invoke(this, (questionStyle, isChecked, score));
+            QuestionStateChanged?.Invoke(this, (questionStyle, isChecked, score,Qustion));
         }
 
 

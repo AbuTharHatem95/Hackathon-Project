@@ -1,0 +1,93 @@
+﻿<UserControl x:Class="Interface.Pages.UserControles.QusetionCreater"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:IQD_UI_Library;assembly=IQD_UI_Library"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="800"
+             FlowDirection="{DynamicResource AppFlowDirection}"
+             Background="{StaticResource PrimaryBackgroundColor}"
+             >
+
+    <Grid>
+        <Grid x:Name="QustionCreate" >
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <!-- رقم السؤال -->
+        <Grid Grid.Row="0" Margin="5">
+            <local:IQD_TextBox x:Name="txtQNum"  FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="رقم السؤال" Tag="رقم السؤال" HorizontalAlignment="Stretch"/>
+        </Grid>
+
+        <!-- عنوان السؤال -->
+        <Grid Grid.Row="1" Margin="5">
+            <local:IQD_TextBox x:Name="txtQustionTitle"  FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="عنوان السؤال" Tag="عنوان السؤال" HorizontalAlignment="Stretch"/>
+        </Grid>
+
+        <!-- عدد الاجابات المطلوبه -->
+        <Grid Grid.Row="2" Margin="5">
+            <local:IQD_TextBox x:Name="txtNumberOfAnswers"  FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="ادخل عدد الاجابات المطلوبه لهذا السؤال" Tag="عدد الاجابات" HorizontalAlignment="Stretch"/>
+        </Grid>
+        <!-- الدرجة -->
+        <Grid Grid.Row="3" Margin="5">
+            <local:IQD_TextBox x:Name="txtQscore" FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="الدرجة" Tag="الدرجة" HorizontalAlignment="Stretch"/>
+        </Grid>
+
+        <!--اضافة نفاط-->
+        <local:IQD_Button x:Name="btnAddQustion"
+             Margin="10,0,0,10" 
+             Grid.Row="4" 
+             Style="{StaticResource ButtonsWithIconStyle}"
+             HorizontalAlignment="Stretch"
+             Content="إضافة تفاط"
+             Icon="/Assets/export.png"
+             Click="btnAddQustion_Click"
+                   >
+        </local:IQD_Button>
+
+        <!--اضافة فرع-->
+        <local:IQD_Button x:Name="btnAddNewBrach"
+                    Margin="10,0,0,10" 
+                    Grid.Row="5" 
+                    Style="{StaticResource ButtonsWithIconStyle}"
+                    HorizontalAlignment="Stretch"
+                    Content="إضافة افرع"
+                    Icon="/Assets/export.png"
+                    Click="btnAddNewBrach_Click"
+                          >
+        </local:IQD_Button>
+        
+        <!--انشاء الاسئلة-->
+        <local:IQD_Button x:Name="btnCreateQustion"
+                    Margin="10,0,0,10" 
+                    Grid.Row="6" 
+                    Style="{StaticResource ButtonsWithIconStyle}"
+                    HorizontalAlignment="Stretch"
+                    Content="إنشاء نموذج"
+                    Icon="/Assets/export.png"
+                    Click="btnCreateQustion_Click"
+                          >
+        </local:IQD_Button>
+
+    </Grid>
+
+
+        <Grid x:Name="QustionList" Visibility="Collapsed" Grid.Row="0">
+                
+            <Frame x:Name="ContentFrame" NavigationUIVisibility="Hidden"/>
+
+        </Grid>
+    </Grid>
+    
+    
+    
+</UserControl>

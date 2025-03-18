@@ -9,7 +9,7 @@ namespace Interface.Pages.UserControles
     /// </summary>
     public partial class ctrlCheckBoxBoxes : UserControl, INotifyPropertyChanged
     {
-        public event EventHandler<(bool IsChecked, string Score)>? StateChanged; // حدث جديد للإعلام بحالة CheckBox وقيمة TextBox
+        public event EventHandler<(bool IsChecked, byte Score,string Qustion)>? StateChanged; // حدث جديد للإعلام بحالة CheckBox وقيمة TextBox
 
         private bool _isCheckedProperty;
         public bool IsCheckedProperty
@@ -32,26 +32,62 @@ namespace Interface.Pages.UserControles
             {
                 _scoreText = value;
                 OnPropertyChanged(nameof(ScoreText));
-                NotifyStateChanged(); // إشعار عند تغيير قيمة TextBox
+                NotifyScoreChanged(); // إشعار عند تغيير قيمة TextBox
             }
         }
+
+        private string _question {  get; set; }
 
         public ctrlCheckBoxBoxes(string question)
         {
             InitializeComponent();
             checkBox.Content = question;
-            txtScore.TextChanged += TxtScore_TextChanged; // الاشتراك في حدث تغيير النص
+            _question= question;
+           // txtScore.LostFocus += txtScore_LostFocus; // الاشتراك في حدث تغيير النص
+            this.DataContext = this; // تعيين DataContext إلى نفس الكلاس
+
         }
 
-        private void TxtScore_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            ScoreText = txtScore.Text; // تحديث قيمة ScoreText عند تغيير النص
-        }
+        //private void TxtScore_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    ScoreText = txtScore.Text; // تحديث قيمة ScoreText عند تغيير النص
+        //}
 
         private void NotifyStateChanged()
         {
-            StateChanged?.Invoke(this, (IsCheckedProperty, ScoreText)); // إرسال الحالة والقيمة
+            if(IsCheckedProperty)
+            {
+               // txtScore.Focus();
+                StateChanged?.Invoke(this, (IsCheckedProperty, byte.Parse(ScoreText), _question)); // إرسال الحالة والقيمة
+
+            }
+            
+            //StateChanged?.Invoke(this, (IsCheckedProperty, ScoreText, _question)); // إرسال الحالة والقيمة
+
+
+
         }
+
+        private void NotifyScoreChanged()
+        {
+            if (!IsCheckedProperty)
+            {
+                IsCheckedProperty = true;
+
+                StateChanged?.Invoke(this, (IsCheckedProperty, byte.Parse(ScoreText), _question)); // إرسال الحالة والقيمة
+
+            }
+            else if (txtScore.Text != "")
+            {
+                StateChanged?.Invoke(this, (IsCheckedProperty,byte.Parse(ScoreText), _question)); // إرسال الحالة والقيمة
+
+            }
+            //StateChanged?.Invoke(this, (IsCheckedProperty, ScoreText, _question)); // إرسال الحالة والقيمة
+
+
+
+        }
+
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
@@ -59,10 +95,15 @@ namespace Interface.Pages.UserControles
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void txtScore_LostFocus(object sender, RoutedEventArgs e)
-        {
-            ScoreText = txtScore.Text; // تحديث قيمة ScoreText عند فقدان التركيز
-        }
+        //private void txtScore_LostFocus(object sender, RoutedEventArgs e)
+        //{
+        //    if (txtScore.Text =="")
+        //    {
+
+        //    }
+        //    else
+        //        ScoreText = txtScore.Text; // تحديث قيمة ScoreText عند فقدان التركيز
+        //}
     }
 }
 
