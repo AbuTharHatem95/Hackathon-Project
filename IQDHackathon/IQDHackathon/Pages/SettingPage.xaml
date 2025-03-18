@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Interface.Pages"
       mc:Ignorable="d" 
-        Title="SettingPage" Height="450" Width="800"
+        Title="SettingPage" 
     FlowDirection="{DynamicResource AppFlowDirection}"
    Loaded="Window_Loaded"
     >
@@ -16,8 +16,12 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
         <!-- الثيم -->
-        <GroupBox  Padding="0,12,0,0" BorderThickness="0.4" BorderBrush="{DynamicResource Coboxborder}" Height="120" Margin="8" FontWeight="Bold" FontSize="14">
+        <GroupBox  FlowDirection="{DynamicResource AppFlowDirection}" Padding="0,12,0,0" BorderThickness="0.4" BorderBrush="{DynamicResource Coboxborder}" Height="120" Margin="8" FontWeight="Bold" FontSize="14">
             <GroupBox.HeaderTemplate >
                 <DataTemplate>
                     <TextBlock Text="{DynamicResource ThemeTitle}" Foreground="{DynamicResource PrimaryTextColor}" />
@@ -30,7 +34,7 @@
         </GroupBox>
 
         <!-- اللغة -->
-        <GroupBox Grid.Column="1" Margin="8,10,8,8" Padding="0,12,0,0" BorderThickness="0.4" BorderBrush="{DynamicResource Coboxborder}" Height="120"  FontWeight="Bold" FontSize="14" >
+        <GroupBox  FlowDirection="{DynamicResource AppFlowDirection}" Grid.Column="1" Margin="8,10,8,8" Padding="0,12,0,0" BorderThickness="0.4" BorderBrush="{DynamicResource Coboxborder}" Height="120"  FontWeight="Bold" FontSize="14" >
             <GroupBox.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock Text="{DynamicResource LanguageTitle}" Foreground="{DynamicResource PrimaryTextColor}" />
@@ -43,7 +47,7 @@
         </GroupBox>
 
         <!-- حفظ المعلومات -->
-        <GroupBox Grid.Column="2" Margin="8,10,8,8" Padding="0,12,0,0" BorderThickness="0.4" BorderBrush="{DynamicResource Coboxborder}" Height="120"  FontWeight="Bold" FontSize="14" >
+        <GroupBox  FlowDirection="{DynamicResource AppFlowDirection}" Grid.Column="2" Margin="8,10,8,8" Padding="0,12,0,0" BorderThickness="0.4" BorderBrush="{DynamicResource Coboxborder}" Height="120"  FontWeight="Bold" FontSize="14" >
             <GroupBox.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock Text="{DynamicResource rdSaveDataText}" Foreground="{DynamicResource PrimaryTextColor}" />
@@ -55,5 +59,12 @@
         </GroupBox>
 
 
+
+        <Button Click="btnSetting_Click" HorizontalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="3" Name="btnSetting"  Style="{StaticResource BackButtonStyle}" Width="53" Height="53"  VerticalAlignment="Top" Margin="6,-10,0,0" >
+
+        </Button>
+
+
     </Grid>
+   
 </Page>

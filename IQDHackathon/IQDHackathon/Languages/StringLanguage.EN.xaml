@@ -26,4 +26,19 @@
     <system:String x:Key="rdSaveDataText">SaveData</system:String>
     <system:String x:Key="rdCheckSaveData">SaveData</system:String>
 
+    <!--mm-->
+    <system:String x:Key="MainTitle">Artifical Entelegance Genrerator</system:String>
+    <system:String x:Key="t2">حفظ المعلومات</system:String>
+    <system:String x:Key="t3">حفظ المعلومات</system:String>
+    <system:String x:Key="t33">حفظ المعلومات</system:String>
+    <system:String x:Key="t4">حفظ المعلومات</system:String>
+    <system:String x:Key="t5">حفظ المعلومات</system:String>
+    <system:String x:Key="t6">حفظ المعلومات</system:String>
+    <system:String x:Key="t7">حفظ المعلومات</system:String>
+    <system:String x:Key="t8">حفظ المعلومات</system:String>
+    <system:String x:Key="t9">حفظ المعلومات</system:String>
+    <system:String x:Key="t00">حفظ المعلومات</system:String>
+    <system:String x:Key="t11">حفظ المعلومات</system:String>
+    <system:String x:Key="t12">حفظ المعلومات</system:String>
+
 </ResourceDictionary>

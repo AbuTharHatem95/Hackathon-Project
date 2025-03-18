@@ -6,15 +6,34 @@
       FlowDirection="{DynamicResource AppFlowDirection}"
       FontFamily="Poppins">
 
-    <Grid Background="Gray">
-        <Grid x:Name="MainPageGrid" Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Center">
-            <Border Background="{StaticResource PrimaryBackgroundColor}"  >
+    <Grid Background="{DynamicResource PrimaryBackgroundColor}">
+       
+
+       
+
+        <Grid  x:Name="MainPageGrid" Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" >
+                <Image Margin="0,0,0,0" Source="/Assets/school.png" Height="90" VerticalAlignment="Top" RenderTransformOrigin="0.479,0.187"/>
+            </Grid>
+            <Grid Grid.Row="2" Margin="0,15,0,0">
+                <Button x:Name="btnRetuntomainmenue" Click="btnRetuntomainmenue_Click" Margin="0,-20,0,10" Height="50" Style="{StaticResource BackButtonStyle}" />
+            </Grid>
+            <Border Grid.Row="1" Background="{DynamicResource PrimaryBackgroundColor}"  >
+                
                 <Grid Background="{DynamicResource PrimaryBackgroundColor}"  Margin="0,0,0,0" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
+                    
 
                     <!-- العمود الأول -->
                     <Grid Grid.Column="0" Margin="20,20,20,20" >
@@ -181,9 +200,9 @@
                 </Grid>
             </Border>
         </Grid>
-        
+
         <Grid x:Name="QuestionsPage" Visibility="Collapsed" Grid.Row="0">
-          
+
             <Frame x:Name="ContentFrame" NavigationUIVisibility="Hidden"/>
         </Grid>
 

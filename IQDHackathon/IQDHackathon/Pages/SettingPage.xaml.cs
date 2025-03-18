@@ -72,8 +72,16 @@ namespace Interface.Pages
         private void rchecked_Checked(object sender, RoutedEventArgs e)
         {
 
+           
+
         }
 
+        private void btnSetting_Click(object sender, RoutedEventArgs e)
+        {
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
+            Window.GetWindow(this).Close();
 
+        }
     }
 }
