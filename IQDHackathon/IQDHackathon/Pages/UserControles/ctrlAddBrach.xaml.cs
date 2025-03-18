@@ -28,14 +28,14 @@ namespace Interface.Pages.UserControles
         {
             _qustion.AddBranch('A');
 
-            QustionListView qustion = new QustionListView(dictionary, Qstyles,null);
-            qustion.QuestionStateChanged += Qustion_QuestionStateChanged;
+            AddQustiones qustion = new AddQustiones();
+          //  qustion.QuestionStateChanged += Qustion_QuestionStateChanged;
 
 
 
         }
 
-        private void Qustion_QuestionStateChanged(object? sender, (string QuestionStyle, bool IsChecked, string Qustion) e)
+        private void Qustion_QuestionStateChanged(object? sender, (string QuestionStyle, bool IsChecked, byte Score, string Qustion) e)
         {
             if (!e.IsChecked && _qustion?.PointList.Count > 0) 
             {

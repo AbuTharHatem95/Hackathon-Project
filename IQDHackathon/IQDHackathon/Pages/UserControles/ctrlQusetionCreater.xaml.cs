@@ -1,10 +1,12 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Interface.Pages.UserControles
 {
     public partial class QusetionCreater : UserControl
     {
+
         public clsQuestion Questions;
 
         public event EventHandler<(bool IsChecked, string Qustion)>? StateChanged; // حدث جديد للإعلام بحالة CheckBox وقيمة TextBox
@@ -17,11 +19,46 @@ namespace Interface.Pages.UserControles
             this.DataContext = this;
         }
 
-        private void btnAddQustion_Click(object sender, RoutedEventArgs e)
+
+        private void GetDataFromListView(object sender,(bool IsCheck,string Qustion)e)
+        {
+            
+            if(e.IsCheck)
+            {
+                Questions.AddPoint(new clsPoint(e.Qustion));
+
+               
+            }
+            else
+            {
+                foreach (var item in Questions.PointList)
+                {
+                    if(item.Text == e.Qustion)
+                    {
+                        Questions.PointList.Remove(item);
+                        return;
+                    }
+                    
+                }
+              
+            }
+
+            Questions.AddPoint(new clsPoint(e.Qustion));
+
+        }
+
+        private void btnAddQustion_Click_1(object sender, RoutedEventArgs e)
         {
             clsTitle title = new clsTitle(byte.Parse(txtQNum.Text), byte.Parse(txtQscore.Text), byte.Parse(txtNumberOfAnswers.Text), txtQustionTitle.Text);
             Questions = new clsQuestion(title);
+
+            ctrlQustionListView qusetionList = new ctrlQustionListView();
+            qusetionList.QuestionStateChanged += GetDataFromListView;
+            QustionCreate.Visibility = Visibility.Collapsed;
+            QustionList.Visibility = Visibility.Visible;
+            ContentFrame.Navigate(qusetionList);
         }
+        
 
         private void btnAddQustionPointes_Click(object sender, RoutedEventArgs e)
         {
@@ -31,6 +68,22 @@ namespace Interface.Pages.UserControles
         private void LoadDataFromEvent(object sender, (string QNum, string Qtitle, string QAnswer, string Qscore) e)
         {
             //هنا نملئ الاوبجكت تبع clsQustion
+        }
+
+
+        private void btnAddPointes_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAddNewBrach_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCreateQustion_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
 
@@ -48,7 +101,7 @@ namespace Interface.Pages.UserControles
         //    QustionList.Visibility = Visibility.Visible;
         //    ContentFrame.Navigate(new ctrlAddBrach(QuestionsDictFromChatGPT, QStyle, question));
 
-        //   // ContentFrame.Navigate(new QustionListView(_qustion, QustionListView.Mod.BrachMod,QStyle,question)); 
+        //   // ContentFrame.Navigate(new AddQustiones(_qustion, AddQustiones.Mod.BrachMod,QStyle,question)); 
         //    //يجب فتح الليست بدون النمط الوقف عليه
         //}
 
@@ -58,7 +111,7 @@ namespace Interface.Pages.UserControles
 
         //    QustionCreate.Visibility = Visibility.Collapsed;
         //    QustionList.Visibility = Visibility.Visible;
-        //    ContentFrame.Navigate(new QustionListView(QuestionsDictFromChatGPT,QStyle,question)); 
+        //    ContentFrame.Navigate(new AddQustiones(QuestionsDictFromChatGPT,QStyle,question)); 
         //}
 
         ////يتم انشاء اوبجكت عند حدوث هذا الايفنت

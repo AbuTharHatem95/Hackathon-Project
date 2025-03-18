@@ -52,6 +52,9 @@
     <Compile Update="Pages\UserControles\ctrlQusetionCreater.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\UserControles\ctrlAddQustiones.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\UserControles\ctrlQustionListView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

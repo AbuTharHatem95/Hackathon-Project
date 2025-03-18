@@ -13,7 +13,7 @@ namespace Interface.Pages
 {
     public partial class TestScenarioGeneratorPage : Page
     {
-        public static Dictionary<string, List<string>> QuestionsDictFromChatGPT { get; set; }
+        public static Dictionary<string, List<string>> QuestionsDictFromChatGPT = new Dictionary<string, List<string>>();
 
         // public ObservableCollection<QuestionStyle> QuestionStyles { get; set; }
 
@@ -40,14 +40,14 @@ namespace Interface.Pages
         {
             GenretQuestiones();
 
-            if (QustionesDict.Count == 0)
+            if (QuestionsDictFromChatGPT.Count == 0)
             {
                 IQD_MessageBox.Show("Erorr", "الدشكنري فااارغ", MessageBoxType.Error);
                 return;
             }
             MainPageGrid.Visibility = Visibility.Collapsed;
             QuestionsPage.Visibility = Visibility.Visible;
-            ContentFrame.Navigate(new QustionListView()); 
+            ContentFrame.Navigate(new AddQustiones()); 
         }
 
         private void FillComboBox()
@@ -226,11 +226,10 @@ namespace Interface.Pages
 
         //السترنك الاول يحتوي على النمط
         //والليست تحتوي على الاسئلة المدرجة تحت النمط
-        public Dictionary<string, List<string>> QustionesDict = new Dictionary<string, List<string>>();
 
         private void GenretQuestiones()
         {
-            QustionesDict.Add("تعريف", new List<string>
+            QuestionsDictFromChatGPT.Add("تعريف", new List<string>
             {
                 "يوسف محمد",
                 "سعيد بن عمر",
@@ -243,7 +242,7 @@ namespace Interface.Pages
 
             }
             );
-            QustionesDict.Add("فراغات", new List<string>
+            QuestionsDictFromChatGPT.Add("فراغات", new List<string>
             {
                 "يوسف ______هواي",
                 "اين تقع_________",
@@ -255,7 +254,7 @@ namespace Interface.Pages
 
           );
 
-            QustionesDict.Add("تعاليل", new List<string>
+            QuestionsDictFromChatGPT.Add("تعاليل", new List<string>
             {
                 "ماذا لو",
                 "هي او تلك",
@@ -266,7 +265,7 @@ namespace Interface.Pages
             );
 
 
-            QustionesDict.Add("صح او خطأ", new List<string>
+            QuestionsDictFromChatGPT.Add("صح او خطأ", new List<string>
             {
                 "العراق سعيد",
                 "البصرة بارده",
