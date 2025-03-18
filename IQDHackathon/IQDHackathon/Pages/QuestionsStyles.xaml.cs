@@ -57,17 +57,17 @@ namespace Interface.Pages
 
         private void GentetListViewComponat(Dictionary<string, List<string>> qustiones)
         {
-            foreach (var style in qustiones)
-            {
-                // إنشاء عنصر تحكم ديناميكي
-                ctrlDynamicListControl listView = new ctrlDynamicListControl(style.Key, style.Value);
+            //foreach (var style in qustiones)
+            //{
+            //    // إنشاء عنصر تحكم ديناميكي
+            //    ctrlDynamicListControl listView = new ctrlDynamicListControl(style.Key, style.Value);
 
-                // الاشتراك في الحدث الجديد
-                listView.QuestionStateChanged += ListView_QuestionStateChanged;
+            //    // الاشتراك في الحدث الجديد
+            //    listView.QuestionStateChanged += ListView_QuestionStateChanged;
 
-                // إضافة العنصر إلى الواجهة
-                ItemsListBox.Items.Add(listView);
-            }
+            //    // إضافة العنصر إلى الواجهة
+            //    ItemsListBox.Items.Add(listView);
+            //}
         }
 
         private void ListView_QuestionStateChanged(object sender, (string QuestionStyle, bool IsChecked,string Qustion) e)
@@ -128,7 +128,7 @@ namespace Interface.Pages
         {
             MainGrid.Visibility = Visibility.Collapsed;
             CreateQuestionsPage.Visibility = Visibility.Visible;
-            ContentFrame.Navigate(new QusetionCreater(qustiones, ""));
+            ContentFrame.Navigate(new QusetionCreater());
         }
 
         private void btnPrintQustion_Click(object sender, RoutedEventArgs e)
@@ -138,23 +138,23 @@ namespace Interface.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var button = sender as Button;
-            if (button != null)
-            {
-                var item = button.CommandParameter as ListItem;
-                if (item != null)
-                {
+            //var button = sender as Button;
+            //if (button != null)
+            //{
+            //    var item = button.CommandParameter as ListItem;
+            //    if (item != null)
+            //    {
 
-                    QusetionCreater qustion = new QusetionCreater(qustiones,item.Text);
+            //        QusetionCreater qustion = new QusetionCreater(qustiones,item.Text);
 
 
-                   // MainGrid.Visibility = Visibility.Collapsed;
-                   // CreateQuestionsPage.Visibility = Visibility.Visible;
-                   // UserControlContainer.Children.Add(qustion);
+            //       // MainGrid.Visibility = Visibility.Collapsed;
+            //       // CreateQuestionsPage.Visibility = Visibility.Visible;
+            //       // UserControlContainer.Children.Add(qustion);
 
-                   // ContentFrame.Navigate(new QusetionCreater(qustiones,item.Text)); 
-                }
-            }
+            //       // ContentFrame.Navigate(new QusetionCreater(qustiones,item.Text)); 
+            //    }
+            //}
         }
 
 

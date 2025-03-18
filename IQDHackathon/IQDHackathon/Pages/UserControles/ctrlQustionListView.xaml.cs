@@ -1,30 +1,29 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace Interface.Pages.UserControles
 {
-    public partial class QustionListView : UserControl
+   
+    public partial class ctrlQustionListView : UserControl
     {
-        public event EventHandler<(string QuestionStyle, bool IsChecked, string Qustion)>? QuestionStateChanged;
+        public event EventHandler<(bool IsChecked, string Qustion)>? QuestionStateChanged; 
 
-        //clsQuestion _question;
-
-        //public static Dictionary<string, List<string>> QuestionsDictFromChatGPT;
-
-        public QustionListView()
+        public ctrlQustionListView()
         {
             InitializeComponent();
-            //GentetListViewComponat();
-        }
-
-        //يتم ارجاع كل الاسئلة المحدده الى صفحة انشاء الاسئلة
-        private void btnAddQustion_Click(object sender, RoutedEventArgs e)
-        {
-            QusetionCreater qusetionCreater = new QusetionCreater();
-            //qusetionCreater.DataLoaded += LoadDataFromEvent;
-            AddQustionGrid.Visibility = Visibility.Collapsed;
-            QusetionCreaterGrid.Visibility = Visibility.Visible;
-            QusetionCreaterFrame.Navigate(qusetionCreater);
+            GentetListViewComponat();
         }
 
         private void GentetListViewComponat()
@@ -39,47 +38,37 @@ namespace Interface.Pages.UserControles
                 listView.QuestionStateChanged += ListView_QuestionStateChanged;
 
                 ////إضافة العنصر إلى الواجهة
-                //ItemsListBox.Items.Add(listView);          // <---------------------------------------@
+                ItemsListBox.Items.Add(listView);
             }
-        }
-
-        private void LoadDataFromEvent(object sender, (string QNum, string Qtitle, string QAnswer, string Qscore) e)
-        {
-            //هنا نملئ الاوبجكت تبع clsQustion
-            clsTitle title = new clsTitle(byte.Parse(e.QNum), byte.Parse(e.Qscore), byte.Parse(e.QAnswer), e.Qtitle);
-            _question = new clsQuestion(title);
         }
 
         private void ListView_QuestionStateChanged(object sender, (bool IsChecked, string Qustion) e)
         {
-            // هنا يمكنك معالجة البيانات الواردة
             var isChecked = e.IsChecked;
             var Qustion = e.Qustion;
 
 
-            if(isChecked)
-            {
-                if (!_QustionList.Contains(e.Qustion))
-                    _QustionList.Remove(e.Qustion);
-            }
-            else if (_QustionList.Contains(e.Qustion))
-                _QustionList.Remove(e.Qustion);
-            
+            //if (isChecked)
+            //{
+            //    if (!_QustionList.Contains(e.Qustion))
+            //        _QustionList.Remove(e.Qustion);
+            //}
+            //else if (_QustionList.Contains(e.Qustion))
+            //    _QustionList.Remove(e.Qustion);
+
             QuestionStateChanged?.Invoke(this, (isChecked, Qustion));
 
             // عرض البيانات في MessageBox (أو حفظها في قائمة أو أي شيء آخر)
             MessageBox.Show($"{isChecked}\nمحتوى السؤال :{Qustion}");
         }
 
-        private void LoadDataInOBJ(string QText)
+        private void btnChooesQustion_Click(object sender, RoutedEventArgs e)
         {
-            _question.AddPoint(new clsPoint(QText));
+            QusetionCreater CreateQustion = new QusetionCreater();
+            MainGrid.Visibility = Visibility.Collapsed;
+            SubGrid.Visibility = Visibility.Visible;
+            ContentFrame.Navigate(CreateQustion);
 
-            _question.AddBranch('A');
-            foreach (var item in _QustionList)
-            {
-                _question.AddPointToBranch('A', new clsPoint(QText));
-            }
-        } 
+        }
     }
 }

@@ -21,6 +21,7 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
             <!-- رقم السؤال -->
@@ -43,16 +44,28 @@
                 <local:IQD_TextBox x:Name="txtQscore" FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="الدرجة" Tag="الدرجة" HorizontalAlignment="Stretch"/>
             </Grid>
 
-            <!--اضافة نفاط-->
+            <!--اضافة سؤال-->
             <local:IQD_Button x:Name="btnAddQustion"
                     Margin="10,0,0,10" 
                     Grid.Row="4" 
                     Style="{StaticResource ButtonsWithIconStyle}"
                     HorizontalAlignment="Stretch"
-                    Content="إضافة تفاط"
+                    Content="إضافة سؤال"
                     Icon="/Assets/export.png"
-                    Click="btnAddQustionPointes_Click"
+                    Click="btnAddQustion_Click_1"
                     >
+            </local:IQD_Button>
+            
+            <!--اضافة نقاط-->
+            <local:IQD_Button x:Name="btnAddPointes"
+                  Margin="10,0,0,10" 
+                  Grid.Row="6" 
+                  Style="{StaticResource ButtonsWithIconStyle}"
+                  HorizontalAlignment="Stretch"
+                  Content="إضافة نقاط"
+                  Icon="/Assets/export.png"
+                  Click="btnAddPointes_Click"
+                  >
             </local:IQD_Button>
 
             <!--اضافة فرع-->
@@ -67,10 +80,11 @@
                     >
             </local:IQD_Button>
 
-            <!--انشاء -->
+
+            <!--انشاء  -->
             <local:IQD_Button x:Name="btnCreateQustion"
                     Margin="10,0,0,10" 
-                    Grid.Row="6" 
+                    Grid.Row="7" 
                     Style="{StaticResource ButtonsWithIconStyle}"
                     HorizontalAlignment="Stretch"
                     Content="إنشاء نموذج"
