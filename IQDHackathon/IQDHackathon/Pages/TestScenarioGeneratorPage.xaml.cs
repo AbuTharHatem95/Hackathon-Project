@@ -306,6 +306,13 @@ namespace Interface.Pages
         {
 
         }
+
+        private void btnRetuntomainmenue_Click(object sender, RoutedEventArgs e)
+        {
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
+            Window.GetWindow(this).Close();
+        }
     }
 
   

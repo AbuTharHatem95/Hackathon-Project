@@ -73,7 +73,7 @@
                                 </Border>
 
                                 <!-- الصورة الأساسية -->
-                                <Image Source="/Assets/settings.png" Width="50" Height="50"/>
+                                <Image Source="/Assets/settings.png" Width="25" Height="25"/>
                             </Grid>
                         </ControlTemplate>
                     </Setter.Value>
