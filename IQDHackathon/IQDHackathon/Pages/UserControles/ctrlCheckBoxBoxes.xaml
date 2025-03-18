@@ -19,8 +19,7 @@
                 BorderBrush="White" 
                 Padding ="2"
                 >
-            <StackPanel Orientation="Horizontal" Height="Auto">
-                <local:IQD_TextBox x:Name="txtScore" LostFocus="txtScore_LostFocus" HorizontalAlignment="Center" Tag="Degree" Height="Auto" Width="90" Margin="12, 2, 2, 2" FontWeight="Bold"/>
+            <StackPanel Orientation="Horizontal" Height="Auto" Margin="5">
                 <CheckBox x:Name="checkBox"  
                           HorizontalAlignment="Right"  
                           Width="665"
