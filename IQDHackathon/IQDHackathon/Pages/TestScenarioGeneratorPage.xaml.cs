@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using Interface.Pages.UserControles;
 using IQD_UI_Library;
 using IQDHackathon;
 using Microsoft.Win32;
@@ -14,7 +15,7 @@ namespace Interface.Pages
 {
     public partial class TestScenarioGeneratorPage : Page
     {
-        public ObservableCollection<QuestionStyle> QuestionStyles { get; set; }
+       // public ObservableCollection<QuestionStyle> QuestionStyles { get; set; }
         private List<QuestionItem> __generatedQuestions = new List<QuestionItem>();
         private readonly string? __openAiApiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
 
@@ -201,7 +202,7 @@ namespace Interface.Pages
         //    }
         //    mainGrid.Visibility = Visibility.Collapsed;
         //    FramGrid.Visibility=Visibility.Visible;
-        //    InnerFrame?.Navigate(new QuestionsPage(QustionesDict));
+        //    InnerFrame?.Navigate(new QuestionsStyles(QustionesDict));
         //}
 
 
@@ -216,7 +217,7 @@ namespace Interface.Pages
             }
             MainPageGrid.Visibility = Visibility.Collapsed;
             QuestionsPage.Visibility = Visibility.Visible;
-            ContentFrame.Navigate(new QuestionsPage(QustionesDict)); // استبدل QuestionsPage بالصفحة التي تريد فتحها
+            ContentFrame.Navigate(new QustionListView(QustionesDict,"",null)); // استبدل QuestionsStyles بالصفحة التي تريد فتحها
         }
 
         //السترنك الاول يحتوي على النمط
@@ -246,7 +247,30 @@ namespace Interface.Pages
                 "ماذا تفعل_______",
 
             }
+
+
           );
+
+            QustionesDict.Add("تعاليل", new List<string>
+            {
+                "ماذا لو",
+                "هي او تلك",
+                "لماذا نحن هنا",
+                "سبب الصلع",
+
+            }
+            );
+
+
+            QustionesDict.Add("صح او خطأ", new List<string>
+            {
+                "العراق سعيد",
+                "البصرة بارده",
+                "يوسف ما يسوي مشاكل",
+                "الزواج حلو؟",
+
+            }
+           );
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -284,50 +308,7 @@ namespace Interface.Pages
         }
     }
 
-    public class Title
-    {
-        public byte Number { get; set; }
-
-        public string? QuestionTitle { get; set; }
-
-        public byte Score { get; set; }
-
-        public List<Question> QuestionList { get; private set; }
-
-        public Title(byte number, byte score, string? questionTitle = null)
-        {
-            Number = number;
-            QuestionTitle = questionTitle;
-            Score = score;
-            QuestionList = new List<Question>();
-        }
-    }
-
-    public class Question
-    {
-        public char Branch { get; set; }
-
-        public string Text { get; set; }
-
-        public string QuestionStyle { get; set; }
-
-        public byte Score { get; set; }
-
-        public Question(char branch, string text, string questionStyle, byte score)
-        {
-            Branch = branch;
-            Text = text;
-            QuestionStyle = questionStyle;
-            Score = score;
-        }
-    }
-
-    public class QuestionStyle
-    {
-        public int Id { get; set; } // معرف النمط
-        public string Name { get; set; } // اسم النمط
-        public bool IsSelected { get; set; } // حالة التحديد
-    }
+  
 
     public class QuestionItem
     {

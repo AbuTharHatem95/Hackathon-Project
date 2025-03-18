@@ -2,6 +2,8 @@
 using IQD_UI_Library;
 using IQDHackathon;
 using Microsoft.Win32;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -11,18 +13,47 @@ using System.Windows.Controls;
 namespace Interface.Pages
 {
     /// <summary>
-    /// Interaction logic for QuestionsPage.xaml
+    /// Interaction logic for QuestionsStyles.xaml
     /// </summary>
-    public partial class QuestionsPage : Page
+    public partial class QuestionsStyles : Page
     {
-        //يحتوي على البيج على ليست فيو الرئيسية
+
+        public class ListItem
+        {
+            public string Text { get; set; } // النص الذي سيظهر بجانب الزر
+            public string ButtonContent { get; set; } // نص الزر
+          
+        }
+        public ObservableCollection<ListItem> Items { get; set; }
+
+
+       
         private Dictionary<string, List<string>> qustiones;
 
-        public QuestionsPage(Dictionary<string, List<string>> dict)
+        public QuestionsStyles(Dictionary<string, List<string>> dict)
         {
             InitializeComponent();
-            GentetListViewComponat(dict);
+
+            Items = new ObservableCollection<ListItem>();
+
+            ItemsListBox.ItemsSource = Items;
+
+            AddItemsFromDictionary(dict);
+            qustiones = dict;
+
         }
+
+
+        private void AddItemsFromDictionary(Dictionary<string,List<string>> dictionary)
+        {
+            foreach (var keyValuePair in dictionary)
+            {
+                // إضافة عنصر جديد إلى القائمة
+                Items.Add(new ListItem { Text = keyValuePair.Key, ButtonContent = "إنشاء سؤال" });
+            }
+        }
+    
+    
 
         private void GentetListViewComponat(Dictionary<string, List<string>> qustiones)
         {
@@ -39,15 +70,16 @@ namespace Interface.Pages
             }
         }
 
-        private void ListView_QuestionStateChanged(object sender, (string QuestionStyle, bool IsChecked, string Score) e)
+        private void ListView_QuestionStateChanged(object sender, (string QuestionStyle, bool IsChecked, byte Score,string Qustion) e)
         {
             // هنا يمكنك معالجة البيانات الواردة
             var questionStyle = e.QuestionStyle;
             var isChecked = e.IsChecked;
             var score = e.Score;
+            var Qustion = e.Qustion;
 
             // عرض البيانات في MessageBox (أو حفظها في قائمة أو أي شيء آخر)
-            MessageBox.Show($"نمط السؤال: {questionStyle}\nالتحديد: {isChecked}\nالدرجة: {score}");
+            MessageBox.Show($"نمط السؤال: {questionStyle}\nالتحديد: {isChecked}\nالدرجة: {score}\nمحتوى السؤال :{Qustion}");
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -94,12 +126,35 @@ namespace Interface.Pages
 
         private void btnCreateQustion1_Click(object sender, RoutedEventArgs e)
         {
-
+            MainGrid.Visibility = Visibility.Collapsed;
+            CreateQuestionsPage.Visibility = Visibility.Visible;
+            ContentFrame.Navigate(new QusetionCreater(qustiones, ""));
         }
 
         private void btnPrintQustion_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button != null)
+            {
+                var item = button.CommandParameter as ListItem;
+                if (item != null)
+                {
+
+                    QusetionCreater qustion = new QusetionCreater(qustiones,item.Text);
+
+
+                   // MainGrid.Visibility = Visibility.Collapsed;
+                   // CreateQuestionsPage.Visibility = Visibility.Visible;
+                   // UserControlContainer.Children.Add(qustion);
+
+                   // ContentFrame.Navigate(new QusetionCreater(qustiones,item.Text)); 
+                }
+            }
         }
 
 
