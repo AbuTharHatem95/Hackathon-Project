@@ -37,6 +37,7 @@
   <ItemGroup>
     <PackageReference Include="itext7" Version="9.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="QuestPDF" Version="2025.1.6" />
   </ItemGroup>
 
   <ItemGroup>

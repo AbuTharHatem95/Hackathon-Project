@@ -87,7 +87,7 @@
                     Grid.Row="7" 
                     Style="{StaticResource ButtonsWithIconStyle}"
                     HorizontalAlignment="Stretch"
-                    Content="إنشاء نموذج"
+                    Content=" إنشاء نموذج اسئلة"
                     Icon="/Assets/export.png"
                     Click="btnCreateQustion_Click"
                     >

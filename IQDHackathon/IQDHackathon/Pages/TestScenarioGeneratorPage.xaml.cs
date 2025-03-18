@@ -229,9 +229,9 @@ namespace Interface.Pages
 
         private void GenretQuestiones()
         {
-            QuestionsDictFromChatGPT.Add("تعريف", new List<string>
+            QuestionsDictFromChatGPT.Add("عدد", new List<string>
             {
-                "يوسف محمد",
+                "معالج",
                 "سعيد بن عمر",
                 "محمد الفاتح",
                 "سعيد ابن الجبير",
