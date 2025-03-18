@@ -35,7 +35,7 @@ namespace Interface.Pages.UserControles
 
         }
 
-        private void Qustion_QuestionStateChanged(object? sender, (string QuestionStyle, bool IsChecked, byte Score, string Qustion) e)
+        private void Qustion_QuestionStateChanged(object? sender, (string QuestionStyle, bool IsChecked, string Qustion) e)
         {
             if (!e.IsChecked && _qustion?.PointList.Count > 0) 
             {

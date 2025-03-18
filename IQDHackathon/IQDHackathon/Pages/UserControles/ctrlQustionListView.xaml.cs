@@ -8,7 +8,7 @@ namespace Interface.Pages.UserControles
     /// </summary>
     public partial class QustionListView : UserControl
     {
-        public event EventHandler<(string QuestionStyle, bool IsChecked, byte Score, string Qustion)>? QuestionStateChanged;
+        public event EventHandler<(string QuestionStyle, bool IsChecked, string Qustion)>? QuestionStateChanged;
 
         clsQuestion _question;
 
@@ -50,12 +50,12 @@ namespace Interface.Pages.UserControles
 
         }
 
-        private void ListView_QuestionStateChanged(object sender, (string QuestionStyle, bool IsChecked, byte Score, string Qustion) e)
+        private void ListView_QuestionStateChanged(object sender, (string QuestionStyle, bool IsChecked, string Qustion) e)
         {
             // هنا يمكنك معالجة البيانات الواردة
             var questionStyle = e.QuestionStyle;
             var isChecked = e.IsChecked;
-            var score = e.Score;
+           // var score = e.Score;
             var Qustion = e.Qustion;
 
             if(isChecked)
@@ -73,11 +73,11 @@ namespace Interface.Pages.UserControles
                     _QustionList.Remove(e.Qustion);
                 }
             }
-            QuestionStateChanged?.Invoke(this, (questionStyle, isChecked, score, Qustion));
+            QuestionStateChanged?.Invoke(this, (questionStyle, isChecked, Qustion));
 
 
             // عرض البيانات في MessageBox (أو حفظها في قائمة أو أي شيء آخر)
-            MessageBox.Show($"نمط السؤال: {questionStyle}\nالتحديد: {isChecked}\nالدرجة: {score}\nمحتوى السؤال :{Qustion}");
+            MessageBox.Show($"نمط السؤال: {questionStyle}\nالتحديد: {isChecked}\nمحتوى السؤال :{Qustion}");
         }
 
 
