@@ -1,76 +1,73 @@
-﻿using Interface;
-using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-
 
 namespace Interface.Pages.UserControles
 {
-    /// <summary>
-    /// Interaction logic for QusetionCreater.xaml
-    /// </summary>
-    
-    
     public partial class QusetionCreater : UserControl
     {
-        clsQuestion question;
+        public clsQuestion Questions;
 
-        private Dictionary<string, List<string>> _qustion;
+        public event EventHandler<(bool IsChecked, string Qustion)>? StateChanged; // حدث جديد للإعلام بحالة CheckBox وقيمة TextBox
 
-        private string QStyle;
+        public event EventHandler<(string QustionNum, string QustionTitle, string QustionScor, string NumberOfAnswer)>? DataLoaded;
 
-        public QusetionCreater(Dictionary<string, List<string>> dictionary,string QustionStyle)
+        public QusetionCreater()
         {
             InitializeComponent();
             this.DataContext = this;
-            _qustion= dictionary;
-            QStyle= QustionStyle;
-        }
-
-
-        private void LoadDataFromText()
-        {
-            question = new clsQuestion(new clsTitle(byte.Parse(txtQNum.Text),byte.Parse(txtQscore.Text),byte.Parse(txtNumberOfAnswers.Text),txtQustionTitle.Text));
-
-        }
-
-        private void btnAddNewBrach_Click(object sender, RoutedEventArgs e)
-        {
-
-            QustionCreate.Visibility = Visibility.Collapsed;
-            QustionList.Visibility = Visibility.Visible;
-            ContentFrame.Navigate(new ctrlAddBrach(_qustion, QStyle, question));
-
-           // ContentFrame.Navigate(new QustionListView(_qustion, QustionListView.Mod.BrachMod,QStyle,question)); 
-
-            //يجب فتح الليست بدون النمط الوقف عليه
         }
 
         private void btnAddQustion_Click(object sender, RoutedEventArgs e)
         {
-            LoadDataFromText();
-
-
-
-
-            QustionCreate.Visibility = Visibility.Collapsed;
-            QustionList.Visibility = Visibility.Visible;
-            ContentFrame.Navigate(new QustionListView(_qustion,QStyle,question)); 
-
+            clsTitle title = new clsTitle(byte.Parse(txtQNum.Text), byte.Parse(txtQscore.Text), byte.Parse(txtNumberOfAnswers.Text), txtQustionTitle.Text);
+            Questions = new clsQuestion(title);
         }
 
-
-        //يتم انشاء اوبجكت عند حدوث هذا الايفنت
-        private void btnCreateQustion_Click(object sender, RoutedEventArgs e)
+        private void btnAddQustionPointes_Click(object sender, RoutedEventArgs e)
         {
-            //انشاء اوبجكت من التايتل 
+
+        }
+
+        private void LoadDataFromEvent(object sender, (string QNum, string Qtitle, string QAnswer, string Qscore) e)
+        {
+            //هنا نملئ الاوبجكت تبع clsQustion
         }
 
 
 
 
+        //private void LoadDataFromText()
+        //{
+        //    question = new clsQuestion(new clsTitle(byte.Parse(txtQNum.Text),byte.Parse(txtQscore.Text),byte.Parse(txtNumberOfAnswers.Text),txtQustionTitle.Text));
+        //}
 
+        //private void btnAddNewBrach_Click(object sender, RoutedEventArgs e)
+        //{
 
+        //    QustionCreate.Visibility = Visibility.Collapsed;
+        //    QustionList.Visibility = Visibility.Visible;
+        //    ContentFrame.Navigate(new ctrlAddBrach(QuestionsDictFromChatGPT, QStyle, question));
+
+        //   // ContentFrame.Navigate(new QustionListView(_qustion, QustionListView.Mod.BrachMod,QStyle,question)); 
+        //    //يجب فتح الليست بدون النمط الوقف عليه
+        //}
+
+        //private void btnAddQustion_Click(object sender, RoutedEventArgs e)
+        //{
+        //    LoadDataFromText();
+
+        //    QustionCreate.Visibility = Visibility.Collapsed;
+        //    QustionList.Visibility = Visibility.Visible;
+        //    ContentFrame.Navigate(new QustionListView(QuestionsDictFromChatGPT,QStyle,question)); 
+        //}
+
+        ////يتم انشاء اوبجكت عند حدوث هذا الايفنت
+        //private void btnCreateQustion_Click(object sender, RoutedEventArgs e)
+        //{
+        //    //انشاء اوبجكت من التايتل 
+        //    //باي بوتن تريد يصير هذا الايفنت تضيف هذا السطر
+        //    DataLoaded?.Invoke(this, (txtQNum.Text, txtQustionTitle.Text, txtQscore.Text, txtNumberOfAnswers.Text));
+        //}
 
         //private void GentetListViewComponat(Dictionary<string, List<string>> qustiones)
         //{

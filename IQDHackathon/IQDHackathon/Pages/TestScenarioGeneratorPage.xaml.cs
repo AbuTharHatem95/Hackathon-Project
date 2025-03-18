@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.IO;
+﻿using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Windows;
@@ -10,13 +9,16 @@ using IQDHackathon;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 
-
 namespace Interface.Pages
 {
     public partial class TestScenarioGeneratorPage : Page
     {
-       // public ObservableCollection<QuestionStyle> QuestionStyles { get; set; }
+        public static Dictionary<string, List<string>> QuestionsDictFromChatGPT { get; set; }
+
+        // public ObservableCollection<QuestionStyle> QuestionStyles { get; set; }
+
         private List<QuestionItem> __generatedQuestions = new List<QuestionItem>();
+
         private readonly string? __openAiApiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
 
 
@@ -32,6 +34,20 @@ namespace Interface.Pages
 
             //// تعيين مصدر البيانات لـ ItemsControl
             //CheckBoxList.ItemsSource = QuestionStyles;
+        }
+
+        private void Gentet_Click(object sender, RoutedEventArgs e)
+        {
+            GenretQuestiones();
+
+            if (QustionesDict.Count == 0)
+            {
+                IQD_MessageBox.Show("Erorr", "الدشكنري فااارغ", MessageBoxType.Error);
+                return;
+            }
+            MainPageGrid.Visibility = Visibility.Collapsed;
+            QuestionsPage.Visibility = Visibility.Visible;
+            ContentFrame.Navigate(new QustionListView()); 
         }
 
         private void FillComboBox()
@@ -137,9 +153,9 @@ namespace Interface.Pages
                         model = "gpt-4",
                         messages = new[]
                         {
-                    new { role = "system", content = "أنت مساعد ذكاء اصطناعي يقوم بتحليل النصوص وإنشاء أسئلة فقط بدون إجابات." },
-                    new { role = "user", content = chunk }
-                },
+                            new { role = "system", content = "أنت مساعد ذكاء اصطناعي يقوم بتحليل النصوص وإنشاء أسئلة فقط بدون إجابات." },
+                            new { role = "user", content = chunk }
+                        },
                         max_tokens = 300
                     };
 
@@ -206,19 +222,7 @@ namespace Interface.Pages
         //}
 
 
-        private void Gentet_Click(object sender, RoutedEventArgs e)
-        {
-            GenretQuestiones();
-
-            if (QustionesDict.Count == 0)
-            {
-                IQD_MessageBox.Show("Erorr", "الدشكنري فااارغ", MessageBoxType.Error);
-                return;
-            }
-            MainPageGrid.Visibility = Visibility.Collapsed;
-            QuestionsPage.Visibility = Visibility.Visible;
-            ContentFrame.Navigate(new QustionListView(QustionesDict,"",null)); // استبدل QuestionsStyles بالصفحة التي تريد فتحها
-        }
+        
 
         //السترنك الاول يحتوي على النمط
         //والليست تحتوي على الاسئلة المدرجة تحت النمط

@@ -6,23 +6,24 @@
              xmlns:local="clr-namespace:IQD_UI_Library;assembly=IQD_UI_Library"
              mc:Ignorable="d" 
              Background="{DynamicResource PrimaryBackgroundColor}" 
-             Width="800" 
+             Width="700" 
              Height="Auto"
              FlowDirection="{DynamicResource AppFlowDirection}"
              >
 
     <Grid Height="Auto">
         <Border VerticalAlignment="Center"
-                CornerRadius="20" 
+                CornerRadius="15" 
                 Margin="5, 2, 5, 2" 
                 BorderThickness="1" 
                 BorderBrush="White" 
                 Padding ="2"
+                Width="690"
                 >
             <StackPanel Orientation="Horizontal" Height="Auto" Margin="5">
                 <CheckBox x:Name="checkBox"  
                           HorizontalAlignment="Right"  
-                          Width="665"
+                          Width="650"
                           FontSize="15" 
                           Style="{StaticResource ModernCheckBox}" 
                           FlowDirection="{StaticResource AppFlowDirection}" 

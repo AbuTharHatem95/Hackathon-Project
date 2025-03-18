@@ -3,83 +3,73 @@ using System.Windows.Controls;
 
 namespace Interface.Pages.UserControles
 {
-    /// <summary>
-    /// Interaction logic for QustionListView.xaml
-    /// </summary>
     public partial class QustionListView : UserControl
     {
         public event EventHandler<(string QuestionStyle, bool IsChecked, string Qustion)>? QuestionStateChanged;
 
-        clsQuestion _question;
+        //clsQuestion _question;
 
-       
-        string QsutionStyle;
-        private Dictionary<string, List<string>> _dictionary;
+        //public static Dictionary<string, List<string>> QuestionsDictFromChatGPT;
 
-        private List<string> _QustionList = new List<string>();
-
-        public QustionListView(Dictionary<string, List<string>> dictionary,string QsStyles,clsQuestion qustion)
+        public QustionListView()
         {
             InitializeComponent();
-           // _dictionary= dictionary;
-            QsutionStyle= QsStyles;
-            _question = qustion;
-            GentetListViewComponat(dictionary,QsStyles);
-
+            //GentetListViewComponat();
         }
 
-        private void GentetListViewComponat(Dictionary<string, List<string>> qustiones,string QustionStyles )
+        //يتم ارجاع كل الاسئلة المحدده الى صفحة انشاء الاسئلة
+        private void btnAddQustion_Click(object sender, RoutedEventArgs e)
+        {
+            QusetionCreater qusetionCreater = new QusetionCreater();
+            //qusetionCreater.DataLoaded += LoadDataFromEvent;
+            AddQustionGrid.Visibility = Visibility.Collapsed;
+            QusetionCreaterGrid.Visibility = Visibility.Visible;
+            QusetionCreaterFrame.Navigate(qusetionCreater);
+        }
+
+        private void GentetListViewComponat()
         {
 
-            foreach (var style in qustiones)
+            foreach (var question in TestScenarioGeneratorPage.QuestionsDictFromChatGPT)
             {
-               
-                        // إنشاء عنصر تحكم ديناميكي
-                        ctrlDynamicListControl listView = new ctrlDynamicListControl(style.Key, style.Value);
+                //إنشاء عنصر تحكم ديناميكي
+                ctrlDynamicListControl listView = new ctrlDynamicListControl(question.Key, question.Value);
 
-                        // الاشتراك في الحدث الجديد
-                        listView.QuestionStateChanged += ListView_QuestionStateChanged;
+                // الاشتراك في الحدث الجديد
+                listView.QuestionStateChanged += ListView_QuestionStateChanged;
 
-                        // إضافة العنصر إلى الواجهة
-                        ItemsListBox.Items.Add(listView);
-               
-                
-               
+                ////إضافة العنصر إلى الواجهة
+                //ItemsListBox.Items.Add(listView);          // <---------------------------------------@
             }
-
-
         }
 
-        private void ListView_QuestionStateChanged(object sender, (string QuestionStyle, bool IsChecked, string Qustion) e)
+        private void LoadDataFromEvent(object sender, (string QNum, string Qtitle, string QAnswer, string Qscore) e)
+        {
+            //هنا نملئ الاوبجكت تبع clsQustion
+            clsTitle title = new clsTitle(byte.Parse(e.QNum), byte.Parse(e.Qscore), byte.Parse(e.QAnswer), e.Qtitle);
+            _question = new clsQuestion(title);
+        }
+
+        private void ListView_QuestionStateChanged(object sender, (bool IsChecked, string Qustion) e)
         {
             // هنا يمكنك معالجة البيانات الواردة
-            var questionStyle = e.QuestionStyle;
             var isChecked = e.IsChecked;
-           // var score = e.Score;
             var Qustion = e.Qustion;
+
 
             if(isChecked)
             {
                 if (!_QustionList.Contains(e.Qustion))
-                {
                     _QustionList.Remove(e.Qustion);
-
-                }
             }
-            else
-            {
-                if(_QustionList.Contains(e.Qustion))
-                {
-                    _QustionList.Remove(e.Qustion);
-                }
-            }
-            QuestionStateChanged?.Invoke(this, (questionStyle, isChecked, Qustion));
-
+            else if (_QustionList.Contains(e.Qustion))
+                _QustionList.Remove(e.Qustion);
+            
+            QuestionStateChanged?.Invoke(this, (isChecked, Qustion));
 
             // عرض البيانات في MessageBox (أو حفظها في قائمة أو أي شيء آخر)
-            MessageBox.Show($"نمط السؤال: {questionStyle}\nالتحديد: {isChecked}\nمحتوى السؤال :{Qustion}");
+            MessageBox.Show($"{isChecked}\nمحتوى السؤال :{Qustion}");
         }
-
 
         private void LoadDataInOBJ(string QText)
         {
@@ -90,14 +80,6 @@ namespace Interface.Pages.UserControles
             {
                 _question.AddPointToBranch('A', new clsPoint(QText));
             }
-           
-
-        }
-
-        //يتم ارجاع كل الاسئلة المحدده الى صفحة انشاء الاسئلة
-        private void btnAddQustion_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        } 
     }
 }
