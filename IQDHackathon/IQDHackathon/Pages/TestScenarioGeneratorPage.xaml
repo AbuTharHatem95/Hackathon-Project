@@ -7,6 +7,7 @@
       FontFamily="Poppins">
 
     <Grid Background="Gray">
+        
         <Grid x:Name="MainPageGrid" Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <Border Background="{StaticResource PrimaryBackgroundColor}"  >
                 <Grid Background="{DynamicResource PrimaryBackgroundColor}"  Margin="0,0,0,0" >
