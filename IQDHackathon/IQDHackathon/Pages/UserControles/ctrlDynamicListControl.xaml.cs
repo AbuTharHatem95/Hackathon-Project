@@ -1,22 +1,17 @@
-﻿using System.Collections;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace Interface.Pages.UserControles
 {
-    /// <summary>
-    /// Interaction logic for ctrlDynamicListControl.xaml
-    /// </summary>
     public partial class ctrlDynamicListControl : UserControl
     {
         // حدث جديد لنقل البيانات إلى الصفحة الرئيسية
-        public event EventHandler<(string QuestionStyle, bool IsChecked,string Qustion)>? QuestionStateChanged;
+        public event EventHandler<(bool IsChecked,string Qustion)>? QuestionStateChanged;
 
-        public ctrlDynamicListControl(string questionStyles, List<string> questions)
+        public ctrlDynamicListControl(string questionStyles, List<string> questionList)
         {
             InitializeComponent();
             txtTitle.Text = questionStyles;
-            LoadDataInUserControl(questions);
+            LoadDataInUserControl(questionList);
         }
 
         private void LoadDataInUserControl(List<string> questionList)
@@ -37,13 +32,7 @@ namespace Interface.Pages.UserControles
             var Qustion = e.Question;
 
             // إطلاق الحدث مع البيانات
-            QuestionStateChanged?.Invoke(this, (questionStyle, isChecked,Qustion));
+            QuestionStateChanged?.Invoke(this, (isChecked, Qustion));
         }
-
-
     }
-
-
-
-
 }

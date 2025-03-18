@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              >
 
-    <Grid FlowDirection="{StaticResource AppFlowDirection}" >
+    <Grid FlowDirection="{StaticResource AppFlowDirection}" Width="740" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>

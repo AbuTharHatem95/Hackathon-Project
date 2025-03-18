@@ -14,6 +14,8 @@ namespace Interface
 
         public List<clsPoint>? PointList { get; private set; }
 
+        public static Dictionary<byte, clsQuestion> QuestionsDict { get; private set; } = new Dictionary<byte, clsQuestion>();
+
         public clsQuestion(clsTitle title)
         {
             Title = title;
@@ -42,7 +44,9 @@ namespace Interface
             return this;
         }
 
-
-
+        public void CreateQuestion()
+        {
+            QuestionsDict.Add(Title.Number, this);
+        }
     }
 }
