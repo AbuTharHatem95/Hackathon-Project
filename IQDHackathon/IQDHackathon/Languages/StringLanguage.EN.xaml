@@ -28,17 +28,29 @@
 
     <!--mm-->
     <system:String x:Key="MainTitle">Artifical Entelegance Genrerator</system:String>
-    <system:String x:Key="t2">حفظ المعلومات</system:String>
-    <system:String x:Key="t3">حفظ المعلومات</system:String>
-    <system:String x:Key="t33">حفظ المعلومات</system:String>
-    <system:String x:Key="t4">حفظ المعلومات</system:String>
-    <system:String x:Key="t5">حفظ المعلومات</system:String>
-    <system:String x:Key="t6">حفظ المعلومات</system:String>
-    <system:String x:Key="t7">حفظ المعلومات</system:String>
-    <system:String x:Key="t8">حفظ المعلومات</system:String>
-    <system:String x:Key="t9">حفظ المعلومات</system:String>
-    <system:String x:Key="t00">حفظ المعلومات</system:String>
-    <system:String x:Key="t11">حفظ المعلومات</system:String>
-    <system:String x:Key="t12">حفظ المعلومات</system:String>
+    <system:String x:Key="IntelligentFinancialAnalysis">Intelligent Financial Analysis</system:String>
+    <system:String x:Key="Presentations">Presentations</system:String>
+    <system:String x:Key="ReportAssistant">Report Assistant</system:String>
+    <system:String x:Key="Testscenariosgenerator">Test scenarios generator</system:String>
+    <system:String x:Key="Creatorofstorycharacters">Creator of story characters</system:String>
+    <system:String x:Key="MaintenanceAssistant">Maintenance Assistant</system:String>
+    <system:String x:Key="FacadeDesignAssistant">Facade Design Assistant</system:String>
+    <system:String x:Key="ImageGenerator">Images Generator</system:String>
+    <system:String x:Key="EducationalMaterialsCreator">Educational Materials Creator</system:String>
+    <system:String x:Key="txtSchoolName">School Name</system:String>
+    <system:String x:Key="txtThecherName">Teacher Name</system:String>
+    <system:String x:Key="txtExamTime">Exam Time</system:String>
+    <system:String x:Key="txtExamType">Exam Type</system:String>
+    <system:String x:Key="txtNote">Note</system:String>
+    <system:String x:Key="QuestionStyles">Questions Styles</system:String>
+    <system:String x:Key="CreateAndDeploy">Create And Deploy</system:String>
+
+    <system:String x:Key="cbxSubject1">Subject</system:String>
+    <system:String x:Key="cbxStage">Stage</system:String>
+    <system:String x:Key="cbxClass">Class</system:String>
+    <system:String x:Key="cbxDivision">Division</system:String>
+    <system:String x:Key="btnreturntooltio">Return</system:String>
+    <system:String x:Key="btnPrintQuestions">Print Questions</system:String>
+    <system:String x:Key="btnCreateQuastion">Create Questions</system:String>
 
 </ResourceDictionary>

@@ -91,7 +91,7 @@
            Grid.Row="3" 
            Style="{StaticResource ButtonsWithIconStyle}"
            HorizontalAlignment="Left"
-           Content="إنشاء سؤال"
+           Content="{DynamicResource btnCreateQuastion}"
            Icon="/Assets/export.png"
            Click="btnCreateQustion1_Click"
          
