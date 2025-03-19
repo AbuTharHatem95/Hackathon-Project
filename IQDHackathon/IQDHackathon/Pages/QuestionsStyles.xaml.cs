@@ -20,8 +20,8 @@ namespace Interface.Pages
 
         public class ListItem
         {
-            public string Text { get; set; } // النص الذي سيظهر بجانب الزر
-            public string ButtonContent { get; set; } // نص الزر
+            public string? Text { get; set; } // النص الذي سيظهر بجانب الزر
+            public string? ButtonContent { get; set; } // نص الزر
           
         }
         public ObservableCollection<ListItem> Items { get; set; }
@@ -30,7 +30,7 @@ namespace Interface.Pages
        
         private Dictionary<string, List<string>> qustiones;
 
-        public QuestionsStyles(Dictionary<string, List<string>> dict)
+        public QuestionsStyles()
         {
             InitializeComponent();
 
@@ -38,8 +38,7 @@ namespace Interface.Pages
 
             ItemsListBox.ItemsSource = Items;
 
-            AddItemsFromDictionary(dict);
-            qustiones = dict;
+            AddItemsFromDictionary(TestScenarioGeneratorPage.QuestionsDictFromChatGPT);
 
         }
 
@@ -53,33 +52,29 @@ namespace Interface.Pages
             }
         }
     
-    
-
         private void GentetListViewComponat(Dictionary<string, List<string>> qustiones)
         {
-            //foreach (var style in qustiones)
-            //{
-            //    // إنشاء عنصر تحكم ديناميكي
-            //    ctrlDynamicListControl listView = new ctrlDynamicListControl(style.Key, style.Value);
+            foreach (var style in qustiones)
+            {
+                // إنشاء عنصر تحكم ديناميكي
+                ctrlDynamicListControl listView = new ctrlDynamicListControl(style.Key, style.Value);
 
-            //    // الاشتراك في الحدث الجديد
-            //    listView.QuestionStateChanged += ListView_QuestionStateChanged;
+                // الاشتراك في الحدث الجديد
+                listView.QuestionStateChanged += ListView_QuestionStateChanged;
 
-            //    // إضافة العنصر إلى الواجهة
-            //    ItemsListBox.Items.Add(listView);
-            //}
+                // إضافة العنصر إلى الواجهة
+                ItemsListBox.Items.Add(listView);
+            }
         }
 
-        private void ListView_QuestionStateChanged(object sender, (string QuestionStyle, bool IsChecked,string Qustion) e)
+        private void ListView_QuestionStateChanged(object? sender, ( bool IsChecked,string Qustion) e)
         {
             // هنا يمكنك معالجة البيانات الواردة
-            var questionStyle = e.QuestionStyle;
+            
             var isChecked = e.IsChecked;
            
             var Qustion = e.Qustion;
 
-            // عرض البيانات في MessageBox (أو حفظها في قائمة أو أي شيء آخر)
-            MessageBox.Show($"نمط السؤال: {questionStyle}\nالتحديد: {isChecked}\nمحتوى السؤال :{Qustion}");
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -138,23 +133,23 @@ namespace Interface.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //var button = sender as Button;
-            //if (button != null)
-            //{
-            //    var item = button.CommandParameter as ListItem;
-            //    if (item != null)
-            //    {
+            var button = sender as Button;
+            if (button != null)
+            {
+                var item = button.CommandParameter as ListItem;
+                if (item != null)
+                {
 
-            //        QusetionCreater qustion = new QusetionCreater(qustiones,item.Text);
+                    QusetionCreater qustion = new QusetionCreater();
 
 
-            //       // MainGrid.Visibility = Visibility.Collapsed;
-            //       // CreateQuestionsPage.Visibility = Visibility.Visible;
-            //       // UserControlContainer.Children.Add(qustion);
+                   // MainGrid.Visibility = Visibility.Collapsed;
+                   // CreateQuestionsPage.Visibility = Visibility.Visible;
+                   // UserControlContainer.Children.Add(qustion);
 
-            //       // ContentFrame.Navigate(new QusetionCreater(qustiones,item.Text)); 
-            //    }
-            //}
+                   // ContentFrame.Navigate(new QusetionCreater(qustiones,item.Text)); 
+                }
+            }
         }
 
 
@@ -181,7 +176,7 @@ namespace Interface.Pages
         //    if (openFileDialog.ShowDialog() == true)
         //    {
         //        string extractedText = ExtractTextFromPdf(openFileDialog.FileName);
-        //        GenerateQuestionsFromText(extractedText);
+        //        GenerateQuestionsFromTextDaynmic(extractedText);
         //    }
         //}
 
@@ -200,7 +195,7 @@ namespace Interface.Pages
         //    return extractedText;
         //}
 
-        //private async void GenerateQuestionsFromText(string text)
+        //private async void GenerateQuestionsFromTextDaynmic(string text)
         //{
         //    if (string.IsNullOrWhiteSpace(text))
         //    {

@@ -12,7 +12,10 @@
 
     <Grid>
 
-        <Grid.RowDefinitions>
+
+        <Grid x:Name="MainGrid" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
@@ -42,11 +45,29 @@
                     Style="{StaticResource ButtonsWithIconStyle}"
                     HorizontalAlignment="Stretch"
                     Content=" اضـافـة نـقـاط للفرع"
-                    Icon="/Assets/undo.png"
+                    Icon="/Assets/Logo.png"
                     Click="btnAddPointToBranch_Click"
+                    IconSize="30"
                           >
             </local:IQD_Button>
 
+            <!--الرجوع الى صفحة الاسئلة-->
+            <local:IQD_Button x:Name="btnClose"
+         Margin="10,0,0,10" 
+         Grid.Row="4" 
+         Style="{StaticResource ButtonsWithIconStyle}"
+         HorizontalAlignment="Stretch"
+         Content="الرجوع الى صفحة الاسئلة"
+         Icon="/Assets/logout.png"
+         Click="btnClose_Click"
+         IconSize="30"
+               >
+        </local:IQD_Button>
+
+        </Grid>
+
+
+        <Grid x:Name="SubGrid" Visibility="Collapsed"></Grid>
         
     </Grid>
 </UserControl>

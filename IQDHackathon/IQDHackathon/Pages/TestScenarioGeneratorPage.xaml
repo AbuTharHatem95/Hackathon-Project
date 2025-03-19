@@ -39,27 +39,27 @@
 
                     <!-- اسم المدرسة -->
                     <Grid Grid.Row="0" Margin="5">
-                        <local:IQD_TextBox FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="اسم المدرسة" Tag="اسم المدرسة" HorizontalAlignment="Stretch"/>
+                        <local:IQD_TextBox x:Name="txtSchoolName" FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="اسم المدرسة" Tag="اسم المدرسة" HorizontalAlignment="Stretch"/>
                     </Grid>
 
                     <!-- اسم الاستاذ -->
                     <Grid Grid.Row="1" Margin="5">
-                        <local:IQD_TextBox FontSize="20" ToolTip="اسم الاستاذ" Height="55" BorderBrushes="DarkBlue" Tag="اسم الاستاذ" HorizontalAlignment="Stretch"/>
+                        <local:IQD_TextBox x:Name="txtTeacherName" FontSize="20" ToolTip="اسم الاستاذ" Height="55" BorderBrushes="DarkBlue" Tag="اسم الاستاذ" HorizontalAlignment="Stretch"/>
                     </Grid>
 
                     <!-- وقت الامتحان -->
                     <Grid Grid.Row="2" Margin="5">
-                        <local:IQD_TextBox FontSize="20" ToolTip="وقت الامتحان" BorderBrushes="DarkBlue" Height="55" Tag="وقت الامتحان" HorizontalAlignment="Stretch"/>
+                        <local:IQD_TextBox x:Name="txtExampleTime" FontSize="20" ToolTip="وقت الامتحان" BorderBrushes="DarkBlue" Height="55" Tag="وقت الامتحان" HorizontalAlignment="Stretch"/>
                     </Grid>
 
                     <!-- نوع الامتحان -->
                     <Grid Grid.Row="3" Margin="5">
-                        <local:IQD_TextBox FontSize="20" ToolTip="نوع الامتحان" BorderBrushes="DarkBlue" Height="55" Tag="نوع الامتحان" HorizontalAlignment="Stretch"/>
+                        <local:IQD_TextBox x:Name="txtTypeQuze" FontSize="20" ToolTip="نوع الامتحان" BorderBrushes="DarkBlue" Height="55" Tag="نوع الامتحان" HorizontalAlignment="Stretch"/>
                     </Grid>
 
                     <!-- الملاحظة -->
                     <Grid Grid.Row="4" Margin="5">
-                        <local:IQD_TextBox FontSize="20" ToolTip="الملاحظة" BorderBrushes="DarkBlue" Height="55" Tag="الملاحظة" HorizontalAlignment="Stretch"/>
+                        <local:IQD_TextBox x:Name="txtNote" FontSize="20" ToolTip="الملاحظة" BorderBrushes="DarkBlue" Height="55" Tag="الملاحظة" HorizontalAlignment="Stretch"/>
                     </Grid>
                 </Grid>
 
@@ -74,14 +74,14 @@
 
                     <!-- المادة -->
                     <Grid Grid.Row="0" Margin="5">
-                        <ComboBox x:Name="txtSubject1" ToolTip="المادة" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
+                        <ComboBox x:Name="CombSubject" ToolTip="المادة" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
                                   VerticalContentAlignment="Center" Height="55" Tag="المادة" 
                                   Foreground="{DynamicResource PrimaryTextColor}" HorizontalAlignment="Stretch"/>
                     </Grid>
 
                     <!-- المرحلة -->
                     <Grid Grid.Row="1" Margin="5">
-                        <ComboBox x:Name="txtSubject" ToolTip="المرحلة" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
+                        <ComboBox x:Name="CombStage" ToolTip="المرحلة" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
                                   VerticalContentAlignment="Center" Height="55" Tag="المرحلة" 
                                   Foreground="{DynamicResource PrimaryTextColor}" HorizontalAlignment="Stretch">
                             <ComboBoxItem>ابتدائية</ComboBoxItem>
@@ -92,7 +92,7 @@
 
                     <!-- الصف -->
                     <Grid Grid.Row="2" Margin="5">
-                        <ComboBox x:Name="txtStage" ToolTip="الصف" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
+                        <ComboBox x:Name="CombGrade" ToolTip="الصف" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
                                   VerticalContentAlignment="Center" Height="55" Tag="الصف" 
                                   Foreground="{DynamicResource PrimaryTextColor}" HorizontalAlignment="Stretch">
                             <ComboBoxItem>اول</ComboBoxItem>
@@ -104,7 +104,7 @@
 
                     <!-- الشعبة -->
                     <Grid Grid.Row="3" Margin="5">
-                        <ComboBox x:Name="txtClass" ToolTip="الشعبة" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
+                        <ComboBox x:Name="CombClass" ToolTip="الشعبة" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
                                   VerticalContentAlignment="Center" Height="55" Tag="الشعبة" 
                                   Foreground="{DynamicResource PrimaryTextColor}" HorizontalAlignment="Stretch">
                             <ComboBoxItem>ا</ComboBoxItem>
@@ -149,28 +149,38 @@
                     </Grid>
 
                     <!-- الانشاء والتصدير -->
-                    <Grid Grid.Row="1" Margin="0">
+                    <Grid Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <GroupBox BorderBrush="DarkBlue" BorderThickness="0.2" FontSize="20" Header="الانشاء والتصدير" 
                                   Foreground="{DynamicResource PrimaryTextColor}" Margin="0,2,10,0">
                             <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
 
-                                <!-- رفع الأسئلة -->
+                                <!-- انشاء نموذج اسئلة باستخدام الذكاء الاصطناعي -->
                                 <Grid Grid.Column="0">
-                                    <Button ToolTip="رفع الاسئلة" Background="{DynamicResource PrimaryBackgroundColor}" BorderBrush="{x:Null}">
-                                        <Image Source="/Assets/export.png" Height="60" HorizontalAlignment="Center"/>
-                                    </Button>
+                                    <local:IQD_Button x:Name="GenretWithGPT"
+                                                      Click="GenretWithGPT_Click"
+                                                      ToolTip="اختيار ملف المادة لانشاء نموذج باستخدام الذكاء الاصطناعي" 
+                                                      Style="{StaticResource ButtonsWithIconStyle}"
+                                                      Icon="/Assets/export.png"
+                                                      Content="نموذج GPT"
+                                                      
+                                                      >
+                                    </local:IQD_Button> 
                                 </Grid>
 
-                                <!-- انشاء أسئلة -->
-                                <Grid Grid.Column="1">
-                                    <Button x:Name="Gentet" Click="Gentet_Click" ToolTip="انشاء اسئلة" 
-                                            Background="{DynamicResource PrimaryBackgroundColor}" BorderBrush="{x:Null}">
-                                        <Image Source="/Assets/Generate.png" Height="60" HorizontalAlignment="Center"/>
-                                    </Button>
+                                <!-- انشاء أسئلة بشكل اختياري -->
+                                <Grid  Grid.Row="1">
+                                    <local:IQD_Button x:Name="Gentet"
+                                                      Click="Gentet_Click"
+                                                      ToolTip="رفع الملف لاختيار الاسئلة بشكل يدوي"
+                                                      Icon="/Assets/export.png"
+                                                      Style="{StaticResource ButtonsWithIconStyle}"
+                                                      Content="اختيار الاسئلة"
+                                                      >
+                                    </local:IQD_Button> 
                                 </Grid>
                             </Grid>
                         </GroupBox>

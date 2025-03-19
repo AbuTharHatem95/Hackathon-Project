@@ -1,15 +1,14 @@
 ﻿using System.ComponentModel;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace Interface.Pages.UserControles
 {
     /// <summary>
-    /// Interaction logic for ctrlCheckBoxBoxes.xaml
+    /// يتم عرض السؤال في هذا الكروب بوكس 
     /// </summary>
     public partial class ctrlCheckBoxBoxes : UserControl, INotifyPropertyChanged
     {
-        public event EventHandler<(bool IsChecked,string Qustion)>? StateChanged; // حدث جديد للإعلام بحالة CheckBox وقيمة TextBox
+        public event EventHandler<(bool IsChecked,string Qustion)>? StateChanged;
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
@@ -26,7 +25,6 @@ namespace Interface.Pages.UserControles
             {
                 _isCheckedProperty = value;
                 OnPropertyChanged(nameof(IsCheckedProperty));
-                MessageBox.Show($"CheckBox حالة التحديد: {(_isCheckedProperty ? "✅ محدد" : "❌ غير محدد")}");
                 NotifyStateChanged(); // إشعار عند تغيير حالة CheckBox
             }
         }
@@ -43,13 +41,8 @@ namespace Interface.Pages.UserControles
         }
 
         private void NotifyStateChanged()
-        {
-            if(IsCheckedProperty)
-            {
-                StateChanged?.Invoke(this, (IsCheckedProperty, _question)); // إرسال الحالة والقيمة
-
-            }
-      
+        { 
+           StateChanged?.Invoke(this, (IsCheckedProperty, _question)); 
         }
 
        
