@@ -8,6 +8,6 @@ namespace Interface
 {
    public abstract class absScore
     {
-        public byte Score { get; set; }
+        public float Score { get; set; }
     }
 }

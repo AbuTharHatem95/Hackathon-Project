@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Interface
+﻿namespace Interface
 {
-   public class clsQuestion
+    public class clsQuestion
     {
         public clsTitle Title { get; set; }
 
@@ -31,7 +25,7 @@ namespace Interface
         public clsQuestion AddPointToBranch(char Char, clsPoint point)
         {
             if (BranchzDict == null) BranchzDict = new();
-            point.Score = (byte)(BranchzDict[Char].Score / BranchzDict[Char].NumberOfAnswer);
+            point.Score = (float)(BranchzDict[Char].Score / BranchzDict[Char].NumberOfAnswer);
             BranchzDict[Char].PointList.Add(point);
             return this;
         }

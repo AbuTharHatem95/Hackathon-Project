@@ -22,6 +22,7 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
            
             <!--Header-->
@@ -54,18 +55,7 @@
                 <local:IQD_TextBox x:Name="txtQscore" FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="الدرجة" Tag="الدرجة" HorizontalAlignment="Stretch"/>
             </Grid>
 
-            <!--اضافة سؤال--><!--
-            <local:IQD_Button x:Name="btnAddQustion"
-                    Margin="10,0,0,10" 
-                    Grid.Row="4" 
-                    Style="{StaticResource ButtonsWithIconStyle}"
-                    HorizontalAlignment="Stretch"
-                    Content="إضافة سؤال"
-                    Icon="/Assets/export.png"
-                    Click="btnAddQustion_Click_1"
-                    >
-            </local:IQD_Button>-->
-            
+          
             <!--اضافة نقاط-->
             <local:IQD_Button x:Name="btnAddPointes"
                   Margin="10,0,0,10" 
@@ -90,8 +80,7 @@
                     >
             </local:IQD_Button>
 
-
-            <!--انشاء  -->
+            <!-- انشاء سؤال  -->
             <local:IQD_Button x:Name="btnCreateQustion"
                     Margin="10,0,0,10" 
                     Grid.Row="7" 
@@ -101,6 +90,18 @@
                     Icon="/Assets/export.png"
                     Click="btnCreateQustion_Click"
                     >
+            </local:IQD_Button>
+
+            <!-- طباعة  -->
+            <local:IQD_Button x:Name="btnPrintQustiones"
+          Margin="10,0,0,10" 
+          Grid.Row="8" 
+          Style="{StaticResource ButtonsWithIconStyle}"
+          HorizontalAlignment="Stretch"
+          Content="'طباعة نموذج الاسئلة"
+          Icon="/Assets/export.png"
+          Click="btnPrintQustiones_Click"
+          >
             </local:IQD_Button>
 
         </Grid>

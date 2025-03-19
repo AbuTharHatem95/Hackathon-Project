@@ -46,6 +46,7 @@
     <system:String x:Key="txtNote">الملاحظة</system:String>
     <system:String x:Key="QuestionStyles">انماط الاسئلة</system:String>
     <system:String x:Key="CreateAndDeploy">الانشاء والتصدير</system:String>
+    <system:String x:Key="txtEmapleDate">تاريخ الامتحان</system:String>
     
     <system:String x:Key="cbxSubject1">المادة</system:String>
     <system:String x:Key="cbxStage">المرحلة</system:String>

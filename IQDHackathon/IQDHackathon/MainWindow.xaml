@@ -15,6 +15,7 @@
         WindowState="Maximized" 
         FontFamily="Poppins"
         FlowDirection="{DynamicResource AppFlowDirection}"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
         >
 
 
