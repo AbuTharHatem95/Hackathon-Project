@@ -1,20 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Abu_Sanad\\Desktop\\IQDHackathon\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{659E1E42-57E3-9D52-B4C0-91F26DFC303D}|IQDHackathon\\Interface.csproj|c:\\users\\abu_sanad\\desktop\\iqdhackathon\\iqdhackathon\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{659E1E42-57E3-9D52-B4C0-91F26DFC303D}|IQDHackathon\\Interface.csproj|solutionrelative:iqdhackathon\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{659E1E42-57E3-9D52-B4C0-91F26DFC303D}|IQDHackathon\\Interface.csproj|c:\\users\\abu_sanad\\desktop\\iqdhackathon\\iqdhackathon\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{659E1E42-57E3-9D52-B4C0-91F26DFC303D}|IQDHackathon\\Interface.csproj|solutionrelative:iqdhackathon\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{659E1E42-57E3-9D52-B4C0-91F26DFC303D}|IQDHackathon\\Interface.csproj|c:\\users\\abu_sanad\\desktop\\iqdhackathon\\iqdhackathon\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{659E1E42-57E3-9D52-B4C0-91F26DFC303D}|IQDHackathon\\Interface.csproj|solutionrelative:iqdhackathon\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -22,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -35,43 +22,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "App.xaml",
-              "DocumentMoniker": "C:\\Users\\Abu_Sanad\\Desktop\\IQDHackathon\\IQDHackathon\\App.xaml",
-              "RelativeDocumentMoniker": "IQDHackathon\\App.xaml",
-              "ToolTip": "C:\\Users\\Abu_Sanad\\Desktop\\IQDHackathon\\IQDHackathon\\App.xaml*",
-              "RelativeToolTip": "IQDHackathon\\App.xaml*",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-14T00:27:28.866Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\Abu_Sanad\\Desktop\\IQDHackathon\\IQDHackathon\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "IQDHackathon\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\Abu_Sanad\\Desktop\\IQDHackathon\\IQDHackathon\\MainWindow.xaml",
-              "RelativeToolTip": "IQDHackathon\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-14T00:27:15.848Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "App.config",
-              "DocumentMoniker": "C:\\Users\\Abu_Sanad\\Desktop\\IQDHackathon\\IQDHackathon\\App.config",
-              "RelativeDocumentMoniker": "IQDHackathon\\App.config",
-              "ToolTip": "C:\\Users\\Abu_Sanad\\Desktop\\IQDHackathon\\IQDHackathon\\App.config",
-              "RelativeToolTip": "IQDHackathon\\App.config",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2025-03-14T00:18:24.344Z",
-              "EditorCaption": ""
             }
           ]
         }
