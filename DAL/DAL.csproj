@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MyLib_DotNet">
+      <HintPath>..\..\..\MyLibraries v.1.1\MyLibraries v.1.1\MyLibraries\MyLib_DotNet\bin\Debug\net8.0\MyLib_DotNet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
