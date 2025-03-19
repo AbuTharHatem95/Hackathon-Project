@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Abu_Sanad\Desktop\IQDHackathon\IQDHackathon\obj\Debug\net8.0-windows\
+C:\Users\Abu_Sanad\Documents\GitHub\Hackathon-Project\IQDHackathon\IQDHackathon\obj\Debug\net8.0-windows\
 Interface
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
-C:\Users\Abu_Sanad\Desktop\IQDHackathon\IQDHackathon\App.xaml
-2599825546
+C:\Users\Abu_Sanad\Documents\GitHub\Hackathon-Project\IQDHackathon\IQDHackathon\App.xaml
+201556578757
 
-11534658492
+35230192896
 199-1176642837
-Assets\Icons\Icons.xaml;MainWindow.xaml;
+Assets\Icons\Icons.xaml;MainWindow.xaml;Pages\EducationMaterialPage.xaml;Pages\FinancialAnalyzerPage.xaml;Pages\ImageGeneratorPage.xaml;Pages\MaintenanceAssistantPage.xaml;Pages\PresentationGeneratorPage.xaml;Pages\QuestionsStyles.xaml;Pages\ReportAssistantPage.xaml;Pages\SettingPage.xaml;Pages\StoryCharacterPage.xaml;Pages\TestScenarioGeneratorPage.xaml;Pages\UIDesignerPage.xaml;Pages\UserControles\ctrlAddAPI.xaml;Pages\UserControles\ctrlAddBrach.xaml;Pages\UserControles\ctrlAddQustiones.xaml;Pages\UserControles\ctrlCheckBoxBoxes.xaml;Pages\UserControles\ctrlDynamicListControl.xaml;Pages\UserControles\ctrlQusetionCreater.xaml;Pages\UserControles\ctrlQustionListView.xaml;
 
-False
+True
 
