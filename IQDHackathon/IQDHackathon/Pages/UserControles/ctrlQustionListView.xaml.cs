@@ -1,24 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Interface.Pages.UserControles
 {
    
     public partial class ctrlQustionListView : UserControl
     {
-        public event EventHandler<(bool IsChecked, string Qustion)>? QuestionStateChanged; 
+        public event EventHandler<(bool IsChecked, string Qustion)>? QuestionIsSelected; 
 
         public ctrlQustionListView()
         {
@@ -28,47 +16,37 @@ namespace Interface.Pages.UserControles
 
         private void GentetListViewComponat()
         {
-
             foreach (var question in TestScenarioGeneratorPage.QuestionsDictFromChatGPT)
             {
-                //إنشاء عنصر تحكم ديناميكي
+                //إنشاء عنصر تحكم الليست فيو التي تحتوي على كنترول الجيك بوكس
                 ctrlDynamicListControl listView = new ctrlDynamicListControl(question.Key, question.Value);
 
-                // الاشتراك في الحدث الجديد
+                // الاشتراك في الحدث 
                 listView.QuestionStateChanged += ListView_QuestionStateChanged;
 
-                ////إضافة العنصر إلى الواجهة
+                //إضافة العنصر إلى الواجهة
                 ItemsListBox.Items.Add(listView);
             }
         }
 
-        private void ListView_QuestionStateChanged(object sender, (bool IsChecked, string Qustion) e)
+        private void ListView_QuestionStateChanged(object? sender, (bool IsChecked, string Qustion) e)
         {
             var isChecked = e.IsChecked;
             var Qustion = e.Qustion;
+ 
+            QuestionIsSelected?.Invoke(this, (isChecked, Qustion));
 
 
-            //if (isChecked)
-            //{
-            //    if (!_QustionList.Contains(e.Qustion))
-            //        _QustionList.Remove(e.Qustion);
-            //}
-            //else if (_QustionList.Contains(e.Qustion))
-            //    _QustionList.Remove(e.Qustion);
-
-            QuestionStateChanged?.Invoke(this, (isChecked, Qustion));
-
+            //هنا سيتم الغاء هذا المسج بوكس بعد اختبار المشروع
             // عرض البيانات في MessageBox (أو حفظها في قائمة أو أي شيء آخر)
             MessageBox.Show($"{isChecked}\nمحتوى السؤال :{Qustion}");
         }
 
         private void btnChooesQustion_Click(object sender, RoutedEventArgs e)
         {
-            QusetionCreater CreateQustion = new QusetionCreater();
-            MainGrid.Visibility = Visibility.Collapsed;
-            SubGrid.Visibility = Visibility.Visible;
-            ContentFrame.Navigate(CreateQustion);
-
+            //هنا لا يتم تطبيق اي اجراء فقط اخفاء الليست والرجوع الى صفحة انشاء الاسئلة
+            this.Visibility= Visibility.Collapsed;
+ 
         }
     }
 }

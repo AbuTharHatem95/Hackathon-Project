@@ -10,26 +10,51 @@
              >
 
     <Grid>
-        <Grid x:Name="AddQustionGrid">
+        <Grid x:Name="MainGrid">
+            <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
 
-            <!-- انشاء اسئلة -->
-            <local:IQD_Button x:Name="btnAddQustion"
-            Margin="10,10,0,10" 
-            Grid.Row="1" 
-            Grid.Column="0"
-            Style="{StaticResource ButtonsWithIconStyle}"
-            HorizontalAlignment="Center"
-            Content="انشاء اسئلة"
-            Icon="/Assets/export.png"
-            Click="btnAddQustion_Click"
-            />
+       
+            <ScrollViewer   HorizontalScrollBarVisibility="Auto" Margin="10,0,0,0" Grid.Row="0">
+            <ListBox x:Name="ItemsListBox" 
+                 Width="750" 
+                 Background="{StaticResource PrimaryBackgroundColor}"
+                 Margin="10"
+                 HorizontalContentAlignment="Right"
+                 HorizontalAlignment="Right"
+                  
+                     >
+            </ListBox>
+        </ScrollViewer>
+
+        <!-- اعادة توليد اسئلة -->
+        <local:IQD_Button x:Name="btnRelodGenric"
+        Margin="10,10,0,10" 
+        Grid.Row="1" 
+        Style="{StaticResource ButtonsWithIconStyle}"
+        HorizontalAlignment="Stretch"
+        Content="اعادة توليد اسئلة"
+        Icon="/Assets/export.png"
+        Click="btnRelodGenric_Click"
+        />
+
+        <!-- انشاء اسئلة -->
+        <local:IQD_Button x:Name="btnAddQustion"
+        Margin="10,10,0,10" 
+        Grid.Row="2" 
+        Style="{StaticResource ButtonsWithIconStyle}"
+        HorizontalAlignment="Stretch"
+        Content="انشاء اسئلة"
+        Icon="/Assets/export.png"
+        Click="btnAddQustion_Click"
+        />
         </Grid>
-
-        <Grid x:Name="QusetionCreaterGrid">
-            <Frame x:Name="QusetionCreaterFrame" NavigationUIVisibility="Hidden"/>
-                
-        </Grid>
-
+        
+        <Grid x:Name="SubGrid" Visibility="Collapsed"></Grid>
+        
     </Grid>
 
 </UserControl>

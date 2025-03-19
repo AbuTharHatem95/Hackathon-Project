@@ -1,43 +1,48 @@
-﻿using iText.Forms.Xfdf;
-using System.Linq;
+﻿using IQD_UI_Library;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace Interface.Pages.UserControles
 {
-    /// <summary>
-    /// Interaction logic for ctrlAddBrach.xaml
-    /// </summary>
+   
     public partial class ctrlAddBrach : UserControl
     {
-        clsQuestion _qustion;
-        Dictionary<string, List<string>> dictionary;
-        string Qstyles;
+        clsQuestion? _qustion = null;
 
-        public ctrlAddBrach(Dictionary<string, List<string>> dictionary, string QustionStyle,clsQuestion qustion)
+        public ctrlAddBrach(clsQuestion qustion)
         {
             InitializeComponent();
-            this.dictionary = dictionary;
-            Qstyles = QustionStyle;
-            _qustion= qustion;
+            _qustion = qustion;
+
         }
 
        
 
         private void btnAddPointToBranch_Click(object sender, RoutedEventArgs e)
         {
-            _qustion.AddBranch('A');
+            if(string.IsNullOrEmpty(txtQustionTitle.Text)|| string.IsNullOrEmpty(txtQNum.Text)|| string.IsNullOrEmpty(txtNumberOfAnswers.Text))
+            {
+                IQD_MessageBox.Show("تحذير", "يجب ملئ المعلومات", MessageBoxType.Warning);
+                return;
+            }
 
-            AddQustiones qustion = new AddQustiones();
-          //  qustion.QuestionStateChanged += Qustion_QuestionStateChanged;
+            _qustion?.AddBranch('A');
+
+            ctrlQustionListView listQustion = new ctrlQustionListView();
+            listQustion.QuestionIsSelected += Qustion_QuestionStateChanged;
+
+            MainGrid.Visibility= Visibility.Collapsed;
+            SubGrid.Visibility= Visibility.Visible;
+            SubGrid.Children.Clear();
+            SubGrid.Children.Add(listQustion);
 
 
 
         }
 
-        private void Qustion_QuestionStateChanged(object? sender, (string QuestionStyle, bool IsChecked, byte Score, string Qustion) e)
+        private void Qustion_QuestionStateChanged(object? sender, ( bool IsChecked, string Qustion) e)
         {
-            if (!e.IsChecked && _qustion?.PointList.Count > 0) 
+            if (!e.IsChecked && _qustion?.PointList?.Count > 0) 
             {
                 foreach (var p in _qustion.PointList)
                 {
@@ -51,10 +56,15 @@ namespace Interface.Pages.UserControles
             }
             else
             {
-                _qustion.AddPointToBranch('A', new clsPoint(e.Qustion));
+                _qustion?.AddPointToBranch('A', new clsPoint(e.Qustion));
 
             }
 
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Visibility = Visibility.Collapsed; 
         }
     }
 }

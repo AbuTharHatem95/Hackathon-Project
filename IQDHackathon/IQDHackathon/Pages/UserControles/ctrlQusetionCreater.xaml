@@ -23,28 +23,38 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-
+           
+            <!--Header-->
+            <TextBlock Grid.Row="0" Text="اضافة الاسئلة" 
+                       Style="{StaticResource CustomTextWithShadow_1}"
+                       Foreground="{StaticResource PrimaryTextColor}"
+                       FontSize="27"
+                       FontWeight="ExtraLight"
+                       >
+                
+            </TextBlock>
+            
             <!-- رقم السؤال -->
-            <Grid Grid.Row="0" Margin="5">
+            <Grid Grid.Row="1" Margin="5">
                 <local:IQD_TextBox x:Name="txtQNum"  FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="رقم السؤال" Tag="رقم السؤال" HorizontalAlignment="Stretch"/>
             </Grid>
 
             <!-- عنوان السؤال -->
-            <Grid Grid.Row="1" Margin="5">
+            <Grid Grid.Row="2" Margin="5">
                 <local:IQD_TextBox x:Name="txtQustionTitle"  FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="عنوان السؤال" Tag="عنوان السؤال" HorizontalAlignment="Stretch"/>
             </Grid>
 
             <!-- عدد الاجابات المطلوبه -->
-            <Grid Grid.Row="2" Margin="5">
+            <Grid Grid.Row="3" Margin="5">
                 <local:IQD_TextBox x:Name="txtNumberOfAnswers"  FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="ادخل عدد الاجابات المطلوبه لهذا السؤال" Tag="عدد الاجابات" HorizontalAlignment="Stretch"/>
             </Grid>
             
             <!-- الدرجة -->
-            <Grid Grid.Row="3" Margin="5">
+            <Grid Grid.Row="4" Margin="5">
                 <local:IQD_TextBox x:Name="txtQscore" FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="الدرجة" Tag="الدرجة" HorizontalAlignment="Stretch"/>
             </Grid>
 
-            <!--اضافة سؤال-->
+            <!--اضافة سؤال--><!--
             <local:IQD_Button x:Name="btnAddQustion"
                     Margin="10,0,0,10" 
                     Grid.Row="4" 
@@ -54,12 +64,12 @@
                     Icon="/Assets/export.png"
                     Click="btnAddQustion_Click_1"
                     >
-            </local:IQD_Button>
+            </local:IQD_Button>-->
             
             <!--اضافة نقاط-->
             <local:IQD_Button x:Name="btnAddPointes"
                   Margin="10,0,0,10" 
-                  Grid.Row="6" 
+                  Grid.Row="5" 
                   Style="{StaticResource ButtonsWithIconStyle}"
                   HorizontalAlignment="Stretch"
                   Content="إضافة نقاط"
@@ -71,7 +81,7 @@
             <!--اضافة فرع-->
             <local:IQD_Button x:Name="btnAddNewBrach"
                     Margin="10,0,0,10" 
-                    Grid.Row="5" 
+                    Grid.Row="6" 
                     Style="{StaticResource ButtonsWithIconStyle}"
                     HorizontalAlignment="Stretch"
                     Content="إضافة افرع"
@@ -87,14 +97,15 @@
                     Grid.Row="7" 
                     Style="{StaticResource ButtonsWithIconStyle}"
                     HorizontalAlignment="Stretch"
-                    Content=" إنشاء نموذج اسئلة"
+                    Content=" إنشاء  السؤال"
                     Icon="/Assets/export.png"
                     Click="btnCreateQustion_Click"
                     >
             </local:IQD_Button>
 
         </Grid>
-            <Grid x:Name="QustionList" Visibility="Collapsed" Grid.Row="0">
+            
+        <Grid x:Name="QustionList" Visibility="Collapsed" Grid.Row="0">
                 <Frame x:Name="ContentFrame" NavigationUIVisibility="Hidden"/>
         </Grid>
     </Grid>

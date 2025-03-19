@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using IQD_UI_Library;
+using Microsoft.Win32;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
@@ -11,10 +12,9 @@ namespace Interface.Pages.UserControles
 {
     public partial class QusetionCreater : UserControl
     {
-
-        public clsQuestion Questions;
-
-        public event EventHandler<(bool IsChecked, string Qustion)>? StateChanged; // حدث جديد للإعلام بحالة CheckBox وقيمة TextBox
+        ctrlAddBrach? AddNewBranch = null;
+        ctrlQustionListView? qusetionList = null;
+        public clsQuestion? Questions = null;
 
         public event EventHandler<(string QustionNum, string QustionTitle, string QustionScor, string NumberOfAnswer)>? DataLoaded;
 
@@ -25,14 +25,11 @@ namespace Interface.Pages.UserControles
         }
 
 
-        private void GetDataFromListView(object sender, (bool IsCheck, string Qustion) e)
+        private void GetDataFromListView(object? sender, (bool IsCheck, string Qustion) e)
         {
-
             if (e.IsCheck)
             {
-                Questions.AddPoint(new clsPoint(e.Qustion));
-
-
+                Questions?.AddPoint(new clsPoint(e.Qustion));
             }
             else
             {
@@ -48,70 +45,132 @@ namespace Interface.Pages.UserControles
 
             }
 
-            Questions.AddPoint(new clsPoint(e.Qustion));
+            Questions?.AddPoint(new clsPoint(e.Qustion));
 
         }
 
-        private void btnAddQustion_Click_1(object sender, RoutedEventArgs e)
-        {
-            clsTitle title = new clsTitle(byte.Parse(txtQNum.Text), byte.Parse(txtQscore.Text), byte.Parse(txtNumberOfAnswers.Text), txtQustionTitle.Text);
-            Questions = new clsQuestion(title);
-
-            ctrlQustionListView qusetionList = new ctrlQustionListView();
-            qusetionList.QuestionStateChanged += GetDataFromListView;
-            QustionCreate.Visibility = Visibility.Collapsed;
-            QustionList.Visibility = Visibility.Visible;
-            ContentFrame.Navigate(qusetionList);
-        }
-
-
-        private void btnAddQustionPointes_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void LoadDataFromEvent(object sender, (string QNum, string Qtitle, string QAnswer, string Qscore) e)
-        {
-            //هنا نملئ الاوبجكت تبع clsQustion
-        }
-
-
+        //اول اجراء سيحدث بعد ملئ المعلومات
         private void btnAddPointes_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void btnAddNewBrach_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnCreateQustion_Click(object sender, RoutedEventArgs e)
-        {
-
-            var saveFileDialog = new SaveFileDialog
+            if (string.IsNullOrEmpty(txtQustionTitle.Text) || string.IsNullOrEmpty(txtQscore.Text) || string.IsNullOrEmpty(txtQNum.Text) || string.IsNullOrEmpty(txtNumberOfAnswers.Text))
             {
-                DefaultExt = ".pdf",
-                Filter = "PDF Files (*.pdf)|*.pdf"
-            };
-
-            if (saveFileDialog.ShowDialog() == true)
-            {
-                string fullPath = saveFileDialog.FileName;
-                try
-                {
-                    GeneratePdf(fullPath);
-                    OpenPdf(fullPath);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                IQD_MessageBox.Show("تحذير", "يجب ملئ معلومات السؤال", MessageBoxType.Warning);
+                return;
             }
 
+            //هنا اضفنا الشرط للتاكيد بان هذا اليوزر كنترول غير مهيئة في الخلفية
+            if (qusetionList == null)
+            {
+                clsTitle title = new clsTitle(byte.Parse(txtQNum.Text), byte.Parse(txtQscore.Text), byte.Parse(txtNumberOfAnswers.Text), txtQustionTitle.Text);
+                Questions = new clsQuestion(title);
+
+                qusetionList = new ctrlQustionListView();
+                qusetionList.QuestionIsSelected += GetDataFromListView;
+                QustionCreate.Visibility = Visibility.Collapsed;
+                QustionList.Visibility = Visibility.Visible;
+
+            }
+            else
+            {
+                qusetionList.QuestionIsSelected += GetDataFromListView;
+                QustionCreate.Visibility = Visibility.Collapsed;
+                QustionList.Visibility = Visibility.Visible;
+            }
+
+            QustionList.Children.Clear();
+            QustionList.Children.Add(qusetionList);
+        }
+       
+        //اجراء اضافة افرع الى السؤال
+        private void btnAddNewBrach_Click(object sender, RoutedEventArgs e)
+        {
+            if(AddNewBranch==null)
+            {
+                AddNewBranch = new ctrlAddBrach(Questions);
+                QustionCreate.Visibility = Visibility.Collapsed;
+                QustionList.Visibility = Visibility.Visible;
+               
+            }
+            else
+            {
+                QustionCreate.Visibility = Visibility.Collapsed;
+                QustionList.Visibility = Visibility.Visible;
+
+            }
+
+            QustionList.Children.Clear();
+            QustionList.Children.Add(AddNewBranch);
+
+        }
+
+        //انشاء نموذج سؤال
+        private void btnCreateQustion_Click(object sender, RoutedEventArgs e)
+        {
+            //هنا نتاكد من انه لا يتخطا العدد المسموح له بأنشاء اسئلة فقط 6
+            if(Questions?.BranchzDict?.Count >= 6)
+            {
+                IQD_MessageBox.Show("تحذير","تم انشاء 6 اسئلة",MessageBoxType.Warning);
+
+                IQD_MessageBox.Show("حفظ ", "حفظ نموذج الاسئلة");
+
+                //هنا بعد ان انشئ 6 اسئلة يتم اعلام المستخدم بحفظ نموذج الاسئلة
+                var saveFileDialog = new SaveFileDialog
+                {
+                    DefaultExt = ".pdf",
+                    Filter = "PDF Files (*.pdf)|*.pdf"
+                };
+
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    string fullPath = saveFileDialog.FileName;
+                    try
+                    {
+                        GeneratePdf(fullPath);
+                        OpenPdf(fullPath);
+                    }
+                    catch (Exception ex)
+                    {
+                        IQD_MessageBox.Show("خطأ", $"لم يتم حفظ الاسئلة, حدث خطأ: {ex.Message}", MessageBoxType.Error);
+                    }
+                    return;
+                }
+                else
+                {
+                    IQD_MessageBox.Show("تحذير", "لم تقم بحـفظ الاسئـلة!!", MessageBoxType.Warning);
+
+                }
+
+
+            }
+
+            if(string.IsNullOrEmpty(txtQustionTitle.Text)|| string.IsNullOrEmpty(txtQscore.Text)|| string.IsNullOrEmpty(txtQNum.Text)|| string.IsNullOrEmpty(txtNumberOfAnswers.Text))
+            {
+                IQD_MessageBox.Show("تحذير", "يجب ملئ معلومات السؤال", MessageBoxType.Warning);
+                return;
+            }
+
+            //هنا يتم اضافة اوبجكت الى دكشنري الاسئلة 
+            Questions?.CreateQuestion();
+
+            //اعلام المستخدم بنجاح اضافة السؤال 
+            IQD_MessageBox.Show("نجاح", "تم انشاء السؤال بنجاح");
+
+            //تنظيف التيكست لاضافة سؤال اخر
+            txtNumberOfAnswers.Clear();
+            txtQNum.Clear();
+            txtQustionTitle.Clear();
+            txtQscore.Clear();
+
+            //هنا يجب ان نتاكد من ان اليوزر كنترول الواقف عليه غير مكرر في الخلفية
+            //QustionList.Children.Clear();
+            //QustionList.Children.Add(this);
+
+
         }
 
 
+
+        //يجب تمرير اوبجكت السؤال لكي يتم الملئ هنا في هذا النموذج  
         private void GeneratePdf(string fullPath)
         {
             QuestPDF.Settings.License = LicenseType.Community;
@@ -220,52 +279,37 @@ namespace Interface.Pages.UserControles
         }
 
 
-        //private void LoadDataFromText()
-        //{
-        //    question = new clsQuestion(new clsTitle(byte.Parse(txtQNum.Text),byte.Parse(txtQscore.Text),byte.Parse(txtNumberOfAnswers.Text),txtQustionTitle.Text));
-        //}
 
-        //private void btnAddNewBrach_Click(object sender, RoutedEventArgs e)
-        //{
+        //حاليا مهمش
+        private void btnAddQustion_Click_1(object sender, RoutedEventArgs e)
+        {
+            //if (string.IsNullOrEmpty(txtQustionTitle.Text) || string.IsNullOrEmpty(txtQscore.Text) || string.IsNullOrEmpty(txtQNum.Text) || string.IsNullOrEmpty(txtNumberOfAnswers.Text))
+            //{
+            //    IQD_MessageBox.Show("تحذير", "يجب ملئ معلومات السؤال", MessageBoxType.Warning);
+            //    return;
+            //}
 
-        //    QustionCreate.Visibility = Visibility.Collapsed;
-        //    QustionList.Visibility = Visibility.Visible;
-        //    ContentFrame.Navigate(new ctrlAddBrach(QuestionsDictFromChatGPT, QStyle, question));
 
-        //   // ContentFrame.Navigate(new AddQustiones(_qustion, AddQustiones.Mod.BrachMod,QStyle,question)); 
-        //    //يجب فتح الليست بدون النمط الوقف عليه
-        //}
+            //clsTitle title = new clsTitle(byte.Parse(txtQNum.Text), byte.Parse(txtQscore.Text), byte.Parse(txtNumberOfAnswers.Text), txtQustionTitle.Text);
+            //Questions = new clsQuestion(title);
 
-        //private void btnAddQustion_Click(object sender, RoutedEventArgs e)
-        //{
-        //    LoadDataFromText();
+            //if(qusetionList==null)
+            //{
+            //    qusetionList=new ctrlQustionListView();
+            //    qusetionList.QuestionIsSelected += GetDataFromListView;
+            //    QustionCreate.Visibility = Visibility.Collapsed;
+            //    QustionList.Visibility = Visibility.Visible;
 
-        //    QustionCreate.Visibility = Visibility.Collapsed;
-        //    QustionList.Visibility = Visibility.Visible;
-        //    ContentFrame.Navigate(new AddQustiones(QuestionsDictFromChatGPT,QStyle,question)); 
-        //}
+            //}
+            //else
+            //{
+            //    qusetionList.QuestionIsSelected += GetDataFromListView;
+            //    QustionCreate.Visibility = Visibility.Collapsed;
+            //    QustionList.Visibility = Visibility.Visible;
+            //}
 
-        ////يتم انشاء اوبجكت عند حدوث هذا الايفنت
-        //private void btnCreateQustion_Click(object sender, RoutedEventArgs e)
-        //{
-        //    //انشاء اوبجكت من التايتل 
-        //    //باي بوتن تريد يصير هذا الايفنت تضيف هذا السطر
-        //    DataLoaded?.Invoke(this, (txtQNum.Text, txtQustionTitle.Text, txtQscore.Text, txtNumberOfAnswers.Text));
-        //}
-
-        //private void GentetListViewComponat(Dictionary<string, List<string>> qustiones)
-        //{
-        //    foreach (var style in qustiones)
-        //    {
-        //        // إنشاء عنصر تحكم ديناميكي
-        //        ctrlDynamicListControl listView = new ctrlDynamicListControl(style.Key, style.Value);
-
-        //        // الاشتراك في الحدث الجديد
-        //        //listView.QuestionStateChanged += ListView_QuestionStateChanged;
-
-        //        //// إضافة العنصر إلى الواجهة
-        //        //ItemsListBox.Items.Add(listView);
-        //    }
-        //}
+            //QustionList.Children.Clear();
+            //QustionList.Children.Add(qusetionList);
+        }
     }
 }
