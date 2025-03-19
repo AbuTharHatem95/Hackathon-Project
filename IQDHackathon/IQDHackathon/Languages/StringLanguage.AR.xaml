@@ -30,18 +30,31 @@
 
 <!--mm-->
     <system:String x:Key="MainTitle">مولد الذكاء الصناعي</system:String>
-    <system:String x:Key="t2">حفظ المعلومات</system:String>
-    <system:String x:Key="t3">حفظ المعلومات</system:String>
-    <system:String x:Key="t33">حفظ المعلومات</system:String>
-    <system:String x:Key="t4">حفظ المعلومات</system:String>
-    <system:String x:Key="t5">حفظ المعلومات</system:String>
-    <system:String x:Key="t6">حفظ المعلومات</system:String>
-    <system:String x:Key="t7">حفظ المعلومات</system:String>
-    <system:String x:Key="t8">حفظ المعلومات</system:String>
-    <system:String x:Key="t9">حفظ المعلومات</system:String>
-    <system:String x:Key="t00">حفظ المعلومات</system:String>
-    <system:String x:Key="t11">حفظ المعلومات</system:String>
-    <system:String x:Key="t12">حفظ المعلومات</system:String>
+    <system:String x:Key="IntelligentFinancialAnalysis">التحليل المالي الذكي</system:String>
+    <system:String x:Key="Presentations">العروض التقديمية</system:String>
+    <system:String x:Key="ReportAssistant">مساعد التقرير</system:String>
+    <system:String x:Key="Testscenariosgenerator">مولد سيناريوهات الاختبار</system:String>
+    <system:String x:Key="Creatorofstorycharacters">منشئ الشخصيات القصصية</system:String>
+    <system:String x:Key="MaintenanceAssistant">مساعد الصيانة</system:String>
+    <system:String x:Key="FacadeDesignAssistant">مساعد تصميم الواجهات</system:String>
+    <system:String x:Key="ImageGenerator">مولد الصور</system:String>
+    <system:String x:Key="EducationalMaterialsCreator">منشئ المواد التعليمية</system:String>
+    <system:String x:Key="txtSchoolName">اسم المدرسة</system:String>
+    <system:String x:Key="txtThecherName">اسم المدرس</system:String>
+    <system:String x:Key="txtExamTime">وقت الامتحان</system:String>
+    <system:String x:Key="txtExamType">نوع الامتحان</system:String>
+    <system:String x:Key="txtNote">الملاحظة</system:String>
+    <system:String x:Key="QuestionStyles">انماط الاسئلة</system:String>
+    <system:String x:Key="CreateAndDeploy">الانشاء والتصدير</system:String>
+    
+    <system:String x:Key="cbxSubject1">المادة</system:String>
+    <system:String x:Key="cbxStage">المرحلة</system:String>
+    <system:String x:Key="cbxClass">الصف</system:String>
+    <system:String x:Key="cbxDivision">الشعبة</system:String>
+    <system:String x:Key="btnreturntooltio">رجوع</system:String>
+    <system:String x:Key="btnPrintQuestions">طباعة الاسئلة</system:String>
+    <system:String x:Key="btnCreateQuastion">انشاء الاسئلة</system:String>
+
 
 
 

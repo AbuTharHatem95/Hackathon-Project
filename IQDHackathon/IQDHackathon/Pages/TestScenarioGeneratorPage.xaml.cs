@@ -53,11 +53,8 @@ namespace Interface.Pages
         private void FillComboBox()
         {
             // إضافة عناصر إلى ComboBox
-            txtSubject1.Items.Add("الرياضيات");
-            txtSubject1.Items.Add("الاحياء");
-            txtSubject1.Items.Add("ثالث");
-            txtSubject1.Items.Add("رابع");
-            txtSubject1.SelectedIndex = 0;
+          
+           
         }
 
         private void BackToMainWindowButton_Click(object sender, RoutedEventArgs e)
