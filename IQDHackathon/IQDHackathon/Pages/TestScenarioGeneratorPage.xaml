@@ -39,27 +39,47 @@
 
                     <!-- اسم المدرسة -->
                     <Grid Grid.Row="0" Margin="5">
+
                         <local:IQD_TextBox x:Name="txtSchoolName" FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="اسم المدرسة" Tag="اسم المدرسة" HorizontalAlignment="Stretch"/>
+
+                        <local:IQD_TextBox FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="{DynamicResource txtSchoolName}" Tag="{DynamicResource txtSchoolName}" HorizontalAlignment="Stretch"/>
+
                     </Grid>
 
                     <!-- اسم الاستاذ -->
                     <Grid Grid.Row="1" Margin="5">
+
                         <local:IQD_TextBox x:Name="txtTeacherName" FontSize="20" ToolTip="اسم الاستاذ" Height="55" BorderBrushes="DarkBlue" Tag="اسم الاستاذ" HorizontalAlignment="Stretch"/>
+
+                        <local:IQD_TextBox FontSize="20" ToolTip="{DynamicResource txtThecherName}" Height="55" BorderBrushes="DarkBlue" Tag="{DynamicResource txtThecherName}" HorizontalAlignment="Stretch"/>
+
                     </Grid>
 
                     <!-- وقت الامتحان -->
                     <Grid Grid.Row="2" Margin="5">
+
                         <local:IQD_TextBox x:Name="txtExampleTime" FontSize="20" ToolTip="وقت الامتحان" BorderBrushes="DarkBlue" Height="55" Tag="وقت الامتحان" HorizontalAlignment="Stretch"/>
+
+                        <local:IQD_TextBox FontSize="20" ToolTip="{DynamicResource txtExamTime}" BorderBrushes="DarkBlue" Height="55" Tag="{DynamicResource txtExamTime}" HorizontalAlignment="Stretch"/>
+
                     </Grid>
 
                     <!-- نوع الامتحان -->
                     <Grid Grid.Row="3" Margin="5">
+
                         <local:IQD_TextBox x:Name="txtTypeQuze" FontSize="20" ToolTip="نوع الامتحان" BorderBrushes="DarkBlue" Height="55" Tag="نوع الامتحان" HorizontalAlignment="Stretch"/>
+
+                        <local:IQD_TextBox FontSize="20" ToolTip="{DynamicResource txtExamType}" BorderBrushes="DarkBlue" Height="55" Tag="{DynamicResource txtExamType}" HorizontalAlignment="Stretch"/>
+
                     </Grid>
 
                     <!-- الملاحظة -->
                     <Grid Grid.Row="4" Margin="5">
+
                         <local:IQD_TextBox x:Name="txtNote" FontSize="20" ToolTip="الملاحظة" BorderBrushes="DarkBlue" Height="55" Tag="الملاحظة" HorizontalAlignment="Stretch"/>
+
+                        <local:IQD_TextBox FontSize="20" ToolTip="{DynamicResource txtNote}" BorderBrushes="DarkBlue" Height="55" Tag="{DynamicResource txtNote}" HorizontalAlignment="Stretch"/>
+
                     </Grid>
                 </Grid>
 
@@ -74,15 +94,24 @@
 
                     <!-- المادة -->
                     <Grid Grid.Row="0" Margin="5">
+
                         <ComboBox x:Name="CombSubject" ToolTip="المادة" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
                                   VerticalContentAlignment="Center" Height="55" Tag="المادة" 
+
+                        <ComboBox x:Name="txtSubject1" ToolTip="{DynamicResource cbxSubject1}" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
+                                  VerticalContentAlignment="Center" Height="55" Tag="{DynamicResource cbxSubject1}" 
+
                                   Foreground="{DynamicResource PrimaryTextColor}" HorizontalAlignment="Stretch"/>
                     </Grid>
 
                     <!-- المرحلة -->
                     <Grid Grid.Row="1" Margin="5">
+
                         <ComboBox x:Name="CombStage" ToolTip="المرحلة" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
                                   VerticalContentAlignment="Center" Height="55" Tag="المرحلة" 
+
+                        <ComboBox x:Name="txtSubject" ToolTip="{DynamicResource cbxStage}" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
+                                  VerticalContentAlignment="Center" Height="55" Tag="{DynamicResource cbxStage}" 
                                   Foreground="{DynamicResource PrimaryTextColor}" HorizontalAlignment="Stretch">
                             <ComboBoxItem>ابتدائية</ComboBoxItem>
                             <ComboBoxItem>متوسطة</ComboBoxItem>
@@ -94,6 +123,8 @@
                     <Grid Grid.Row="2" Margin="5">
                         <ComboBox x:Name="CombGrade" ToolTip="الصف" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
                                   VerticalContentAlignment="Center" Height="55" Tag="الصف" 
+                        <ComboBox x:Name="txtStage" ToolTip="{DynamicResource cbxClass}" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
+                                  VerticalContentAlignment="Center" Height="55" Tag="{DynamicResource cbxClass}" 
                                   Foreground="{DynamicResource PrimaryTextColor}" HorizontalAlignment="Stretch">
                             <ComboBoxItem>اول</ComboBoxItem>
                             <ComboBoxItem>ثاني</ComboBoxItem>
@@ -106,6 +137,8 @@
                     <Grid Grid.Row="3" Margin="5">
                         <ComboBox x:Name="CombClass" ToolTip="الشعبة" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
                                   VerticalContentAlignment="Center" Height="55" Tag="الشعبة" 
+                        <ComboBox x:Name="txtClass" ToolTip="{DynamicResource cbxDivision}" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
+                                  VerticalContentAlignment="Center" Height="55" Tag="{DynamicResource cbxDivision}" 
                                   Foreground="{DynamicResource PrimaryTextColor}" HorizontalAlignment="Stretch">
                             <ComboBoxItem>ا</ComboBoxItem>
                             <ComboBoxItem>ب</ComboBoxItem>
@@ -124,7 +157,7 @@
 
                     <!-- أنماط الأسئلة -->
                     <Grid Grid.Row="0" Margin="0">
-                        <GroupBox BorderBrush="DarkBlue" BorderThickness="0.2" FontSize="20" Header="أنماط الأسئلة" 
+                        <GroupBox BorderBrush="DarkBlue" BorderThickness="0.2" FontSize="20" Header="{DynamicResource QuestionStyles}" 
                                   Foreground="{DynamicResource PrimaryTextColor}" Margin="0,2,10,8">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -151,6 +184,8 @@
                     <!-- الانشاء والتصدير -->
                     <Grid Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <GroupBox BorderBrush="DarkBlue" BorderThickness="0.2" FontSize="20" Header="الانشاء والتصدير" 
+                    <Grid Grid.Row="1" Margin="0">
+                        <GroupBox BorderBrush="DarkBlue" BorderThickness="0.2" FontSize="20" Header="{DynamicResource CreateAndDeploy}" 
                                   Foreground="{DynamicResource PrimaryTextColor}" Margin="0,2,10,0">
                             <Grid>
                                 <Grid.RowDefinitions>

@@ -109,6 +109,11 @@ namespace Interface.Pages
             }
             return false;
 
+        private void FillComboBox()
+        {
+            // إضافة عناصر إلى ComboBox
+          
+           
         }
        
         //انشاء نموذج بشكل دينمايكي باستخدام GPT
