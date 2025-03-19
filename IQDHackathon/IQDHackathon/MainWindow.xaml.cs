@@ -184,5 +184,10 @@ namespace IQDHackathon
         {
             Content = new SettingPage();
         }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
     }
 }

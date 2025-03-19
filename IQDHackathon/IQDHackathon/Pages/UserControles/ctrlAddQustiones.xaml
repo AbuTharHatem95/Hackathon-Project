@@ -23,8 +23,8 @@
                  Width="750" 
                  Background="{StaticResource PrimaryBackgroundColor}"
                  Margin="10"
-                 HorizontalContentAlignment="Right"
-                 HorizontalAlignment="Right"
+                 HorizontalContentAlignment="Stretch"
+                 HorizontalAlignment="Stretch"
                   
                      >
             </ListBox>

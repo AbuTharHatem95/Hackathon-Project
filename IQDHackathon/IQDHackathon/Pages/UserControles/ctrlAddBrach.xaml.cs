@@ -16,8 +16,6 @@ namespace Interface.Pages.UserControles
 
         }
 
-       
-
         private void btnAddPointToBranch_Click(object sender, RoutedEventArgs e)
         {
             if(string.IsNullOrEmpty(txtQustionTitle.Text)|| string.IsNullOrEmpty(txtQNum.Text)|| string.IsNullOrEmpty(txtNumberOfAnswers.Text))
@@ -26,7 +24,7 @@ namespace Interface.Pages.UserControles
                 return;
             }
 
-            _qustion?.AddBranch('A');
+            _qustion?.AddBranch(char.Parse(txtQNum.Text));
 
             ctrlQustionListView listQustion = new ctrlQustionListView();
             listQustion.QuestionIsSelected += Qustion_QuestionStateChanged;
@@ -42,13 +40,13 @@ namespace Interface.Pages.UserControles
 
         private void Qustion_QuestionStateChanged(object? sender, ( bool IsChecked, string Qustion) e)
         {
-            if (!e.IsChecked && _qustion?.PointList?.Count > 0) 
+            if (!e.IsChecked) 
             {
-                foreach (var p in _qustion.PointList)
+                foreach (var point in _qustion.PointList)
                 {
-                    if (p.Text == e.Qustion)
+                    if (point.Text == e.Qustion)
                     {
-                        _qustion.PointList.Remove(p);
+                        _qustion.PointList.Remove(point);
                         return;
                     }
                 }
@@ -56,7 +54,7 @@ namespace Interface.Pages.UserControles
             }
             else
             {
-                _qustion?.AddPointToBranch('A', new clsPoint(e.Qustion));
+                _qustion?.AddPointToBranch(char.Parse(txtQNum.Text), new clsPoint(e.Qustion));
 
             }
 

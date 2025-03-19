@@ -19,49 +19,19 @@ using System.Windows.Controls;
 
 namespace Interface.Pages
 {
-     //يجب العمل على ان يجلب الاسئلة بناء على النمط المختار من الواجهه وبناء عليها يصممها الجات جي بي تي 
+    //يجب العمل على ان يجلب الاسئلة بناء على النمط المختار من الواجهه وبناء عليها يصممها الجات جي بي تي 
     //بيج لاملائ معلومات المدرسه ومعلومات الاستاذ ورفع مادة الامتحان 
     public partial class TestScenarioGeneratorPage : Page
     {
-        public class StyleModel : INotifyPropertyChanged
-        {
-            private string _name;
-            private bool _isSelected;
+        private readonly string? __openAiApiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
 
-            public string Name
-            {
-                get => _name;
-                set
-                {
-                    _name = value;
-                    OnPropertyChanged(nameof(Name));
-                }
-            }
-
-            public bool IsSelected
-            {
-                get => _isSelected;
-                set
-                {
-                    _isSelected = value;
-                    OnPropertyChanged(nameof(IsSelected));
-                }
-            }
-
-            public event PropertyChangedEventHandler PropertyChanged;
-
-            protected void OnPropertyChanged(string propertyName)
-            {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
         public List<StyleModel> Styles { get; set; }
 
         public static Dictionary<string, List<string>> QuestionsDictFromChatGPT = new Dictionary<string, List<string>>();
 
         private string extractedText;
+
         IQD_LoadingControl load;
-        private List<QuestionItem> __generatedQuestions = new List<QuestionItem>();
 
 
         public TestScenarioGeneratorPage()
@@ -69,20 +39,17 @@ namespace Interface.Pages
             InitializeComponent();
             FillComboBoxSubject();
 
-
             // تعبئة قائمة الأنماط
             Styles = new List<StyleModel>
-    {
-        new StyleModel { Name = "أسئلة اختيار من متعدد", IsSelected = false },
-        new StyleModel { Name = "أسئلة صح/خطأ", IsSelected = false },
-        new StyleModel { Name = "أسئلة ملء الفراغ", IsSelected = false },
-        new StyleModel { Name = "أسئلة مقالية", IsSelected = false }
-    };
+            {
+                new StyleModel { Name = "أسئلة اختيار من متعدد", IsSelected = false },
+                new StyleModel { Name = "أسئلة صح/خطأ", IsSelected = false },
+                new StyleModel { Name = "أسئلة ملء الفراغ", IsSelected = false },
+                new StyleModel { Name = "أسئلة مقالية", IsSelected = false }
+            };
 
             // ربط القائمة بـ ItemsControl
             CheckBoxList.ItemsSource = Styles;
-
-
 
             // جلب البيانات من قاعدة البيانات
             //var databaseService = new DatabaseService();
@@ -92,30 +59,34 @@ namespace Interface.Pages
             //CheckBoxList.ItemsSource = QuestionStyles;
         }
 
-
         private List<string> GetSelectedStyles()
         {
             return Styles.Where(style => style.IsSelected).Select(style => style.Name).ToList();
         }
-        
+
         private bool VauldationText()
         {
-            if (string.IsNullOrEmpty(CombClass.Text) || string.IsNullOrEmpty(CombGrade.Text) || string.IsNullOrEmpty(CombStage.Text) || string.IsNullOrEmpty(txtExampleTime.Text) ||
-             string.IsNullOrEmpty(txtNote.Text) || string.IsNullOrEmpty(txtSchoolName.Text) || string.IsNullOrEmpty(txtTeacherName.Text) ||
-             string.IsNullOrEmpty(txtTypeQuze.Text))
+            if (
+                string.IsNullOrEmpty(txtNote.Text) ||
+                string.IsNullOrEmpty(CombClass.Text) ||
+                string.IsNullOrEmpty(CombGrade.Text) ||
+                string.IsNullOrEmpty(CombStage.Text) ||
+                string.IsNullOrEmpty(txtSchoolName.Text) ||
+                string.IsNullOrEmpty(txtExampleTime.Text) ||
+                string.IsNullOrEmpty(txtTeacherName.Text) ||
+                string.IsNullOrEmpty(txtTypeQuze.Text))
             {
                 IQD_MessageBox.Show("تحذير", "يجب ملئ المعلومات", MessageBoxType.Warning);
                 return true;
             }
             return false;
+        }
 
         private void FillComboBox()
         {
             // إضافة عناصر إلى ComboBox
-          
-           
         }
-       
+
         //انشاء نموذج بشكل دينمايكي باستخدام GPT
         private async void GenretWithGPT_Click(object sender, RoutedEventArgs e)
         {
@@ -123,7 +94,7 @@ namespace Interface.Pages
             //    return;
 
             IQD_MessageBox.Show("اختيار", "يرجى اختيار ملف المادة");
-            
+
             await LoadPdfFile();
         }
 
@@ -136,10 +107,7 @@ namespace Interface.Pages
             {
                 IQD_MessageBox.Show("تحذير", "لم تقم باختيار أي أنماط!", MessageBoxType.Warning);
                 return;
-
             }
-
-
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 Filter = "PDF Files (*.pdf)|*.pdf"
@@ -151,34 +119,32 @@ namespace Interface.Pages
                 {
                     extractedText = ExtractTextFromPdf(openFileDialog.FileName);
 
-
-                    if(string.IsNullOrEmpty(extractedText))
+                    if (string.IsNullOrEmpty(extractedText))
                     {
                         IQD_MessageBox.Show("تحذير", "يجب رفع ملف المادة!!", MessageBoxType.Warning);
                         return;
                     }
 
-                    load = new IQD_LoadingControl();
-                    load.ShowDialog();
+                    //load = new IQD_LoadingControl();
+                    //Task.Run(async () => load.ShowDialog());
+
                     // إنشاء الأسئلة بناءً على الأنماط المختارة
                     await GenerateQuestionsFromText(extractedText, selectedStyles);
 
-                    load.Close();
+                  // load.Close();
 
-                    CreateModles();
-
-                   
+                    //من المفترض ان نقوم باستدعاء هذه الميثود من داخل بيج انشاء الاسئلة 
+                   // CreateModles();
                 }
                 catch (Exception ex)
                 {
-                    load.Close();
+                   // load.Close();
                     IQD_MessageBox.Show("خطأ", $"لم يتم الحفظ بنجاح: {ex.Message}", MessageBoxType.Error);
                 }
             }
-          
         }
 
-        //بناء نموذج اسئلة بشكل يدوي
+        // بناء نموذج اسئلة بشكل يدوي 
         private async void Gentet_Click(object sender, RoutedEventArgs e)
         {
             if (VauldationText())
@@ -187,88 +153,9 @@ namespace Interface.Pages
             await LoadPdfFile();
 
            
-            //اجراء لملئ اسئلة هارد كود
-            GenretQuestionesHardCode();
             MainPageGrid.Visibility = Visibility.Collapsed;
             QuestionsPage.Visibility = Visibility.Visible;
-            ContentFrame.Navigate(new AddQustiones());
-            //
-
-
-
-
-            //اجراء الجات جي بي تي
-            //load = new IQD_LoadingControl();
-            //load.ShowDialog();
-
-            //await Task.Delay(2000);
-
-            //if (QuestionsDictFromChatGPT.Count > 0)
-            //{
-            //    load.Close();
-            //    MainPageGrid.Visibility = Visibility.Collapsed;
-            //    QuestionsPage.Visibility = Visibility.Visible;
-            //    ContentFrame.Navigate(new AddQustiones());
-            //    return;
-            //}
-            //else
-            //{
-            //    IQD_MessageBox.Show("⚠️  لم يتم إنشاء أي أسئلة بعد,حاول مرة اخرى", "تحذير", MessageBoxType.Warning);
-            //}
-
-            //load.Close();
-
-            //
-
-        }
-
-        private void GenretQuestionesHardCode()
-        {
-            QuestionsDictFromChatGPT.Add("تعاريف", new List<string>
-            {
-                "المعالج",
-                "سعيد بن عمر",
-                "محمد الفاتح",
-                "سعيد ابن الجبير",
-                "يوسف محمد",
-                "سعيد بن عمر",
-                "محمد الفاتح",
-                "سعيد ابن الجبير سعيد ابن الجبير سعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبيرسعيد ابن الجبير"
-
-            }
-            );
-            QuestionsDictFromChatGPT.Add("فراغات", new List<string>
-            {
-                "يوسف ______هواي",
-                "اين تقع_________",
-                "كم كيلو_______",
-                "ماذا تفعل_______",
-
-            }
-
-
-          );
-
-            QuestionsDictFromChatGPT.Add("تعاليل", new List<string>
-            {
-                "ماذا لو",
-                "هي او تلك",
-                "لماذا نحن هنا",
-                "سبب الصلع",
-
-            }
-            );
-
-
-            QuestionsDictFromChatGPT.Add("صح او خطأ", new List<string>
-            {
-                "العراق سعيد",
-                "البصرة بارده",
-                "يوسف ما يسوي مشاكل",
-                "الزواج حلو؟",
-
-            }
-           );
+            ContentFrame.Navigate(new AddQustiones(this));
         }
 
 
@@ -292,9 +179,324 @@ namespace Interface.Pages
             CombSubject.SelectedIndex = 0;
         }
 
+        //اجراء خاص بجات جي بي تي ,حيث يتم بناء النموذج بشكل يدوي مع تمرير انماط الاسئلة
+
+        public static string ExtractTextFromPdf(string filePath)
+        {
+            StringBuilder extractedText = new StringBuilder();
+
+            using (var reader = new PdfReader(filePath))
+            using (var pdfDoc = new PdfDocument(reader))
+            {
+                for (int i = 1; i <= pdfDoc.GetNumberOfPages(); i++)
+                {
+                    // استخدام LocationTextExtractionStrategy للحفاظ على ترتيب النصوص
+                    ITextExtractionStrategy strategy = new LocationTextExtractionStrategy();
+                    string pageText = PdfTextExtractor.GetTextFromPage(pdfDoc.GetPage(i), strategy);
+                    extractedText.AppendLine(pageText);
+                }
+            }
+            return extractedText.ToString();
+        }
+
+        private async Task GenerateQuestionsFromText(string text, List<string> selectedStyles)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                IQD_MessageBox.Show("⚠️ الرجاء إدخال نص قبل المتابعة.", "تحذير", MessageBoxType.Warning);
+                return;
+            }
+
+            //مسح الدكشنري الحالي للأسئلة
+            QuestionsDictFromChatGPT.Clear();
+
+            await FillQuestionsDictionary(text, selectedStyles);
+        }
+
+        private async Task FillQuestionsDictionary(string text, List<string> selectedStyles)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append("قم بإنشاء 6 أسئلة لكل من الأنماط التالية: ");
+            foreach (var style in selectedStyles)
+            {
+                stringBuilder.Append($"{style}, ");
+            }
+            stringBuilder.AppendLine($"بناءً على هذا المحتوى:\n{text}");
+            stringBuilder.AppendLine("بدون ترقيم الاسئلة");
+
+
+            // استدعاء ChatGPT للحصول على الأسئلة (يجب أن تكون لديك دالة GetQuestionsFromChatGPT تعمل بشكل صحيح)
+            string questionsResponse = await GetQuestionsFromChatGPT(stringBuilder.ToString());
+
+            // تقسيم الأسئلة المسترجعة إلى قائمة
+            List<string> questionList = questionsResponse.Split('\n')
+                                                        .Where(q => !string.IsNullOrWhiteSpace(q))
+                                                        .ToList();
+
+
+            // توزيع الأسئلة على الأنماط وإضافتها إلى الدكشنري
+            int index = 0;
+            foreach (var style in selectedStyles)
+            {
+                if (!QuestionsDictFromChatGPT.ContainsKey(style))
+                {
+                    QuestionsDictFromChatGPT[style] = new List<string>();
+                }
+
+                // أخذ 6 أسئلة لكل نمط (إذا كانت متوفرة)
+                var styleQuestions = questionList.Skip(index).Take(6).ToList();
+                QuestionsDictFromChatGPT[style].AddRange(styleQuestions);
+
+                index += 6; // الانتقال إلى الأسئلة التالية لكل نمط
+            }
+        }
+
+        private async Task<string> GetQuestionsFromChatGPT(string prompt)
+        {
+            try
+            {
+
+                using HttpClient client = new HttpClient();
+
+                if (string.IsNullOrEmpty(__openAiApiKey))
+                    throw new Exception("API Key غير مضبوط! تأكد من إضافته.");
+
+                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {__openAiApiKey}");
+
+                // "gpt-4"
+                var requestBody = new
+                {
+                    model = "gpt-4-turbo",
+                    messages = new[]
+                    {
+                        new { role = "system", content = "أنت مساعد ذكاء اصطناعي قم بتحليل النصوص وترتيبها حتى اذا كانت معكوسه  وإنشاء أسئلة فقط بدون إجابات." },
+                        new { role = "user", content = prompt }
+                    },
+                    max_tokens = 400
+                };
 
 
 
+                string jsonBody = JsonConvert.SerializeObject(requestBody);
+                HttpContent content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response;
+                try
+                {
+                    response = await client.PostAsync("https://api.openai.com/v1/chat/completions", content);
+                }
+                catch (HttpRequestException httpEx)
+                {
+                    throw new Exception("❌ فشل الاتصال بـ OpenAI. تحقق من اتصالك بالإنترنت.", httpEx);
+                }
+
+                if (!response.IsSuccessStatusCode)
+                    throw new Exception($"خطأ في الاتصال بـ OpenAI: {response.StatusCode} - {await response.Content.ReadAsStringAsync()}");
+
+                string responseString = await response.Content.ReadAsStringAsync();
+                dynamic? responseData = JsonConvert.DeserializeObject(responseString);
+
+                if (responseData?.choices == null || responseData?.choices.Count == 0)
+                    throw new Exception("لم يتم استلام بيانات صحيحة من OpenAI!");
+
+                return responseData?.choices[0].message.content.ToString();
+            }
+            catch (Exception ex)
+            {
+                IQD_MessageBox.Show("خطأ", ex.Message, MessageBoxType.Error);
+                return "حدث خطأ أثناء جلب الأسئلة من ChatGPT.";
+            }
+        }
+
+
+
+        //يستخدم بتعبة النموذج الاسئلة هارد كود 
+        private void GenerateExamPdf(ref string fullPath,Dictionary<byte, clsQuestion> questionsDict1)
+        {
+
+            Dictionary<byte, clsQuestion> questionsDict = new Dictionary<byte, clsQuestion>();
+
+            // السؤال الأول: 6 نقاط تعاريف، درجته 25، عدد الإجابات المطلوبة 5
+            var q1 = new clsQuestion(new clsTitle(1, 25, 5, "عرف المفاهيم التالية"))
+                .AddPoint(new clsPoint("التكامل"))
+                .AddPoint(new clsPoint("التفاضل"))
+                .AddPoint(new clsPoint("المصفوفات"))
+                .AddPoint(new clsPoint("الاحتمالات"))
+                .AddPoint(new clsPoint("المعادلات التفاضلية"))
+                .AddPoint(new clsPoint("النهايات"));
+            q1.CreateQuestion();
+            questionsDict.Add(q1.Title.Number, q1);
+
+            // السؤال الثاني: 3 أفرع، درجته 25، المطلوب الإجابة عن فرعين، وكل فرع يحتوي على 3 نقاط، الإجابة عن نقطتين
+            var q2 = new clsQuestion(new clsTitle(2, 25, 2, "أجب عن فرعين فقط مما يلي"))
+                .AddBranch('أ').AddPointToBranch('أ', new clsPoint("مفهوم الاحتمالات"))
+                .AddPointToBranch('أ', new clsPoint("أنواع الاحتمالات"))
+                .AddPointToBranch('أ', new clsPoint("تطبيقات الاحتمالات"))
+                .AddBranch('ب').AddPointToBranch('ب', new clsPoint("التفاضل العادي"))
+                .AddPointToBranch('ب', new clsPoint("التفاضل الجزئي"))
+                .AddPointToBranch('ب', new clsPoint("قاعدة السلسلة"))
+                .AddBranch('ج').AddPointToBranch('ج', new clsPoint("التكامل المحدد"))
+                .AddPointToBranch('ج', new clsPoint("التكامل غير المحدد"))
+                .AddPointToBranch('ج', new clsPoint("حساب المساحات"));
+            q2.CreateQuestion();
+            questionsDict.Add(q2.Title.Number, q2);
+
+            // السؤال الثالث: سؤال مقالي
+            var q3 = new clsQuestion(new clsTitle(3, 20, 1, "وضح أهمية علم الرياضيات في الحياة اليومية"));
+            q3.CreateQuestion();
+            questionsDict.Add(q3.Title.Number, q3);
+
+            // السؤال الرابع: فراغات
+            var q4 = new clsQuestion(new clsTitle(4, 15, 3, "أكمل الفراغات التالية"))
+                .AddPoint(new clsPoint("إذا كانت المصفوفة مربعة فإن محددها يمكن أن يكون ___"))
+                .AddPoint(new clsPoint("الزاوية القائمة تساوي ___ درجة"))
+                .AddPoint(new clsPoint("المشتقة الثانية للدالة تعطي ___"));
+            q4.CreateQuestion();
+            questionsDict.Add(q4.Title.Number, q4);
+
+            // السؤال الخامس: اختر الإجابة الصحيحة
+            var q5 = new clsQuestion(new clsTitle(5, 15, 3, "اختر الإجابة الصحيحة"))
+                .AddPoint(new clsPoint("ناتج تكامل الدالة \\(x^2\\) هو: أ) x^3/3 ب) 2x ج) x^2/2"))
+                .AddPoint(new clsPoint("التفاضل يعبر عن: أ) المعدل الزمني للتغير ب) المساحة تحت المنحنى ج) التكامل العكسي"))
+                .AddPoint(new clsPoint("النقطة التي تساوي فيها مشتقة الدالة صفر هي: أ) نقطة العظمى ب) نقطة الانعطاف ج) نقطة البداية"));
+            q5.CreateQuestion();
+            questionsDict.Add(q5.Title.Number, q5);
+
+            //return questionsDict;
+            GeneratePdf(ref fullPath);
+        }
+
+        //يستخدم مع جات جي بي تي 
+        public void GeneratePdf(ref string fullPath)
+        {
+            QuestPDF.Settings.License = LicenseType.Community;
+            DateTime curruntYear = DateTime.Now;
+
+            Document.Create(container =>
+            {
+
+                container.Page(page =>
+                {
+                    page.Size(PageSizes.A4);
+                    page.Margin((float)0.4, Unit.Centimetre);
+                    page.PageColor(Colors.White);
+                    page.DefaultTextStyle(x => x.FontSize(12));
+
+                    page.Content().PaddingVertical(5).Column(column =>
+                    {
+                        column.Item().Row(row =>
+                        {
+                            row.RelativeItem().AlignLeft().Text($"المادة: {CombSubject.Text}\n\nالتاريخ: {txtExapleDate.Text}\n\nالوقت: {txtExampleTime.Text}\n").Bold().FontSize(12);
+                            row.RelativeItem().AlignCenter().Text($"{curruntYear.Year}/{curruntYear.AddYears(-1)})\n\nنوع الأمتحان: {txtTypeQuze.Text}\n\n{txtNote.Text}").Bold().FontSize(12);
+                            row.RelativeItem().AlignRight().Text($"المدرسة: {txtSchoolName.Text}\n\n:مدرس المادة {txtTeacherName.Text}\n").Bold().FontSize(12);
+                        });
+
+                        column.Item().LineHorizontal(2).LineColor(Colors.Black);
+                        column.Item().PaddingVertical(10);
+
+                        foreach (var questionEntry in clsQuestion.QuestionsDict)
+                        {
+                            var question = questionEntry.Value;
+                            column.Item().Row(row =>
+                            {
+                                row.RelativeItem().AlignRight().Text($"س{question.Title.Number}: {question.Title.QuestionTitle} (درجة {question.Title.ScoreForBranchOrPint})").Bold().FontSize(12);
+                            });
+
+                            if (question.BranchzDict != null)
+                            {
+                                foreach (var branchEntry in question.BranchzDict)
+                                {
+                                    var branch = branchEntry.Value;
+                                    column.Item().Row(row =>
+                                    {
+                                        row.RelativeItem().AlignRight().Text($"({branch.Char}) {branch.BranchTitle} (درجة {branch.Score})").Bold().FontSize(12);
+                                    });
+
+                                    foreach (var point in branch.PointList)
+                                    {
+                                        column.Item().Row(row =>
+                                        {
+                                            row.RelativeItem().AlignRight().Text($"- {point.Text} (درجة {point.Score})").FontSize(12);
+                                        });
+                                    }
+
+                                    // إضافة سطر فارغ بين الفروع
+                                    column.Item().PaddingVertical(5);
+                                }
+                            }
+
+                            if (question.PointList != null)
+                            {
+                                foreach (var point in question.PointList)
+                                {
+                                    column.Item().Row(row =>
+                                    {
+                                        row.RelativeItem().AlignRight().Text($"- {point.Text} (درجة {point.Score})").FontSize(12);
+                                    });
+                                }
+                            }
+
+                            // إضافة سطرين فارغين قبل الخط الأسود
+                            column.Item().PaddingVertical(10);
+                            column.Item().LineHorizontal(2).LineColor(Colors.Black);
+                            column.Item().PaddingVertical(10);
+                        }
+
+                       
+                    });
+                });
+            })
+            .GeneratePdf(fullPath);
+        }
+
+
+        private void CreateModles()
+        {
+            var saveFileDialog = new SaveFileDialog
+            {
+                DefaultExt = ".pdf",
+                Filter = "PDF Files (*.pdf)|*.pdf"
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                string fullPath = saveFileDialog.FileName;
+                try
+                {
+                    //يستخدم مع جات جي بي تي
+                    GeneratePdf(ref fullPath);
+
+                    //كتابة نموذج اسئلة هارد كود 
+                   // GenerateExamPdf(ref fullPath,clsQuestion.QuestionsDict);
+                   
+                    OpenPdf(fullPath);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+
+        }
+
+        public  void OpenPdf(string fullPath)
+        {
+            try
+            {
+                var process = new Process();
+                process.StartInfo = new ProcessStartInfo(fullPath)
+                {
+                    UseShellExecute = true
+                };
+                process.Start();
+            }
+            catch (Exception ex)
+            {
+                IQD_MessageBox.Show("Error", $"Failed to open PDF: {ex.Message}", MessageBoxType.Error);
+            }
+        }
+
+       
         //اجراءات خاصة بلصفحة
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
@@ -331,399 +533,46 @@ namespace Interface.Pages
             mainWindow.Show();
             Window.GetWindow(this).Close();
         }
-        //
 
-
-        //اجراء خاص بجات جي بي تي ,حيث يتم بناء النموذج بشكل يدوي مع تمرير انماط الاسئلة
-        private readonly string? __openAiApiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
-
-
-        public static string ExtractTextFromPdf(string filePath)
-        {
-            StringBuilder extractedText = new StringBuilder();
-           
-            using (var reader = new PdfReader(filePath))
-            using (var pdfDoc = new PdfDocument(reader))
-            {
-                for (int i = 1; i <= pdfDoc.GetNumberOfPages(); i++)
-                {
-                    // استخدام LocationTextExtractionStrategy للحفاظ على ترتيب النصوص
-                    ITextExtractionStrategy strategy = new LocationTextExtractionStrategy();
-                    string pageText = PdfTextExtractor.GetTextFromPage(pdfDoc.GetPage(i), strategy);
-                    extractedText.AppendLine(pageText);
-                }
-            }
-
-            return extractedText.ToString();
-        }
-
-       
-
-        private async Task GenerateQuestionsFromText(string text, List<string> selectedStyles)
-        {
-            if (string.IsNullOrWhiteSpace(text))
-            {
-                IQD_MessageBox.Show("⚠️ الرجاء إدخال نص قبل المتابعة.", "تحذير", MessageBoxType.Warning);
-                return;
-            }
-
-           
-            // مسح الدكشنري الحالي للأسئلة
-            QuestionsDictFromChatGPT.Clear();
-
-            await FillQuestionsDictionary(text, selectedStyles);
-
-
-
-
-        }
-
-        private  async Task FillQuestionsDictionary(string text, List<string> selectedStyles)
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append("قم بإنشاء 6 أسئلة لكل من الأنماط التالية: ");
-
-            foreach (var style in selectedStyles)
-            {
-                stringBuilder.Append($"{style}, ");
-            }
-
-            stringBuilder.AppendLine($"بناءً على هذا المحتوى:\n{text}");
-
-            IQD_MessageBox.Show("وصول", "تم الوصول الى دالة Fill");
-            // استدعاء ChatGPT للحصول على الأسئلة (يجب أن تكون لديك دالة GetQuestionsFromChatGPT تعمل بشكل صحيح)
-            string questionsResponse = await GetQuestionsFromChatGPT(stringBuilder.ToString());
-
-            // تقسيم الأسئلة المسترجعة إلى قائمة
-            List<string> questionList = questionsResponse.Split('\n')
-                                                        .Where(q => !string.IsNullOrWhiteSpace(q))
-                                                        .ToList();
-
-            IQD_MessageBox.Show("دالة Fill", "تم الخروج من دالة جلب الاسئلة الان");
-
-            // توزيع الأسئلة على الأنماط وإضافتها إلى الدكشنري
-            int index = 0;
-            foreach (var style in selectedStyles)
-            {
-                if (!QuestionsDictFromChatGPT.ContainsKey(style))
-                {
-                    QuestionsDictFromChatGPT[style] = new List<string>();
-                }
-
-                // أخذ 6 أسئلة لكل نمط (إذا كانت متوفرة)
-                var styleQuestions = questionList.Skip(index).Take(6).ToList();
-                QuestionsDictFromChatGPT[style].AddRange(styleQuestions);
-
-                index += 6; // الانتقال إلى الأسئلة التالية لكل نمط
-            }
-        }
-
-        private async Task<string> GetQuestionsFromChatGPT(string prompt)
-        {
-            try
-            {
-                IQD_MessageBox.Show("دالة GPT","تم الدخول الى الدالة", MessageBoxType.Warning);
-
-                using HttpClient client = new HttpClient();
-
-                if (string.IsNullOrEmpty(__openAiApiKey))
-                    throw new Exception("API Key غير مضبوط! تأكد من إضافته.");
-
-                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {__openAiApiKey}");
-
-                var requestBody = new
-                {
-                    model = "gpt-4-turbo",
-                    messages = new[]
-                    {
-                new { role = "system", content = "أنت مساعد ذكاء اصطناعي يقوم بتحليل النصوص وإنشاء أسئلة فقط بدون إجابات." },
-                new { role = "user", content = prompt }
-            },
-                    max_tokens = 300
-                };
-
-                string jsonBody = JsonConvert.SerializeObject(requestBody);
-                HttpContent content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
-
-                HttpResponseMessage response;
-                try
-                {
-                    response = await client.PostAsync("https://api.openai.com/v1/chat/completions", content);
-                }
-                catch (HttpRequestException httpEx)
-                {
-                    throw new Exception("❌ فشل الاتصال بـ OpenAI. تحقق من اتصالك بالإنترنت.", httpEx);
-                }
-
-                if (!response.IsSuccessStatusCode)
-                    throw new Exception($"خطأ في الاتصال بـ OpenAI: {response.StatusCode} - {await response.Content.ReadAsStringAsync()}");
-
-                string responseString = await response.Content.ReadAsStringAsync();
-                dynamic? responseData = JsonConvert.DeserializeObject(responseString);
-
-                if (responseData?.choices == null || responseData?.choices.Count == 0)
-                    throw new Exception("لم يتم استلام بيانات صحيحة من OpenAI!");
-
-
-                return responseData?.choices[0].message.content.ToString();
-            }
-            catch (Exception ex)
-            {
-                IQD_MessageBox.Show("خطأ", ex.Message, MessageBoxType.Error);
-                return "حدث خطأ أثناء جلب الأسئلة من ChatGPT.";
-            }
-
-            IQD_MessageBox.Show("دالة GPT", "تم الخروج من الدالة", MessageBoxType.Warning);
-
-        }
-        //
-
-
-        //اجراء خاص بانشاء نموذج دينماكي بناء على تصميم جات جي بي تي
-
-        private void GeneratePdfDynmaic(string fullPath)
-        {
-            QuestPDF.Settings.License = LicenseType.Community;
-
-            // معلومات المدرسة والامتحان
-            string School = $"المادة: {CombStage.Text}, التاريخ: {DateTime.Now.ToShortDateString()}, الوقت: {txtExampleTime.Text}";
-            string title = $"أسئلة طلبة الانتساب للعام الدراسي ({DateTime.Now.Year}/{DateTime.Now.Year - 1}), إدارة {txtSchoolName.Text}";
-
-            Document.Create(container =>
-            {
-                container.Page(page =>
-                {
-                    page.Size(PageSizes.A4);
-                    page.Margin((float)0.4, Unit.Centimetre);
-                    page.PageColor(Colors.White);
-                    page.DefaultTextStyle(x => x.FontSize(12));
-
-                    page.Content().PaddingVertical(5).Column(column =>
-                    {
-                        // العنوان والتاريخ والوقت
-                        column.Item().Row(row =>
-                        {
-                            row.RelativeItem().AlignLeft().Text($"{School}\n\n{DateTime.Now.ToShortDateString()}\n \n{DateTime.Now.ToShortTimeString()}\n").Bold().FontSize(12);
-                            row.RelativeItem().AlignCenter().Text($"{title}\n\n{DateTime.Now.Year}\n\n{$"{txtNote.Text}/ملاحظة"}").Bold().FontSize(12);
-                            row.RelativeItem().AlignRight().Text($"{DateTime.Now.Month}\n ").Bold().FontSize(12);
-                        });
-
-                        // خط فاصل تحت التفاصيل
-                        column.Item().LineHorizontal(2).LineColor(Colors.Black);
-                        column.Item().PaddingVertical(10);
-
-                        // التحقق من وجود أسئلة في الدكشنري
-                        if (QuestionsDictFromChatGPT.Count > 0)
-                        {
-                            int questionNumber = 1; // عداد لترقيم الأسئلة
-                            int totalScore = 100; // المجموع الكلي للدرجات
-                            int scorePerQuestion = totalScore / 6; // الدرجة لكل سؤال (بدون فواصل عشرية)
-
-                            // أخذ أول 6 أسئلة فقط
-                            var questions = QuestionsDictFromChatGPT
-                                .SelectMany(kvp => kvp.Value) // دمج جميع الأسئلة في قائمة واحدة
-                                .Take(6); // أخذ أول 6 أسئلة
-
-                            // التكرار على الأسئلة
-                            foreach (var question in questions)
-                            {
-                                // السؤال الرئيسي
-                                column.Item().Row(row =>
-                                {
-                                    row.RelativeItem().AlignRight().Text($"س{questionNumber}: {question} ({scorePerQuestion} درجة)").FontSize(12);
-                                });
-
-                                // فروع السؤال (يمكنك تعديلها حسب الحاجة)
-                                column.Item().PaddingLeft(20).Column(subColumn =>
-                                {
-                                    subColumn.Item().Text("أ) فرع 1").FontSize(10);
-                                    subColumn.Item().Text("ب) فرع 2").FontSize(10);
-                                    subColumn.Item().Text("ج) فرع 3").FontSize(10);
-                                });
-
-                                questionNumber++; // زيادة العداد لترقيم الأسئلة
-                            }
-                        }
-                        else
-                        {
-                            // إذا لم تكن هناك أسئلة
-                            column.Item().Row(row =>
-                            {
-                                row.RelativeItem().AlignCenter().Text("لا توجد أسئلة متاحة.").FontSize(12);
-                            });
-                        }
-
-                        // تذييل الصفحة (مدرس المادة)
-                        string TitleTecher = ":مدرس المادة", Techer = $"{txtTeacherName.Text}";
-                        column.Item().Row(row =>
-                        {
-                            row.RelativeItem().AlignLeft().Text($"\n\n{TitleTecher}\n{Techer}\t\t\t\t\t").Bold().FontSize(12);
-                        });
-                    });
-                });
-            })
-            .GeneratePdf(fullPath);
-
-            // إعلام المستخدم بنجاح الحفظ
-            IQD_MessageBox.Show("تم حفظ ملف PDF بنجاح!", "نجاح", MessageBoxType.Info);
-        }
-        
-        private void OpenPdf(string fullPath)
-        {
-            try
-            {
-                var process = new Process();
-                process.StartInfo = new ProcessStartInfo(fullPath)
-                {
-                    UseShellExecute = true
-                };
-                process.Start();
-            }
-            catch (Exception ex)
-            {
-                IQD_MessageBox.Show("Error", $"Failed to open PDF: {ex.Message}", MessageBoxType.Error);
-            }
-        }
-
-        private void CreateModles()
+        private void txtSchoolName_TextChanged(object sender, TextChangedEventArgs e)
         {
 
-            var saveFileDialog = new SaveFileDialog
-            {
-                DefaultExt = ".pdf",
-                Filter = "PDF Files (*.pdf)|*.pdf"
-            };
-
-            if (saveFileDialog.ShowDialog() == true)
-            {
-                string fullPath = saveFileDialog.FileName;
-                try
-                {
-                    GeneratePdfDynmaic(fullPath);
-                    OpenPdf(fullPath);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-
         }
-
-
-        // تحديد الحد الأقصى للأحرف لتجنب استهلاك زائد لـ API
-        //int maxCharacters = 3000;
-        //if (text.Length > maxCharacters)
-        //    text = text.Substring(0, maxCharacters);
-
-
-        //private async Task GenerateQuestionsFromText(string text)
-        //{
-        //    if (string.IsNullOrWhiteSpace(text))
-        //    {
-        //        IQD_MessageBox.Show("⚠️ الرجاء إدخال نص قبل المتابعة.", "تحذير", MessageBoxType.Warning);
-        //        return;
-        //    }
-
-        //    // تحديد الحد الأقصى للأحرف لتجنب استهلاك زائد لـ API
-        //    int maxCharacters = 2000;
-        //    if (text.Length > maxCharacters)
-        //        text = text.Substring(0, maxCharacters);
-
-        //    // أنماط الأسئلة المطلوبة
-        //    string[] questionStyles = { "أسئلة اختيار من متعدد", "أسئلة صح/خطأ", "أسئلة ملء الفراغ", "أسئلة مقالية" };
-
-        //    foreach (var style in questionStyles)
-        //    {
-        //        string prompt = $"قم بإنشاء 6 أسئلة من النمط التالي: {style} بناءً على النص التالي:\n{text}";
-
-        //        string questions = await GetQuestionsFromChatGPT(prompt);
-
-        //        // تقسيم الأسئلة إلى قائمة
-        //        List<string> questionList = questions.Split('\n')
-        //                                             .Where(q => !string.IsNullOrWhiteSpace(q))
-        //                                             .Take(6) // تأكد من أن عدد الأسئلة لا يتجاوز 6
-        //                                             .ToList();
-
-        //        // إضافة النمط والأسئلة إلى الدكشنري
-        //        QuestionsDictFromChatGPT[style] = questionList;
-        //    }
-
-
-        //}
-
-
-        //private async Task GenerateQuestionsFromTextDaynmic(string text, List<string> selectedStyles)
-        //{
-        //    if (string.IsNullOrWhiteSpace(text))
-        //    {
-        //        IQD_MessageBox.Show("⚠️ الرجاء إدخال نص قبل المتابعة.", "تحذير", MessageBoxType.Warning);
-        //        return;
-        //    }
-
-        //    // تحديد الحد الأقصى للأحرف لتجنب استهلاك زائد لـ API
-        //    int maxCharacters = 2000;
-        //    if (text.Length > maxCharacters)
-        //        text = text.Substring(0, maxCharacters);
-
-        //    // مسح الدكشنري الحالي للأسئلة
-        //    QuestionsDictFromChatGPT.Clear();
-
-        //    // إنشاء الأسئلة لكل نمط مختار
-        //    foreach (var style in selectedStyles)
-        //    {
-        //        string prompt = $"قم بإنشاء 6 أسئلة من النمط التالي: {style} بناءً على النص التالي:\n{text}";
-
-        //        string questions = await GetQuestionsFromChatGPT(prompt);
-
-        //        // تقسيم الأسئلة إلى قائمة
-        //        List<string> questionList = questions.Split('\n')
-        //                                            .Where(q => !string.IsNullOrWhiteSpace(q))
-        //                                            .Take(6) // تأكد من أن عدد الأسئلة لا يتجاوز 6
-        //                                            .ToList();
-
-        //        // إضافة النمط والأسئلة إلى الدكشنري
-        //        QuestionsDictFromChatGPT[style] = questionList;
-        //    }
-        //}
-        //
-
-        ////رفع ملف المادة
-        //private async void  UploadQustiones_Click(object sender, RoutedEventArgs e)
-        //{
-        //    // فتح ملف PDF
-        //    OpenFileDialog openFileDialog = new OpenFileDialog
-        //    {
-        //        Filter = "PDF Files (*.pdf)|*.pdf"
-        //    };
-
-        //    if (openFileDialog.ShowDialog() == true)
-        //    {
-        //        //عرض يوزر كنترول الانتظار
-        //        load = new IQD_LoadingControl();
-        //        load.ShowDialog();
-
-        //        //الانتظار ثانتين
-        //       await Task.Delay(2000);
-
-        //        // استخراج النص من PDF
-        //         extractedText = ExtractTextFromPdf(openFileDialog.FileName);
-
-        //         await GenerateQuestionsFromText(extractedText);
-
-        //        load.Close();
-
-        //        IQD_MessageBox.Show("تم انشاء الاسئلة بنجاح!", "نجاح");
-        //    }
-
-        //}
     }
 
-
-
-    public class QuestionItem
+    public class StyleModel : INotifyPropertyChanged
     {
-        public string? Question { get; set; }
-        public bool IsSelected { get; set; }
+        private string _name;
+
+        private bool _isSelected;
+
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                _name = value;
+                OnPropertyChanged(nameof(Name));
+            }
+        }
+
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set
+            {
+                _isSelected = value;
+                OnPropertyChanged(nameof(IsSelected));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
+
+   
 }

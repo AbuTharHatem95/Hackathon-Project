@@ -123,7 +123,7 @@ namespace Interface.Pages
         {
             MainGrid.Visibility = Visibility.Collapsed;
             CreateQuestionsPage.Visibility = Visibility.Visible;
-            ContentFrame.Navigate(new QusetionCreater());
+          //  ContentFrame.Navigate(new QusetionCreater());
         }
 
         private void btnPrintQustion_Click(object sender, RoutedEventArgs e)
@@ -140,7 +140,7 @@ namespace Interface.Pages
                 if (item != null)
                 {
 
-                    QusetionCreater qustion = new QusetionCreater();
+                 //   QusetionCreater qustion = new QusetionCreater();
 
 
                    // MainGrid.Visibility = Visibility.Collapsed;
