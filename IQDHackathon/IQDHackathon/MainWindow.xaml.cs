@@ -133,18 +133,18 @@ namespace IQDHackathon
 
         private void SmartFinancialAnalysis_MouseDown(object sender, MouseButtonEventArgs e)
         {
-          // IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
+            MessageBox.Show("سيتم توفير هذا الميزة قريبا...","رسالة",MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void Presentations_MouseDown(object sender, MouseButtonEventArgs e)
         {
-           // IQD_UI_Library.IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
+            MessageBox.Show("سيتم توفير هذا الميزة قريبا...", "رسالة", MessageBoxButton.OK, MessageBoxImage.Information);
 
         }
 
         private void ReportingAssistant_MouseDown(object sender, MouseButtonEventArgs e)
         {
-           // IQD_UI_Library.IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
+            MessageBox.Show("سيتم توفير هذا الميزة قريبا...", "رسالة", MessageBoxButton.OK, MessageBoxImage.Information);
 
         }
 
@@ -155,31 +155,31 @@ namespace IQDHackathon
 
         private void CharacterCreator_MouseDown(object sender, MouseButtonEventArgs e)
         {
-           // IQD_UI_Library.IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
+            MessageBox.Show("سيتم توفير هذا الميزة قريبا...", "رسالة", MessageBoxButton.OK, MessageBoxImage.Information);
 
         }
 
         private void MaintenanceAssistant_MouseDown(object sender, MouseButtonEventArgs e)
         {
-           // IQD_UI_Library.IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
+            MessageBox.Show("سيتم توفير هذا الميزة قريبا...", "رسالة", MessageBoxButton.OK, MessageBoxImage.Information);
 
         }
 
         private void InterfaceDesignAssistant_MouseDown(object sender, MouseButtonEventArgs e)
         {
-           // IQD_UI_Library.IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
+            MessageBox.Show("سيتم توفير هذا الميزة قريبا...", "رسالة", MessageBoxButton.OK, MessageBoxImage.Information);
 
         }
 
         private void EducationalMaterialCreator_MouseDown(object sender, MouseButtonEventArgs e)
         {
-          //  IQD_UI_Library.IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
+            MessageBox.Show("سيتم توفير هذا الميزة قريبا...", "رسالة", MessageBoxButton.OK, MessageBoxImage.Information);
 
         }
 
         private void ImageGeneration_MouseDown(object sender, MouseButtonEventArgs e)
         {
-           // IQD_UI_Library.IQD_MessageBox.Show("رسالة", "ستتوفر قريبا....");
+            MessageBox.Show("سيتم توفير هذا الميزة قريبا...", "رسالة", MessageBoxButton.OK, MessageBoxImage.Information);
 
         }
 
