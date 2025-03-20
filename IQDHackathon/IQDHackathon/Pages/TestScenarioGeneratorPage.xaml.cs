@@ -43,7 +43,7 @@ namespace Interface.Pages
                 string.IsNullOrEmpty(txtTeacherName.Text) ||
                 string.IsNullOrEmpty(txtTypeQuze.Text))
             {
-                IQD_MessageBox.Show("تحذير", "يجب ملئ المعلومات", MessageBoxType.Warning);
+                MessageBox.Show("يجب ملئ المعلومات", "تنبية", MessageBoxButton.OK, MessageBoxImage.Warning) ;
                 return true;
             }
             return false;
