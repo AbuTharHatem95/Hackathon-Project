@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:IQD_UI_Library;assembly=IQD_UI_Library"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="800"
+             d:DesignHeight="700" 
+             d:DesignWidth="800"
              FlowDirection="{DynamicResource AppFlowDirection}"
              Background="{StaticResource PrimaryBackgroundColor}"
              >
@@ -32,7 +33,6 @@
                        FontSize="27"
                        FontWeight="ExtraLight"
                        >
-                
             </TextBlock>
             
             <!-- رقم السؤال -->
@@ -55,7 +55,6 @@
                 <local:IQD_TextBox x:Name="txtQscore" FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="الدرجة" Tag="الدرجة" HorizontalAlignment="Stretch"/>
             </Grid>
 
-          
             <!--اضافة نقاط-->
             <local:IQD_Button x:Name="btnAddPointes"
                   Margin="10,0,0,10" 
@@ -94,14 +93,14 @@
 
             <!-- طباعة  -->
             <local:IQD_Button x:Name="btnPrintQustiones"
-          Margin="10,0,0,10" 
-          Grid.Row="8" 
-          Style="{StaticResource ButtonsWithIconStyle}"
-          HorizontalAlignment="Stretch"
-          Content="'طباعة نموذج الاسئلة"
-          Icon="/Assets/export.png"
-          Click="btnPrintQustiones_Click"
-          >
+                    Margin="10,0,0,10" 
+                    Grid.Row="8" 
+                    Style="{StaticResource ButtonsWithIconStyle}"
+                    HorizontalAlignment="Stretch"
+                    Content="'طباعة نموذج الاسئلة"
+                    Icon="/Assets/export.png"
+                    Click="btnPrintQustiones_Click"
+                  > 
             </local:IQD_Button>
 
         </Grid>

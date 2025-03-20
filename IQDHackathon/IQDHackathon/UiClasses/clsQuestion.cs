@@ -40,7 +40,10 @@
 
         public void CreateQuestion()
         {
-            QuestionsDict.Add(Title.Number, this);
+            if (QuestionsDict.ContainsKey(Title.Number)) 
+                QuestionsDict[Title.Number] = this;
+            else
+                QuestionsDict.Add(Title.Number, this);
         }
     }
 }

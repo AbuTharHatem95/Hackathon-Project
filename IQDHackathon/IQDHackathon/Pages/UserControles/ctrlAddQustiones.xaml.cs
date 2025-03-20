@@ -15,24 +15,18 @@ namespace Interface.Pages.UserControles
             InitializeComponent();
             this.testpage = TestPage;
             GentetListViewComponat();
-
-
         }
 
         private void GentetListViewComponat()
         {
             foreach (var question in TestScenarioGeneratorPage.QuestionsDictFromChatGPT)
             {
-                
                 ItemsListBox.Items.Add(question.Key);
 
                 foreach (var item in question.Value)
                 {
                     ItemsListBox.Items.Add(item);
-
                 }
-
-
 
                 ////إنشاء عنصر تحكم الليست فيو التي تحتوي على كنترول الجيك بوكس
                 //ctrlDynamicListControl listView = new ctrlDynamicListControl(question.Key, question.Value);
@@ -45,20 +39,19 @@ namespace Interface.Pages.UserControles
             }
         }
 
-        private void ListView_QuestionStateChanged(object? sender, (bool IsChecked, string Qustion) e)
-        {
-            QuestionIsSelected?.Invoke(this, (e.IsChecked, e.Qustion));
+        //private void ListView_QuestionStateChanged(object? sender, (bool IsChecked, string Qustion) e)
+        //{
+        //    QuestionIsSelected?.Invoke(this, (e.IsChecked, e.Qustion));
 
 
-            //هنا سيتم الغاء هذا المسج بوكس بعد اختبار المشروع
-            MessageBox.Show($"{e.IsChecked}\nمحتوى السؤال :{e.Qustion}");
-        }
+        //    //هنا سيتم الغاء هذا المسج بوكس بعد اختبار المشروع
+        //    MessageBox.Show($"{e.IsChecked}\nمحتوى السؤال :{e.Qustion}");
+        //}
 
-
-        //اختيار اسئلة بشكل يدوي
+        // اختيار اسئلة بشكل يدوي
         private void btnAddQustion_Click(object sender, RoutedEventArgs e)
         {
-            QusetionCreater qusetionCreater = new QusetionCreater(ref testpage,this);
+            QusetionCreater qusetionCreater = new QusetionCreater(ref testpage, this);
             MainGrid.Visibility = Visibility.Collapsed;
             SubGrid.Visibility = Visibility.Visible;
             SubGrid.Children.Add(qusetionCreater);
@@ -69,8 +62,5 @@ namespace Interface.Pages.UserControles
         {
             //هنا يكتب كود ليعيد ملئ دكشنري الاسئلة من خلال جات جي بي تي 
         }
-
-
-
     }
 }

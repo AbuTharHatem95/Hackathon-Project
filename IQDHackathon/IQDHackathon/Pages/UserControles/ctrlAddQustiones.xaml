@@ -19,30 +19,30 @@
         </Grid.RowDefinitions>
 
        
-            <ScrollViewer   HorizontalScrollBarVisibility="Auto"  Grid.Row="0" VerticalScrollBarVisibility="Auto" >
-            <ListBox x:Name="ItemsListBox" 
-                 Background="{StaticResource SecundaryBackgroundColor}"
-                 HorizontalContentAlignment="Center"
-                 HorizontalAlignment="Stretch"
-                  FontSize="20"
-                 Foreground="{StaticResource SecundaryTextColor}"
-                     Padding="100"
-                     >
-            </ListBox>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto"  Grid.Row="0" VerticalScrollBarVisibility="Auto" >
+                <ListBox x:Name="ItemsListBox" 
+                    Background="{StaticResource SecundaryBackgroundColor}"
+                    HorizontalContentAlignment="Center"
+                    HorizontalAlignment="Stretch"
+                    FontSize="20"
+                    Foreground="{StaticResource SecundaryTextColor}"
+                    Padding="100"
+                    >
+                </ListBox>
         </ScrollViewer>
 
-              <!-- اعادة توليد اسئلة -->
-              <local:IQD_Button x:Name="btnRelodGenric"
-              Margin="10,10,0,10" 
-              Grid.Row="1" 
-              Style="{StaticResource ButtonsWithIconStyle}"
-              HorizontalAlignment="Stretch"
-              Content="اعادة توليد اسئلة"
-              Icon="/Assets/export.png"
-              Click="btnRelodGenric_Click"
-        />
+            <!-- اعادة توليد اسئلة -->
+            <local:IQD_Button x:Name="btnRelodGenric"
+                Margin="10,10,0,10" 
+                Grid.Row="1" 
+                Style="{StaticResource ButtonsWithIconStyle}"
+                HorizontalAlignment="Stretch"
+                Content="اعادة توليد اسئلة"
+                Icon="/Assets/export.png"
+                Click="btnRelodGenric_Click"
+                />
 
-        <!-- انشاء اسئلة -->
+            <!-- انشاء اسئلة -->
         <local:IQD_Button x:Name="btnAddQustion"
         Margin="10,10,0,10" 
         Grid.Row="2" 

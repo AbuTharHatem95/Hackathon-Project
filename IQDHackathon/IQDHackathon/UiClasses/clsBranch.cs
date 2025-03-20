@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Interface
+﻿namespace Interface
 {
-   public  class clsBranch : absNumberOfAnswer
+    public  class clsBranch : absNumberOfAnswer
     {
         public char Char { get; set; }
 
@@ -20,7 +14,5 @@ namespace Interface
             BranchTitle = branchTitle;
             PointList = new();
         }
-
-
     }
 }
