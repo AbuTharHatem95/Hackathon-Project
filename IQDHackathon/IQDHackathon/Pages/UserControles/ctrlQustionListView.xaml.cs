@@ -8,19 +8,16 @@ namespace Interface.Pages.UserControles
     {
         public event EventHandler<(bool IsChecked, string Qustion)>? QuestionIsSelected;
 
-        QusetionCreater QusetionCreater;
-        ctrlAddBrach _ctrlAddBrach;
+        //QusetionCreater QusetionCreater;
 
-        // خاصية لتحديد من استدعى الـ UserControl
         public UserControl ParentControl { get; set; }
 
         public ctrlQustionListView(QusetionCreater qustionpage, ctrlAddBrach ctrlAddbranch=null)
         {
             InitializeComponent();
             GentetListViewComponat();
-            QusetionCreater = qustionpage;
-            _ctrlAddBrach = ctrlAddbranch;
-            /// تحديد ParentControl بناءً على من استدعى الـ UserControl
+           // QusetionCreater = qustionpage;
+
             ParentControl = ctrlAddbranch != null ? (UserControl)ctrlAddbranch : qustionpage;
         }
 
@@ -28,13 +25,10 @@ namespace Interface.Pages.UserControles
         {
             foreach (var question in TestScenarioGeneratorPage.QuestionsDictFromChatGPT)
             {
-                //إنشاء عنصر تحكم الليست فيو التي تحتوي على كنترول الجيك بوكس
                 ctrlDynamicListControl listView = new ctrlDynamicListControl(question.Key, question.Value);
 
-                // الاشتراك في الحدث 
                 listView.QuestionStateChanged += ListView_QuestionStateChanged;
 
-                //إضافة العنصر إلى الواجهة
                 ItemsListBox.Items.Add(listView);
             }
         }
@@ -42,29 +36,61 @@ namespace Interface.Pages.UserControles
         private void ListView_QuestionStateChanged(object? sender, (bool IsChecked, string Qustion) e)
         {
             QuestionIsSelected?.Invoke(this, (e.IsChecked, e.Qustion));
-
-
-            //هنا سيتم الغاء هذا المسج بوكس بعد اختبار المشروع
-            MessageBox.Show($"{e.IsChecked}\nمحتوى السؤال :{e.Qustion}");
         }
 
         private void btnChooesQustion_Click(object sender, RoutedEventArgs e)
         {
+
             this.Visibility = Visibility.Collapsed;
 
-            if (QusetionCreater.MainGrid.Visibility == Visibility.Collapsed)
-                QusetionCreater.MainGrid.Visibility = Visibility.Visible;
+            if (ParentControl is QusetionCreater qustionCreater)
+            {
+                if (qustionCreater.MainGrid.Visibility == Visibility.Collapsed)
+                    qustionCreater.MainGrid.Visibility = Visibility.Visible;
 
-            QusetionCreater.SubGrid.Visibility = Visibility.Collapsed;
+                qustionCreater.SubGrid.Visibility = Visibility.Collapsed;
+            }
+            else if (ParentControl is ctrlAddBrach addBrach)
+            {
+                if (addBrach.MainGrid.Visibility == Visibility.Collapsed)
+                    addBrach.MainGrid.Visibility = Visibility.Visible;
+
+                addBrach.SubGrid.Visibility = Visibility.Collapsed;
+            }
+
+            //this.Visibility = Visibility.Collapsed;
+
+            //if (QusetionCreater.MainGrid.Visibility == Visibility.Collapsed)
+            //    QusetionCreater.MainGrid.Visibility = Visibility.Visible;
+
+            //QusetionCreater.SubGrid.Visibility = Visibility.Collapsed;
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            this.Visibility= Visibility.Collapsed;
-            if (QusetionCreater.MainGrid.Visibility == Visibility.Collapsed)
-                QusetionCreater.MainGrid.Visibility = Visibility.Visible;
 
-            QusetionCreater.SubGrid.Visibility = Visibility.Collapsed;
+            this.Visibility = Visibility.Collapsed;
+
+            if (ParentControl is QusetionCreater qustionCreater)
+            {
+                if (qustionCreater.MainGrid.Visibility == Visibility.Collapsed)
+                    qustionCreater.MainGrid.Visibility = Visibility.Visible;
+
+                qustionCreater.SubGrid.Visibility = Visibility.Collapsed;
+            }
+            else if (ParentControl is ctrlAddBrach addBrach)
+            {
+                if (addBrach.MainGrid.Visibility == Visibility.Collapsed)
+                    addBrach.MainGrid.Visibility = Visibility.Visible;
+
+                addBrach.SubGrid.Visibility = Visibility.Collapsed;
+            }
+
+            //this.Visibility= Visibility.Collapsed;
+            //if (QusetionCreater.MainGrid.Visibility == Visibility.Collapsed)
+            //    QusetionCreater.MainGrid.Visibility = Visibility.Visible;
+
+            //QusetionCreater.SubGrid.Visibility = Visibility.Collapsed;
         }
     }
 }

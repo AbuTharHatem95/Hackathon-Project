@@ -1,8 +1,11 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Data;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using BLL;
+using Interface.Logic;
 using Interface.Pages;
 using IQD_UI_Library;
 
@@ -17,6 +20,11 @@ namespace IQDHackathon
         {
             InitializeComponent();
 
+            DataTable dt= new DataTable();
+            dt = clsSettings.GetAll();
+            if (dt != null)
+                clsGlobal.AISetting = new clsSettings(dt.Rows[0]["ApiKey"].ToString()!, dt.Rows[0]["SecretKey"].ToString()!, dt.Rows[0]["ModelName"].ToString()!);
+          
         }
 
         // خاصية لإغلاق النافذة

@@ -3,9 +3,6 @@ using System.Windows.Controls;
 
 namespace Interface.Pages.UserControles
 {
-    /// <summary>
-    /// يتم عرض السؤال في هذا الكروب بوكس 
-    /// </summary>
     public partial class ctrlCheckBoxBoxes : UserControl, INotifyPropertyChanged
     {
         public event EventHandler<(bool IsChecked,string Qustion)>? StateChanged;
@@ -25,7 +22,7 @@ namespace Interface.Pages.UserControles
             {
                 _isCheckedProperty = value;
                 OnPropertyChanged(nameof(IsCheckedProperty));
-                NotifyStateChanged(); // إشعار عند تغيير حالة CheckBox
+                NotifyStateChanged(); 
             }
         }
 
@@ -44,10 +41,6 @@ namespace Interface.Pages.UserControles
         { 
            StateChanged?.Invoke(this, (IsCheckedProperty, _question)); 
         }
-
-       
-
-
        
     }
 }

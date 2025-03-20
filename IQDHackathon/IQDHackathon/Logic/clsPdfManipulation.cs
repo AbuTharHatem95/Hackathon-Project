@@ -188,9 +188,10 @@ namespace Interface.LogicClasses
                             var question = questionEntry.Value;
                             column.Item().Row(row =>
                             {
-                                row.RelativeItem().AlignRight().Text($"س{question.Title.Number}: {question.Title.QuestionTitle} (درجة {question.Title.ScoreForBranchOrPint})").Bold().FontSize(12);
+                                row.RelativeItem().AlignRight().Text($"س{question.Title.Number}: {question.Title.QuestionTitle} (درجة {question.Title.Score})").Bold().FontSize(12);
                             });
 
+                            if (question.BranchzDict != null)
                             if (question.BranchzDict != null)
                             {
                                 foreach (var branchEntry in question.BranchzDict)
@@ -240,11 +241,11 @@ namespace Interface.LogicClasses
         }
 
 
-        public static async Task<Dictionary<string, List<string>>?> GenerateQuestionsFromPdfUsingAiGpt(string openApiKey, List<string> QuestionTypes)
+        public static async Task<Dictionary<string, List<string>>?> GenerateQuestionsFromPdfUsingAiGpt( List<string> QuestionTypes)
         {
             string pdfContent = ExtractPdfData();
             if(string.IsNullOrEmpty(pdfContent)) return null;
-            return await clsGptManipulation.QuestionsWithTypes(QuestionTypes, pdfContent, openApiKey);
+            return await clsGptManipulation.QuestionsWithTypes(QuestionTypes, pdfContent);
         }
 
 

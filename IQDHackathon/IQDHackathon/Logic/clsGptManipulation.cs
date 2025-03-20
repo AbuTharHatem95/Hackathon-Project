@@ -1,4 +1,5 @@
-﻿using IQD_UI_Library;
+﻿using Interface.Logic;
+using IQD_UI_Library;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
@@ -23,25 +24,25 @@ namespace Interface.LogicClasses
         }
 
 
-        public  static async Task<string?> GenerateQuestionsByPrompt(string prompt, string openAiApiKey)
+        public  static async Task<string?> GenerateQuestionsByPrompt(string prompt)
         {
             if (string.IsNullOrEmpty(prompt)) return null;
-            if (string.IsNullOrEmpty(openAiApiKey))
-                return "";
+            if (string.IsNullOrEmpty(clsGlobal.AISetting.ApiKey))
+                throw new Exception("API Key غير مضبوط! تأكد من إضافته.");
             try
             {
 
                 using HttpClient client = new HttpClient();
 
-                if (string.IsNullOrEmpty(openAiApiKey))
-                    throw new Exception("API Key غير مضبوط! تأكد من إضافته.");
+               
 
-                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {openAiApiKey}");
+                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {clsGlobal.AISetting.ApiKey}");
 
                 // "gpt-4"
+                //"gpt-4-turbo"
                 var requestBody = new
                 {
-                    model = "gpt-4-turbo",
+                    model = clsGlobal.AISetting.ModelName,
                     messages = new[]
                     {
                         new { role = "system", content = "أنت مساعد ذكاء اصطناعي قم بتحليل النصوص وترتيبها حتى اذا كانت معكوسه  وإنشاء أسئلة فقط بدون إجابات." },
@@ -84,21 +85,21 @@ namespace Interface.LogicClasses
 
         }
 
-        public static async Task<List<string>?> GenerateQuestionsInListByPdfContent(string pdfContent, List<string> QuestionTypes, string openAiApiKey)
+        public static async Task<List<string>?> GenerateQuestionsInListByPdfContent(string pdfContent, List<string> QuestionTypes)
         {
             string prompt = GetGptPromptByPdfContent(pdfContent, QuestionTypes).ToString();
             if (string.IsNullOrEmpty(prompt)) return null;
-            string? Questions = await GenerateQuestionsByPrompt(prompt, openAiApiKey);
+            string? Questions = await GenerateQuestionsByPrompt(prompt);
             if(Questions == null) return null;
             return Questions.Split('\n').Where(q => !string.IsNullOrWhiteSpace(q)).ToList();
 
         }
 
 
-        public static async Task<Dictionary<string, List<string>>?> QuestionsWithTypes(List<string>QuestionTypes, string pdfContent, string openApiKey)
+        public static async Task<Dictionary<string, List<string>>?> QuestionsWithTypes(List<string>QuestionTypes, string pdfContent)
         {
             Dictionary<string, List<string>> questionsDictFromChatGPT = new Dictionary<string, List<string>>();
-            List<string>? questions = await GenerateQuestionsInListByPdfContent(pdfContent, QuestionTypes, openApiKey);
+            List<string>? questions = await GenerateQuestionsInListByPdfContent(pdfContent, QuestionTypes);
             if (questions == null || questions.Count == 0) return null;
             int index = 0;
             foreach (var style in QuestionTypes)
