@@ -1,13 +1,8 @@
-﻿using IQD_UI_Library;
-using iText.StyledXmlParser.Jsoup.Nodes;
-using Microsoft.Win32;
-using QuestPDF.Fluent;
-using QuestPDF.Helpers;
-using QuestPDF.Infrastructure;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using Document = QuestPDF.Fluent.Document;
+using IQD_UI_Library;
+using Microsoft.Win32;
 
 namespace Interface.Pages.UserControles
 {
@@ -18,7 +13,7 @@ namespace Interface.Pages.UserControles
         public clsQuestion? Questions = null;
         private TestScenarioGeneratorPage? Test = null;
         AddQustiones _ctrladd;
-        clsTitle title = null;
+        clsTitle? title = null;
 
 
         public event EventHandler<(string QustionNum, string QustionTitle, string QustionScor, string NumberOfAnswer)>? DataLoaded;
@@ -27,11 +22,10 @@ namespace Interface.Pages.UserControles
         {
             InitializeComponent();
             this.DataContext = this;
-            btnPrintQustiones.IsEnabled= false;
-            Test= test;
-            _ctrladd= ctrladd;
+            //btnPrintQustiones.IsEnabled= false;                  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+            Test = test;
+            _ctrladd = ctrladd;
         }
-
 
         private void GetDataFromListView(object? sender, (bool IsCheck, string Qustion) e)
         {
@@ -48,12 +42,8 @@ namespace Interface.Pages.UserControles
                         Questions.PointList.Remove(item);
                         return;
                     }
-
                 }
-
             }
-
-
         }
 
         //اول اجراء سيحدث بعد ملئ المعلومات
@@ -65,12 +55,11 @@ namespace Interface.Pages.UserControles
                 return;
             }
 
-            if(title==null&&!string.IsNullOrEmpty(txtQNum.Text))
+            if (title == null && !string.IsNullOrEmpty(txtQNum.Text))
             {
                  title = new clsTitle(byte.Parse(txtQNum.Text), byte.Parse(txtQscore.Text), byte.Parse(txtNumberOfAnswers.Text), txtQustionTitle.Text);
                 Questions = new clsQuestion(title);
             }
-
 
             if (qusetionList != null)
             {
@@ -89,10 +78,7 @@ namespace Interface.Pages.UserControles
         //اجراء اضافة افرع الى السؤال
         private void btnAddNewBrach_Click(object sender, RoutedEventArgs e)
         {
-     
-
-            AddNewBranch = new ctrlAddBrach(Questions,this);
-           
+            AddNewBranch = new ctrlAddBrach(Questions, this);
             MainGrid.Visibility = Visibility.Collapsed;
             SubGrid.Visibility = Visibility.Visible;
             SubGrid.Children.Clear();
@@ -108,39 +94,32 @@ namespace Interface.Pages.UserControles
                 return;
             }
 
+            IQD_MessageBox.Show("تنبية", $"عدد الاسئلة {clsQuestion.QuestionsDict.Keys.Count} اسئلة؟؟", MessageBoxType.Question);
 
-            if (clsQuestion.QuestionsDict.Keys.Count >= 6)
+            if (clsQuestion.QuestionsDict.Keys.Count >= 3)
             {
                 bool? Contnie = IQD_MessageBox.Show("تنبية", $"هل تريد اضافه اكثر من {clsQuestion.QuestionsDict.Keys.Count-1} اسئلة؟؟", MessageBoxType.Question);
 
-                //عدم الموافقه
-                if (Contnie == null)
-                {
-                    btnPrintQustiones.IsEnabled = true;
-                    return;
-
-                }
-
-
-
+                //// عدم الموافقه
+                //if (Contnie == null)
+                //{
+                //    btnPrintQustiones.IsEnabled = true;                  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                //    return;
+                //}
+                //btnPrintQustiones.IsEnabled = true;
             }
-            
-                //هنا يتم اضافة اوبجكت الى دكشنري الاسئلة 
-                Questions?.CreateQuestion();
+            //هنا يتم اضافة اوبجكت الى دكشنري الاسئلة 
+            Questions?.CreateQuestion();
+            title = null;
 
-                //اعلام المستخدم بنجاح اضافة السؤال 
-                IQD_MessageBox.Show("نجاح", "تم انشاء السؤال بنجاح");
+            //اعلام المستخدم بنجاح اضافة السؤال 
+            IQD_MessageBox.Show("نجاح", "تم انشاء السؤال بنجاح");
 
-                //تنظيف التيكست لاضافة سؤال اخر
-                txtNumberOfAnswers.Clear();
-                txtQNum.Clear();
-                txtQustionTitle.Clear();
-                txtQscore.Clear();
-
-
-            
-
-
+            //تنظيف التيكست لاضافة سؤال اخر
+            txtNumberOfAnswers.Clear();
+            txtQNum.Clear();
+            txtQustionTitle.Clear();
+            txtQscore.Clear();
         }
 
         //طباعة نموذج الاسئلة
@@ -172,11 +151,8 @@ namespace Interface.Pages.UserControles
             else
             {
                 IQD_MessageBox.Show("تحذير", "لم تقم بحـفظ الاسئـلة!!", MessageBoxType.Warning);
-
             }
         }
-
-
 
         //private void GeneratePdf()
         //{
@@ -261,8 +237,6 @@ namespace Interface.Pages.UserControles
         //    .GeneratePdf(fullPath);
         //}
 
-
-
         private void OpenPdf(string fullPath)
         {
             try
@@ -279,10 +253,5 @@ namespace Interface.Pages.UserControles
                 MessageBox.Show($"Failed to open PDF: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-
-
-
-       
     }
 }

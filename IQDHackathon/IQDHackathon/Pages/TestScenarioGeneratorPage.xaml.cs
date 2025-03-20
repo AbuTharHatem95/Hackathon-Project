@@ -23,7 +23,7 @@ namespace Interface.Pages
     //بيج لاملائ معلومات المدرسه ومعلومات الاستاذ ورفع مادة الامتحان 
     public partial class TestScenarioGeneratorPage : Page
     {
-        private readonly string? __openAiApiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
+        private readonly string? __openAiApiKey =  Environment.GetEnvironmentVariable("OPENAI_API_KEY");
 
         public List<StyleModel> Styles { get; set; }
 
@@ -152,12 +152,10 @@ namespace Interface.Pages
 
             await LoadPdfFile();
 
-           
             MainPageGrid.Visibility = Visibility.Collapsed;
             SubMain.Visibility = Visibility.Visible;
             SubMain.Children.Clear();
             SubMain.Children.Add(new AddQustiones(this));
-           
         }
 
 
@@ -235,7 +233,6 @@ namespace Interface.Pages
                                                         .Where(q => !string.IsNullOrWhiteSpace(q))
                                                         .ToList();
 
-
             // توزيع الأسئلة على الأنماط وإضافتها إلى الدكشنري
             int index = 0;
             foreach (var style in selectedStyles)
@@ -257,7 +254,6 @@ namespace Interface.Pages
         {
             try
             {
-
                 using HttpClient client = new HttpClient();
 
                 if (string.IsNullOrEmpty(__openAiApiKey))
@@ -276,8 +272,6 @@ namespace Interface.Pages
                     },
                     max_tokens = 400
                 };
-
-
 
                 string jsonBody = JsonConvert.SerializeObject(requestBody);
                 HttpContent content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
@@ -310,9 +304,7 @@ namespace Interface.Pages
             }
         }
 
-
-
-        //يستخدم بتعبة النموذج الاسئلة هارد كود 
+        // يستخدم بتعبة النموذج الاسئلة هارد كود  
         private void GenerateExamPdf(ref string fullPath,Dictionary<byte, clsQuestion> questionsDict1)
         {
 
@@ -376,7 +368,6 @@ namespace Interface.Pages
 
             Document.Create(container =>
             {
-
                 container.Page(page =>
                 {
                     page.Size(PageSizes.A4);
@@ -421,7 +412,6 @@ namespace Interface.Pages
                                             row.RelativeItem().AlignRight().Text($"- {point.Text} (درجة {point.Score})").FontSize(12);
                                         });
                                     }
-
                                     // إضافة سطر فارغ بين الفروع
                                     column.Item().PaddingVertical(5);
                                 }
@@ -437,20 +427,16 @@ namespace Interface.Pages
                                     });
                                 }
                             }
-
                             // إضافة سطرين فارغين قبل الخط الأسود
                             column.Item().PaddingVertical(10);
                             column.Item().LineHorizontal(2).LineColor(Colors.Black);
                             column.Item().PaddingVertical(10);
                         }
-
-                       
                     });
                 });
             })
             .GeneratePdf(fullPath);
         }
-
 
         private void CreateModles()
         {
@@ -478,7 +464,6 @@ namespace Interface.Pages
                     MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-
         }
 
         public  void OpenPdf(string fullPath)

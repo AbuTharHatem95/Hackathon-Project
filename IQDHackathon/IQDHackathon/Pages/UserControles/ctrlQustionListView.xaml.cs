@@ -14,7 +14,7 @@ namespace Interface.Pages.UserControles
         // خاصية لتحديد من استدعى الـ UserControl
         public UserControl ParentControl { get; set; }
 
-        public ctrlQustionListView(QusetionCreater qustionpage,ctrlAddBrach ctrlAddbranch=null)
+        public ctrlQustionListView(QusetionCreater qustionpage, ctrlAddBrach ctrlAddbranch=null)
         {
             InitializeComponent();
             GentetListViewComponat();
@@ -56,9 +56,6 @@ namespace Interface.Pages.UserControles
                 QusetionCreater.MainGrid.Visibility = Visibility.Visible;
 
             QusetionCreater.SubGrid.Visibility = Visibility.Collapsed;
-
-
-
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -68,7 +65,6 @@ namespace Interface.Pages.UserControles
                 QusetionCreater.MainGrid.Visibility = Visibility.Visible;
 
             QusetionCreater.SubGrid.Visibility = Visibility.Collapsed;
-
         }
     }
 }

@@ -14,8 +14,7 @@
             Score = score;
             NumberOfAnswer = numberOfAnswer;
             QuestionTitle = questionTitle;
-            ScoreForBranchOrPint = (byte)(Score / NumberOfAnswer);
+            ScoreForBranchOrPint = (float)(Score / NumberOfAnswer);
         }
-
     }
 }
