@@ -28,14 +28,14 @@
 
     <!--mm-->
     <system:String x:Key="MainTitle">Artifical Entelegance Genrerator</system:String>
-    <system:String x:Key="IntelligentFinancialAnalysis">Intelligent Financial Analysis</system:String>
+    <system:String x:Key="IntelligentFinancialAnalysis">Generate homework</system:String>
     <system:String x:Key="Presentations">Presentations</system:String>
     <system:String x:Key="ReportAssistant">Report Assistant</system:String>
     <system:String x:Key="Testscenariosgenerator">Test scenarios generator</system:String>
-    <system:String x:Key="Creatorofstorycharacters">Creator of story characters</system:String>
+    <system:String x:Key="Creatorofstorycharacters">Automatic Question Corrector</system:String>
     <system:String x:Key="MaintenanceAssistant">Maintenance Assistant</system:String>
-    <system:String x:Key="FacadeDesignAssistant">Facade Design Assistant</system:String>
-    <system:String x:Key="ImageGenerator">Images Generator</system:String>
+    <system:String x:Key="FacadeDesignAssistant">Create homework</system:String>
+    <system:String x:Key="ImageGenerator">Automatic Test Generator</system:String>
     <system:String x:Key="EducationalMaterialsCreator">Educational Materials Creator</system:String>
     <system:String x:Key="txtSchoolName">School Name</system:String>
     <system:String x:Key="txtThecherName">Teacher Name</system:String>

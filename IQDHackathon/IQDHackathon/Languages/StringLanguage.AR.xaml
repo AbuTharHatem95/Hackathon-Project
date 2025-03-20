@@ -30,14 +30,14 @@
 
 <!--mm-->
     <system:String x:Key="MainTitle">مولد الذكاء الصناعي</system:String>
-    <system:String x:Key="IntelligentFinancialAnalysis">التحليل المالي الذكي</system:String>
+    <system:String x:Key="IntelligentFinancialAnalysis">توليد واجبات مدرسية</system:String>
     <system:String x:Key="Presentations">العروض التقديمية</system:String>
     <system:String x:Key="ReportAssistant">مساعد التقرير</system:String>
     <system:String x:Key="Testscenariosgenerator">مولد سيناريوهات الاختبار</system:String>
-    <system:String x:Key="Creatorofstorycharacters">منشئ الشخصيات القصصية</system:String>
-    <system:String x:Key="MaintenanceAssistant">مساعد الصيانة</system:String>
-    <system:String x:Key="FacadeDesignAssistant">مساعد تصميم الواجهات</system:String>
-    <system:String x:Key="ImageGenerator">مولد الصور</system:String>
+    <system:String x:Key="Creatorofstorycharacters">مصحح الاسئلة التلقائية</system:String>
+    <system:String x:Key="MaintenanceAssistant">انشاء خطة تدريسية</system:String>
+    <system:String x:Key="FacadeDesignAssistant">انشاء واجبات منزلية</system:String>
+    <system:String x:Key="ImageGenerator">مولد اختبارات تلقائية</system:String>
     <system:String x:Key="EducationalMaterialsCreator">منشئ المواد التعليمية</system:String>
     <system:String x:Key="txtSchoolName">اسم المدرسة</system:String>
     <system:String x:Key="txtThecherName">اسم المدرس</system:String>

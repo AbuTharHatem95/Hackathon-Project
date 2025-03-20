@@ -103,7 +103,7 @@ namespace Interface.Pages
 
         private void FillQuestionTypes(int subjectId)
         {
-            DataTable dt = clsQuestionsType.GetAllQuestionTypesByClassAndStageAndSubject(subjectId);
+            DataTable dt = clsQuestionsType.GetAllQuestionTypesBySubject(subjectId);
             Styles = new List<StyleModel>();    
             
             foreach (DataRow dr in dt.Rows)

@@ -1,4 +1,6 @@
 ﻿using System.Data;
+using System.IO;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,12 +21,25 @@ namespace IQDHackathon
         public MainWindow()
         {
             InitializeComponent();
+            try
+            {
+                var assembly = Assembly.Load("DAL");
+                // استمر في تنفيذ الكود
+            }
+            catch (FileNotFoundException ex)
+            {
+                MessageBox.Show("المكتبة DAL غير موجودة. الرجاء التحقق من المراجع.");
+            }
 
-            DataTable dt= new DataTable();
+
+            DataTable dt = new DataTable();
             dt = clsSettings.GetAll();
-            if (dt != null)
+            if (dt.Rows.Count>0)
+            {
                 clsGlobal.AISetting = new clsSettings(dt.Rows[0]["ApiKey"].ToString()!, dt.Rows[0]["SecretKey"].ToString()!, dt.Rows[0]["ModelName"].ToString()!);
-          
+
+            }
+
         }
 
         // خاصية لإغلاق النافذة

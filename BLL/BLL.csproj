@@ -14,4 +14,10 @@
     <ProjectReference Include="..\DAL\DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="DAL">
+      <HintPath>..\IQDHackathon\BLL\bin\Debug\net8.0\DAL.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
