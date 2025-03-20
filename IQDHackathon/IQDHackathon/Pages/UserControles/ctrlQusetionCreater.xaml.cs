@@ -17,17 +17,19 @@ namespace Interface.Pages.UserControles
         ctrlQustionListView? qusetionList = null;
         public clsQuestion? Questions = null;
         private TestScenarioGeneratorPage? Test = null;
-
+        AddQustiones _ctrladd;
+        clsTitle title = null;
 
 
         public event EventHandler<(string QustionNum, string QustionTitle, string QustionScor, string NumberOfAnswer)>? DataLoaded;
 
-        public QusetionCreater(ref TestScenarioGeneratorPage test)
+        public QusetionCreater(ref TestScenarioGeneratorPage test, AddQustiones ctrladd)
         {
             InitializeComponent();
             this.DataContext = this;
             btnPrintQustiones.IsEnabled= false;
             Test= test;
+            _ctrladd= ctrladd;
         }
 
 
@@ -63,40 +65,38 @@ namespace Interface.Pages.UserControles
                 return;
             }
 
-            clsTitle title = new clsTitle(byte.Parse(txtQNum.Text), byte.Parse(txtQscore.Text), byte.Parse(txtNumberOfAnswers.Text), txtQustionTitle.Text);
-            Questions = new clsQuestion(title);
-
-            if (qusetionList == null)
+            if(title==null&&!string.IsNullOrEmpty(txtQNum.Text))
             {
-                qusetionList = new ctrlQustionListView();
+                 title = new clsTitle(byte.Parse(txtQNum.Text), byte.Parse(txtQscore.Text), byte.Parse(txtNumberOfAnswers.Text), txtQustionTitle.Text);
+                Questions = new clsQuestion(title);
             }
-            QustionCreate.Visibility = Visibility.Collapsed;
-            QustionList.Visibility = Visibility.Visible;
+
+
+            if (qusetionList != null)
+            {
+                qusetionList.QuestionIsSelected -= GetDataFromListView;
+            }
+
+            qusetionList = new ctrlQustionListView(this); 
+            MainGrid.Visibility = Visibility.Collapsed;
+            SubGrid.Visibility = Visibility.Visible;
             qusetionList.QuestionIsSelected += GetDataFromListView;
-            QustionList.Children.Clear();
-            QustionList.Children.Add(qusetionList);
+            SubGrid.Children.Clear();
+            SubGrid.Children.Add(qusetionList);
+            qusetionList.Visibility = Visibility.Visible;
         }
        
         //اجراء اضافة افرع الى السؤال
         private void btnAddNewBrach_Click(object sender, RoutedEventArgs e)
         {
-            if(AddNewBranch==null)
-            {
-                AddNewBranch = new ctrlAddBrach(Questions);
-                QustionCreate.Visibility = Visibility.Collapsed;
-                QustionList.Visibility = Visibility.Visible;
-               
-            }
-            else
-            {
-                QustionCreate.Visibility = Visibility.Collapsed;
-                QustionList.Visibility = Visibility.Visible;
+     
 
-            }
-
-            QustionList.Children.Clear();
-            QustionList.Children.Add(AddNewBranch);
-
+            AddNewBranch = new ctrlAddBrach(Questions,this);
+           
+            MainGrid.Visibility = Visibility.Collapsed;
+            SubGrid.Visibility = Visibility.Visible;
+            SubGrid.Children.Clear();
+            SubGrid.Children.Add(AddNewBranch);
         }
 
         //انشاء نموذج سؤال

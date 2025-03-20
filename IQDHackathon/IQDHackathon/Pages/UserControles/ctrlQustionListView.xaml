@@ -10,35 +10,48 @@
     <Grid>
 
         <Grid x:Name="MainGrid"> 
+            
             <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="AUTO"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
+           
 
         <ScrollViewer  HorizontalScrollBarVisibility="Auto" Margin="10,0,0,0" Grid.Column="1">
             <ListBox x:Name="ItemsListBox" 
              Width="750" 
              Background="{StaticResource PrimaryBackgroundColor}"
              Margin="10"
-             HorizontalContentAlignment="Right"
-             HorizontalAlignment="Right" >
+             HorizontalContentAlignment="Stretch"
+             HorizontalAlignment="Stretch" >
             </ListBox>
         </ScrollViewer>
 
         <local:IQD_Button x:Name="btnChooesQustion"
-        Margin="10,10,0,10" 
+        Margin="10" 
         Grid.Row="1" 
-        Grid.Column="0"
         Style="{StaticResource ButtonsWithIconStyle}"
-        HorizontalAlignment="Center"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Center"
         Content="حفظ الاختيارات"
         Icon="/Assets/export.png"
         Click="btnChooesQustion_Click"
         />
+
+            <local:IQD_Button x:Name="btnBack"
+        Margin="10" 
+        Grid.Row="2" 
+        Style="{StaticResource ButtonsWithIconStyle}"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Center"
+        Content="رجوع للصفحة السابقة"
+        Icon="/Assets/export.png"
+        Click="btnBack_Click"
+        />
+
+
         </Grid>
 
 

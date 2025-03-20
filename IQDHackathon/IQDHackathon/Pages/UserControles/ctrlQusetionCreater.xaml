@@ -11,7 +11,7 @@
              >
 
     <Grid>
-        <Grid x:Name="QustionCreate" >
+        <Grid x:Name="MainGrid" >
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
@@ -106,8 +106,7 @@
 
         </Grid>
             
-        <Grid x:Name="QustionList" Visibility="Collapsed" Grid.Row="0">
-                <Frame x:Name="ContentFrame" NavigationUIVisibility="Hidden"/>
+        <Grid x:Name="SubGrid" Visibility="Collapsed" Grid.Row="0">
         </Grid>
     </Grid>
         

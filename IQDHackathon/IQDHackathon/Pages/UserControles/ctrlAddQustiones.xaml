@@ -7,6 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" 
              d:DesignWidth="800"
+             FlowDirection="{StaticResource AppFlowDirection}"
              >
 
     <Grid>
@@ -18,27 +19,27 @@
         </Grid.RowDefinitions>
 
        
-            <ScrollViewer   HorizontalScrollBarVisibility="Auto" Margin="10,0,0,0" Grid.Row="0">
+            <ScrollViewer   HorizontalScrollBarVisibility="Auto"  Grid.Row="0" VerticalScrollBarVisibility="Auto" >
             <ListBox x:Name="ItemsListBox" 
-                 Width="750" 
-                 Background="{StaticResource PrimaryBackgroundColor}"
-                 Margin="10"
-                 HorizontalContentAlignment="Stretch"
+                 Background="{StaticResource SecundaryBackgroundColor}"
+                 HorizontalContentAlignment="Center"
                  HorizontalAlignment="Stretch"
-                  
+                  FontSize="20"
+                 Foreground="{StaticResource SecundaryTextColor}"
+                     Padding="100"
                      >
             </ListBox>
         </ScrollViewer>
 
-        <!-- اعادة توليد اسئلة -->
-        <local:IQD_Button x:Name="btnRelodGenric"
-        Margin="10,10,0,10" 
-        Grid.Row="1" 
-        Style="{StaticResource ButtonsWithIconStyle}"
-        HorizontalAlignment="Stretch"
-        Content="اعادة توليد اسئلة"
-        Icon="/Assets/export.png"
-        Click="btnRelodGenric_Click"
+              <!-- اعادة توليد اسئلة -->
+              <local:IQD_Button x:Name="btnRelodGenric"
+              Margin="10,10,0,10" 
+              Grid.Row="1" 
+              Style="{StaticResource ButtonsWithIconStyle}"
+              HorizontalAlignment="Stretch"
+              Content="اعادة توليد اسئلة"
+              Icon="/Assets/export.png"
+              Click="btnRelodGenric_Click"
         />
 
         <!-- انشاء اسئلة -->

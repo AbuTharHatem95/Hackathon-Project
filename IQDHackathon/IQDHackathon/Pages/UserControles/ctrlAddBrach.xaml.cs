@@ -8,11 +8,13 @@ namespace Interface.Pages.UserControles
     public partial class ctrlAddBrach : UserControl
     {
         clsQuestion? _qustion = null;
+        QusetionCreater _qusetionCreater;
 
-        public ctrlAddBrach(clsQuestion qustion)
+        public ctrlAddBrach(clsQuestion qustion,QusetionCreater qustionpage)
         {
             InitializeComponent();
             _qustion = qustion;
+            _qusetionCreater = qustionpage;
 
         }
 
@@ -26,16 +28,13 @@ namespace Interface.Pages.UserControles
 
             _qustion?.AddBranch(char.Parse(txtQNum.Text));
 
-            ctrlQustionListView listQustion = new ctrlQustionListView();
+            ctrlQustionListView listQustion = new ctrlQustionListView(_qusetionCreater,this);
             listQustion.QuestionIsSelected += Qustion_QuestionStateChanged;
 
             MainGrid.Visibility= Visibility.Collapsed;
             SubGrid.Visibility= Visibility.Visible;
             SubGrid.Children.Clear();
             SubGrid.Children.Add(listQustion);
-
-
-
         }
 
         private void Qustion_QuestionStateChanged(object? sender, ( bool IsChecked, string Qustion) e)
