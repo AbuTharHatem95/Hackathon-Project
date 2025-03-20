@@ -1,4 +1,5 @@
 ﻿using BLL;
+using Interface.Logic;
 using Interface.LogicClasses;
 using Interface.Pages.UserControles;
 using IQD_UI_Library;
@@ -14,8 +15,7 @@ using System.Windows.Controls;
 
 namespace Interface.Pages
 {
-    //يجب العمل على ان يجلب الاسئلة بناء على النمط المختار من الواجهه وبناء عليها يصممها الجات جي بي تي 
-    //بيج لاملائ معلومات المدرسه ومعلومات الاستاذ ورفع مادة الامتحان 
+   
     public partial class TestScenarioGeneratorPage : Page
     {
         private readonly string? __openAiApiKey =  Environment.GetEnvironmentVariable("OPENAI_API_KEY");
@@ -24,29 +24,10 @@ namespace Interface.Pages
 
         public static Dictionary<string, List<string>> QuestionsDictFromChatGPT = new Dictionary<string, List<string>>();
 
-        private string extractedText;
-
-        IQD_LoadingControl load;
-
-
         public TestScenarioGeneratorPage()
         {
             InitializeComponent();
             FillComboBox();
-
-        }
-
-        private void FillQuestionTypes(int subjectId)
-        {
-            DataTable dt = clsQuestionsType.GetAllQuestionTypesBySubject(subjectId);
-            Styles = new List<StyleModel>();    
-            
-            foreach (DataRow dr in dt.Rows)
-            {
-                Styles.Add(new StyleModel { Name = dr[0].ToString()!, IsSelected = false });
-            }
-
-            CheckBoxList.ItemsSource = Styles; 
 
         }
 
@@ -68,26 +49,15 @@ namespace Interface.Pages
             return false;
         }
 
-        private void FillComboBox()
-        {
-            // إضافة عناصر إلى ComboBox
-            FillComboBoxStage();
-            FillComboBoxSubject((int)CombStage.SelectedValue);
-            FillQuestionTypes((int)CombSubject.SelectedValue);
-
-        }
-
         //انشاء نموذج بشكل دينمايكي باستخدام GPT
         private async void GenretWithGPT_Click(object sender, RoutedEventArgs e)
         {
             //if (VauldationText())
             //    return;
 
-            IQD_MessageBox.Show("اختيار", "يرجى اختيار ملف المادة");
 
            // await LoadPdfFile();
         }
-
 
         // بناء نموذج اسئلة بشكل يدوي 
         private async void Gentet_Click(object sender, RoutedEventArgs e)
@@ -96,7 +66,34 @@ namespace Interface.Pages
                 return;
 
             var selectedStyles = Styles.Where(style => style.IsSelected).Select(style => style.Name).ToList();
-            QuestionsDictFromChatGPT = await clsPdfManipulation.GenerateQuestionsFromPdfUsingAiGpt("", selectedStyles);
+
+            if(selectedStyles.Count == 0)
+            {
+                MessageBox.Show("يجب اختيار انماط الاسئلة", "تحذير", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            MessageBox.Show("ارفق ملف مادة الامتحان", "رسالة", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("يرجى الانتظار بينما يقوم الذكاء الاصطناعي بتوليد الاسئلة", "رسالة", MessageBoxButton.OK, MessageBoxImage.Information);
+
+
+            QuestionsDictFromChatGPT = await clsPdfManipulation.GenerateQuestionsFromPdfUsingAiGpt(selectedStyles);
+
+
+            byte Count = 5;
+
+            //while (QuestionsDictFromChatGPT.Count <= 0 && Count > 0) 
+            //{
+
+            //    QuestionsDictFromChatGPT = await clsPdfManipulation.GenerateQuestionsFromPdfUsingAiGpt(selectedStyles);
+            //    Count--;
+
+            //}
+            //if (Count == 0)
+            //{
+            //    MessageBox.Show("لم يتم تحميل الاسئلة بنجاح , هناك مشكلة في الاتصال!!", "خطأ",MessageBoxButton.OK, MessageBoxImage.Error);
+            //}
+           
             MainPageGrid.Visibility = Visibility.Collapsed;
             SubMain.Visibility = Visibility.Visible;
             SubMain.Children.Clear();
@@ -104,6 +101,26 @@ namespace Interface.Pages
         }
 
 
+        private void FillQuestionTypes(int subjectId)
+        {
+            DataTable dt = clsQuestionsType.GetAllQuestionTypesByClassAndStageAndSubject(subjectId);
+            Styles = new List<StyleModel>();    
+            
+            foreach (DataRow dr in dt.Rows)
+            {
+                Styles.Add(new StyleModel { Name = dr[0].ToString()!, IsSelected = false });
+            }
+
+            CheckBoxList.ItemsSource = Styles; 
+
+        }
+        private void FillComboBox()
+        {
+            FillComboBoxStage();
+            FillComboBoxSubject((int)CombStage.SelectedValue);
+            FillQuestionTypes((int)CombSubject.SelectedValue);
+
+        }
         private void FillComboBoxStage()
         {
             CombStage.ItemsSource = clsStage.GetAll().DefaultView;
@@ -112,26 +129,24 @@ namespace Interface.Pages
 
             CombStage.SelectedIndex = 0;
         }
-
         private void FillComboBoxSubject(int stageId)
         {
             CombSubject.ItemsSource = null;
             CombSubject.Items.Clear();
-            CombSubject.ItemsSource = clsSubject.GetAllSubjectsByStage(stageId).DefaultView;
+            if (stageId != null)
+            {
+                CombSubject.ItemsSource = clsSubject.GetAllSubjectsByStage(stageId).DefaultView;
+            }
             CombSubject.DisplayMemberPath = "SubjectName";
             CombSubject.SelectedValuePath = "SubjectId";
             CombSubject.SelectedIndex = 0;
         }
 
-        //اجراء خاص بجات جي بي تي ,حيث يتم بناء النموذج بشكل يدوي مع تمرير انماط الاسئلة
-
-        // يستخدم بتعبة النموذج الاسئلة هارد كود  
-
-        //يستخدم مع جات جي بي تي 
+        //بناء نموذج الاسئلة
         public void GeneratePdf(ref string fullPath)
         {
             QuestPDF.Settings.License = LicenseType.Community;
-            DateTime curruntYear = DateTime.Now;
+            int currentYear = DateTime.Now.Year;
 
             Document.Create(container =>
             {
@@ -143,69 +158,93 @@ namespace Interface.Pages
                     page.DefaultTextStyle(x => x.FontSize(12));
 
                     page.Content().PaddingVertical(5).Column(column =>
+                {
+                    // معلومات الامتحان
+                    column.Item().Row(row =>
+                {
+                    row.RelativeItem().AlignLeft()
+                        .Text($"المادة: {CombSubject.Text}\n\nالتاريخ: {txtExapleDate.Text}\n\nالوقت: {txtExampleTime.Text}\n")
+                        .Bold().FontSize(12);
+                    row.RelativeItem().AlignCenter()
+                        .Text($"{currentYear}/{currentYear-1}\n\nنوع الأمتحان: {txtTypeQuze.Text}\n\n{txtNote.Text}")
+                        .Bold().FontSize(12);
+                    row.RelativeItem().AlignRight()
+                        .Text($"المدرسة: {txtSchoolName.Text}\n\nمدرس المادة: {txtTeacherName.Text}\n")
+                        .Bold().FontSize(12);
+                });
+
+                    column.Item().LineHorizontal(2).LineColor(Colors.Black);
+                    column.Item().PaddingVertical(10);
+
+                    // عرض الأسئلة
+                    foreach (var questionEntry in clsQuestion.QuestionsDict)
                     {
+                        var question = questionEntry.Value;
+                        float totalScore = question.Title.Score;
+
                         column.Item().Row(row =>
-                        {
-                            row.RelativeItem().AlignLeft().Text($"المادة: {CombSubject.Text}\n\nالتاريخ: {txtExapleDate.Text}\n\nالوقت: {txtExampleTime.Text}\n").Bold().FontSize(12);
-                            row.RelativeItem().AlignCenter().Text($"{curruntYear.Year}/{curruntYear.AddYears(-1)})\n\nنوع الأمتحان: {txtTypeQuze.Text}\n\n{txtNote.Text}").Bold().FontSize(12);
-                            row.RelativeItem().AlignRight().Text($"المدرسة: {txtSchoolName.Text}\n\n:مدرس المادة {txtTeacherName.Text}\n").Bold().FontSize(12);
-                        });
+                    {
+                        string scoreText = (question.BranchzDict != null && question.BranchzDict.Count > 0)
+                            ? ""
+                            : $" (درجة {totalScore}) ";
 
-                        column.Item().LineHorizontal(2).LineColor(Colors.Black);
-                        column.Item().PaddingVertical(10);
+                        row.RelativeItem().AlignRight()
+                            .Text($"س{question.Title.Number}: {question.Title.QuestionTitle} {scoreText}")
+                            .Bold().FontSize(12);
+                    });
 
-                        foreach (var questionEntry in clsQuestion.QuestionsDict)
+                        // عرض الفروع إذا وجدت
+                        if (question.BranchzDict != null && question.BranchzDict.Count > 0)
                         {
-                            var question = questionEntry.Value;
-                            column.Item().Row(row =>
+                            foreach (var branchEntry in question.BranchzDict)
                             {
-                                row.RelativeItem().AlignRight().Text($"س{question.Title.Number}: {question.Title.QuestionTitle} (درجة {question.Title.ScoreForBranchOrPint})").Bold().FontSize(12);
+                                var branch = branchEntry.Value;
+
+                                column.Item().Row(row =>
+                            {
+                                row.RelativeItem().AlignRight()
+                                    .Text($"({branch.Char}) {branch.BranchTitle} (درجة {branch.Score}) ")
+                                    .Bold().FontSize(12);
                             });
 
-                            if (question.BranchzDict != null)
-                            {
-                                foreach (var branchEntry in question.BranchzDict)
-                                {
-                                    var branch = branchEntry.Value;
-                                    column.Item().Row(row =>
-                                    {
-                                        row.RelativeItem().AlignRight().Text($"({branch.Char}) {branch.BranchTitle} (درجة {branch.Score})").Bold().FontSize(12);
-                                    });
-
-                                    foreach (var point in branch.PointList)
-                                    {
-                                        column.Item().Row(row =>
-                                        {
-                                            row.RelativeItem().AlignRight().Text($"- {point.Text} (درجة {point.Score})").FontSize(12);
-                                        });
-                                    }
-                                    // إضافة سطر فارغ بين الفروع
-                                    column.Item().PaddingVertical(5);
-                                }
-                            }
-
-                            if (question.PointList != null)
-                            {
-                                foreach (var point in question.PointList)
+                                foreach (var point in branch.PointList)
                                 {
                                     column.Item().Row(row =>
-                                    {
-                                        row.RelativeItem().AlignRight().Text($"- {point.Text} (درجة {point.Score})").FontSize(12);
-                                    });
+                                {
+                                    row.RelativeItem().AlignRight()
+                                        .Text($" {point.Text} (درجة {point.Score}) - ")
+                                        .FontSize(12);
+                                });
                                 }
+
+                                column.Item().PaddingVertical(5);
                             }
-                            // إضافة سطرين فارغين قبل الخط الأسود
-                            column.Item().PaddingVertical(10);
-                            column.Item().LineHorizontal(2).LineColor(Colors.Black);
-                            column.Item().PaddingVertical(10);
                         }
-                    });
+                        else if (question.PointList != null)
+                        {
+                            foreach (var point in question.PointList)
+                            {
+                                column.Item().Row(row =>
+                            {
+                                row.RelativeItem().AlignRight()
+                                    .Text($" {point.Text} (درجة {point.Score}) - ")
+                                    .FontSize(12);
+                            });
+                            }
+                        }
+
+
+                        column.Item().PaddingVertical(10);
+                        column.Item().LineHorizontal(2).LineColor(Colors.Black);
+                        column.Item().PaddingVertical(10);
+                    }
+                });
                 });
             })
-            .GeneratePdf(fullPath);
+    .GeneratePdf(fullPath);
         }
-       
-        //اجراءات خاصة بلصفحة
+
+
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             // إغلاق الصفحة إذا كانت معروضة داخل NavigationWindow أو Frame

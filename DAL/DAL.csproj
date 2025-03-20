@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <Reference Include="MyLib_DotNet">
-      <HintPath>..\..\..\MyLibraries v.1.1\MyLibraries v.1.1\MyLibraries\MyLib_DotNet\bin\Debug\net8.0\MyLib_DotNet.dll</HintPath>
+      <HintPath>..\IQDHackathon\MyLibraries v.1.1\MyLibraries v.1.1\MyLibraries\MyLib_DotNet\bin\Debug\net8.0\MyLib_DotNet.dll</HintPath>
     </Reference>
   </ItemGroup>
 

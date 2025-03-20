@@ -3,11 +3,8 @@
     public class clsQuestion
     {
         public clsTitle Title { get; set; }
-
         public Dictionary<char, clsBranch>? BranchzDict { get; private set; }
-
         public List<clsPoint>? PointList { get; private set; }
-
         public static Dictionary<byte, clsQuestion> QuestionsDict { get; private set; } = new Dictionary<byte, clsQuestion>();
 
         public clsQuestion(clsTitle title)
@@ -18,32 +15,66 @@
         public clsQuestion AddBranch(char Char)
         {
             if (BranchzDict == null) BranchzDict = new();
-            BranchzDict.Add(Char, new clsBranch(Char) { Score = Title.ScoreForBranchOrPint });
+            BranchzDict.Add(Char, new clsBranch(Char));
             return this;
         }
 
         public clsQuestion AddPointToBranch(char Char, clsPoint point)
         {
             if (BranchzDict == null) BranchzDict = new();
-            point.Score = (float)(BranchzDict[Char].Score / BranchzDict[Char].NumberOfAnswer);
-            BranchzDict[Char].PointList.Add(point);
+            if (!BranchzDict.ContainsKey(Char)) return this;
+
+            clsBranch branch = BranchzDict[Char];
+            branch.PointList.Add(point);
             return this;
         }
 
         public clsQuestion AddPoint(clsPoint point)
         {
             if (PointList == null) PointList = new();
-            point.Score = Title.ScoreForBranchOrPint;
             PointList.Add(point);
             return this;
         }
 
         public void CreateQuestion()
         {
-            if (QuestionsDict.ContainsKey(Title.Number)) 
+            this.__DistributeScore();
+            if (QuestionsDict.ContainsKey(Title.Number))
                 QuestionsDict[Title.Number] = this;
             else
                 QuestionsDict.Add(Title.Number, this);
         }
+
+        private void __DistributeScore()
+        {
+            float totalScore = Title.Score;
+
+            if (BranchzDict != null && BranchzDict.Count > 0)
+            {
+                float branchScore = totalScore / BranchzDict.Count;
+                foreach (var branch in BranchzDict.Values)
+                {
+                    branch.Score = branchScore;
+
+                    if (branch.PointList.Count > 0)
+                    {
+                        float pointScore = branchScore / branch.PointList.Count;
+                        foreach (var point in branch.PointList)
+                        {
+                            point.Score = pointScore;
+                        }
+                    }
+                }
+            }
+            else if (PointList != null && PointList.Count > 0)
+            {
+                float pointScore = totalScore / PointList.Count;
+                foreach (var point in PointList)
+                {
+                    point.Score = pointScore;
+                }
+            }
+        }
     }
+
 }

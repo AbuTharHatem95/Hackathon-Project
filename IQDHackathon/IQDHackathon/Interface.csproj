@@ -41,8 +41,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BLL\BLL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="IQD_UI_Library">
-      <HintPath>..\..\..\..\MyLibraries\WPF_UI_Library\IQD UI Library\bin\Debug\net8.0-windows\IQD_UI_Library.dll</HintPath>
+      <HintPath>..\..\..\WPF_UI_Library\IQD UI Library\bin\Debug\net8.0-windows\IQD_UI_Library.dll</HintPath>
     </Reference>
   </ItemGroup>
 

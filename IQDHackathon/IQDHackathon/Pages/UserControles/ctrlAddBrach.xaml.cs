@@ -61,7 +61,9 @@ namespace Interface.Pages.UserControles
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            this.Visibility = Visibility.Collapsed; 
+            this.Visibility = Visibility.Collapsed;
+
+            _qusetionCreater.MainGrid.Visibility = Visibility.Visible;
         }
     }
 }

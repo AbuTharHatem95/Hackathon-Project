@@ -11,9 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="DAL">
-      <HintPath>..\DAL\bin\Debug\net8.0\DAL.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\DAL\DAL.csproj" />
   </ItemGroup>
 
 </Project>

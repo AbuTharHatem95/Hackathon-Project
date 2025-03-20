@@ -1,5 +1,4 @@
-﻿using Interface.LogicClasses;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace Interface.Pages.UserControles
@@ -7,7 +6,6 @@ namespace Interface.Pages.UserControles
     public partial class AddQustiones : UserControl
     {
         public event EventHandler<(bool IsChecked, string Qustion)>? QuestionIsSelected;
-
 
         TestScenarioGeneratorPage testpage;
 
@@ -29,30 +27,14 @@ namespace Interface.Pages.UserControles
                     ItemsListBox.Items.Add(item);
                 }
 
-                ////إنشاء عنصر تحكم الليست فيو التي تحتوي على كنترول الجيك بوكس
-                //ctrlDynamicListControl listView = new ctrlDynamicListControl(question.Key, question.Value);
-
-                //// الاشتراك في الحدث 
-                //listView.QuestionStateChanged += ListView_QuestionStateChanged;
-
-                ////إضافة العنصر إلى الواجهة
-                //ItemsListBox.Items.Add(listView);
+               
             }
         }
-
-        //private void ListView_QuestionStateChanged(object? sender, (bool IsChecked, string Qustion) e)
-        //{
-        //    QuestionIsSelected?.Invoke(this, (e.IsChecked, e.Qustion));
-
-
-        //    //هنا سيتم الغاء هذا المسج بوكس بعد اختبار المشروع
-        //    MessageBox.Show($"{e.IsChecked}\nمحتوى السؤال :{e.Qustion}");
-        //}
 
         // اختيار اسئلة بشكل يدوي
         private void btnAddQustion_Click(object sender, RoutedEventArgs e)
         {
-            QusetionCreater qusetionCreater = new QusetionCreater(ref testpage, this);
+            QusetionCreater qusetionCreater = new QusetionCreater(ref testpage);
             MainGrid.Visibility = Visibility.Collapsed;
             SubGrid.Visibility = Visibility.Visible;
             SubGrid.Children.Add(qusetionCreater);

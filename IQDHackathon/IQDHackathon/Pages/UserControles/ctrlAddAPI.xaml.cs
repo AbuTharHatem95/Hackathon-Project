@@ -3,9 +3,6 @@ using System.Windows.Controls;
 
 namespace Interface.Pages.UserControles
 {
-    /// <summary>
-    /// Interaction logic for ctrlAddAPI.xaml
-    /// </summary>
     public partial class ctrlAddAPI : UserControl
     {
         public ctrlAddAPI()

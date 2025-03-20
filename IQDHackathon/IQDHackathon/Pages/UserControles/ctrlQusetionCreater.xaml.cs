@@ -12,19 +12,16 @@ namespace Interface.Pages.UserControles
         ctrlQustionListView? qusetionList = null;
         public clsQuestion? Questions = null;
         private TestScenarioGeneratorPage? Test = null;
-       // AddQustiones _ctrladd;
         clsTitle? title = null;
 
 
         public event EventHandler<(string QustionNum, string QustionTitle, string QustionScor, string NumberOfAnswer)>? DataLoaded;
 
-        public QusetionCreater(ref TestScenarioGeneratorPage test, AddQustiones ctrladd)
+        public QusetionCreater(ref TestScenarioGeneratorPage test)
         {
             InitializeComponent();
             this.DataContext = this;
-            //btnPrintQustiones.IsEnabled = false;                  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
             Test = test;
-         //   _ctrladd = ctrladd;
         }
 
         private void GetDataFromListView(object? sender, (bool IsCheck, string Qustion) e)
@@ -51,7 +48,7 @@ namespace Interface.Pages.UserControles
         {
             if (string.IsNullOrEmpty(txtQustionTitle.Text) || string.IsNullOrEmpty(txtQscore.Text) || string.IsNullOrEmpty(txtQNum.Text) || string.IsNullOrEmpty(txtNumberOfAnswers.Text))
             {
-                IQD_MessageBox.Show("تحذير", "يجب ملئ معلومات السؤال", MessageBoxType.Warning);
+                MessageBox.Show("يجب ملئ معلومات السؤال", "تحذير", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -90,32 +87,12 @@ namespace Interface.Pages.UserControles
         {
             if (string.IsNullOrEmpty(txtQustionTitle.Text) || string.IsNullOrEmpty(txtQscore.Text) || string.IsNullOrEmpty(txtQNum.Text) || string.IsNullOrEmpty(txtNumberOfAnswers.Text))
             {
-                IQD_MessageBox.Show("تحذير", "يجب ملئ معلومات السؤال", MessageBoxType.Warning);
+                MessageBox.Show("يجب ملئ معلومات السؤال", "تحذير", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-
-            IQD_MessageBox.Show("تنبية", $"عدد الاسئلة {clsQuestion.QuestionsDict.Keys.Count} اسئلة؟؟", MessageBoxType.Question);
-
-            if (clsQuestion.QuestionsDict.Keys.Count >= 3)
-            {
-                bool? Contnie = IQD_MessageBox.Show("تنبية", $"هل تريد اضافه اكثر من {clsQuestion.QuestionsDict.Keys.Count-1} اسئلة؟؟", MessageBoxType.Question);
-
-                //// عدم الموافقه
-                //if (Contnie == null)
-                //{
-                //    btnPrintQustiones.IsEnabled = true;                  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                //    return;
-                //}
-                //btnPrintQustiones.IsEnabled = true;
-            }
-            //هنا يتم اضافة اوبجكت الى دكشنري الاسئلة 
             Questions?.CreateQuestion();
             title = null;
-
-            //اعلام المستخدم بنجاح اضافة السؤال 
-            IQD_MessageBox.Show("نجاح", "تم انشاء السؤال بنجاح");
-
-            //تنظيف التيكست لاضافة سؤال اخر
+            MessageBox.Show("تم انشاء السؤال بنجاح", "نجاح العملية");
             txtNumberOfAnswers.Clear();
             txtQNum.Clear();
             txtQustionTitle.Clear();
@@ -125,9 +102,8 @@ namespace Interface.Pages.UserControles
         //طباعة نموذج الاسئلة
         private void btnPrintQustiones_Click(object sender, RoutedEventArgs e)
         {
-            IQD_MessageBox.Show("حفظ ", "حفظ نموذج الاسئلة");
+            MessageBox.Show("حفظ نموذج الاسئلة", "حفظ ");
 
-            //هنا بعد ان انشئ 6 اسئلة يتم اعلام المستخدم بحفظ نموذج الاسئلة
             var saveFileDialog = new SaveFileDialog
             {
                 DefaultExt = ".pdf",
@@ -144,98 +120,18 @@ namespace Interface.Pages.UserControles
                 }
                 catch (Exception ex)
                 {
-                    IQD_MessageBox.Show("خطأ", $"لم يتم حفظ الاسئلة, حدث خطأ: {ex.Message}", MessageBoxType.Error);
+                    MessageBox.Show("خطأ", $"لم يتم حفظ الاسئلة, حدث خطأ: {ex.Message}",MessageBoxButton.OK,MessageBoxImage.Error);
                 }
                 return;
             }
             else
             {
-                IQD_MessageBox.Show("تحذير", "لم تقم بحـفظ الاسئـلة!!", MessageBoxType.Warning);
+                MessageBox.Show("تحذير", "لم تقم بحـفظ الاسئـلة!!",MessageBoxButton.OK , MessageBoxImage.Error);
             }
+
+            this.Visibility=Visibility.Collapsed;
+            Test.MainPageGrid.Visibility = Visibility.Visible;
         }
-
-        //private void GeneratePdf()
-        //{
-
-        //    QuestPDF.Settings.License = LicenseType.Community;
-        //    DateTime curruntYear = DateTime.Now;
-
-        //    Document.Create(container =>
-        //    {
-
-        //        container.Page(page =>
-        //        {
-        //            page.Size(PageSizes.A4);
-        //            page.Margin((float)0.4, Unit.Centimetre);
-        //            page.PageColor(Colors.White);
-        //            page.DefaultTextStyle(x => x.FontSize(12));
-
-        //            page.Content().PaddingVertical(5).Column(column =>
-        //            {
-        //                column.Item().Row(row =>
-        //                {
-        //                    row.RelativeItem().AlignLeft().Text($"المادة: {Test?.CombStage.Text}\n\nالتاريخ: {Test?.txtExapleDate.Text}\n\nالوقت: {Test?.txtExampleTime.Text}\n").Bold().FontSize(12);
-        //                    row.RelativeItem().AlignCenter().Text($"{curruntYear.Year}/{curruntYear.AddYears(-1)})\n\nنوع الأمتحان: {Test?.txtTypeQuze.Text}\n\n{Test?.txtNote.Text}").Bold().FontSize(12);
-        //                    row.RelativeItem().AlignRight().Text($"المدرسة: {Test?.txtSchoolName.Text}\n\n:مدرس المادة {Test?.txtTeacherName.Text}\n").Bold().FontSize(12);
-        //                });
-
-        //                column.Item().LineHorizontal(2).LineColor(Colors.Black);
-        //                column.Item().PaddingVertical(10);
-
-        //                foreach (var questionEntry in clsQuestion.QuestionsDict)
-        //                {
-        //                    var question = questionEntry.Value;
-        //                    column.Item().Row(row =>
-        //                    {
-        //                        row.RelativeItem().AlignRight().Text($"س{question.Title.Number}: {question.Title.QuestionTitle} (درجة {question.Title.ScoreForBranchOrPint})").Bold().FontSize(12);
-        //                    });
-
-        //                    if (question.BranchzDict != null)
-        //                    {
-        //                        foreach (var branchEntry in question.BranchzDict)
-        //                        {
-        //                            var branch = branchEntry.Value;
-        //                            column.Item().Row(row =>
-        //                            {
-        //                                row.RelativeItem().AlignRight().Text($"({branch.Char}) {branch.BranchTitle} (درجة {branch.Score})").Bold().FontSize(12);
-        //                            });
-
-        //                            foreach (var point in branch.PointList)
-        //                            {
-        //                                column.Item().Row(row =>
-        //                                {
-        //                                    row.RelativeItem().AlignRight().Text($"- {point.Text} (درجة {point.Score})").FontSize(12);
-        //                                });
-        //                            }
-
-        //                            // إضافة سطر فارغ بين الفروع
-        //                            column.Item().PaddingVertical(5);
-        //                        }
-        //                    }
-
-        //                    if (question.PointList != null)
-        //                    {
-        //                        foreach (var point in question.PointList)
-        //                        {
-        //                            column.Item().Row(row =>
-        //                            {
-        //                                row.RelativeItem().AlignRight().Text($"- {point.Text} (درجة {point.Score})").FontSize(12);
-        //                            });
-        //                        }
-        //                    }
-
-        //                    // إضافة سطرين فارغين قبل الخط الأسود
-        //                    column.Item().PaddingVertical(10);
-        //                    column.Item().LineHorizontal(2).LineColor(Colors.Black);
-        //                    column.Item().PaddingVertical(10);
-        //                }
-
-
-        //            });
-        //        });
-        //    })
-        //    .GeneratePdf(fullPath);
-        //}
 
         private void OpenPdf(string fullPath)
         {
