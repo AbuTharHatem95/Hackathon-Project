@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Interface.LogicClasses;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Interface.Pages.UserControles
@@ -61,6 +62,7 @@ namespace Interface.Pages.UserControles
         private void btnRelodGenric_Click(object sender, RoutedEventArgs e)
         {
             //هنا يكتب كود ليعيد ملئ دكشنري الاسئلة من خلال جات جي بي تي 
+            //TestScenarioGeneratorPage.QuestionsDictFromChatGPT = clsGptManipulation.QuestionsWithTypes()
         }
     }
 }
