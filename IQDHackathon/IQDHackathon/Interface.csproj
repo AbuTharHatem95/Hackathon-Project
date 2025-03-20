@@ -36,12 +36,13 @@
 
   <ItemGroup>
     <PackageReference Include="itext7" Version="9.1.0" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="QuestPDF" Version="2025.1.6" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\BLL\BLL.csproj" />
+    <ProjectReference Include="..\BLL\BLL.csproj" />
   </ItemGroup>
 
   <ItemGroup>

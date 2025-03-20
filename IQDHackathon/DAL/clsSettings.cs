@@ -9,6 +9,6 @@ namespace DVLD_DataAccess
 {
     public static class clsSettings
     {
-        public static string connectionString = "Server=.;Database=HackProject;User ID =sa; Password=sa123456; Encrypt=False;";
+        public static string connectionString = "Server=.;Database=Hack;User ID =sa; Password=sa123456; Encrypt=False;";
     }
 }
