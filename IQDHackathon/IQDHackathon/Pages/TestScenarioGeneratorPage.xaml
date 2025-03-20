@@ -125,7 +125,7 @@
 
                         <ComboBox x:Name="CombSubject" ToolTip="{DynamicResource cbxSubject1}" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
                                   VerticalContentAlignment="Center" Height="55" Tag="{DynamicResource cbxSubject1}" 
-                                  Foreground="{DynamicResource PrimaryTextColor}" HorizontalAlignment="Stretch"/>
+                                  Foreground="{DynamicResource PrimaryTextColor}" HorizontalAlignment="Stretch" SelectionChanged="CombSubject_SelectionChanged"/>
                     </Grid>
 
                     <!-- المرحلة -->
@@ -133,10 +133,9 @@
 
                         <ComboBox x:Name="CombStage" ToolTip="{DynamicResource cbxStage}" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
                                   VerticalContentAlignment="Center" Height="55" Tag="{DynamicResource cbxStage}" 
-                                  Foreground="{DynamicResource PrimaryTextColor}" HorizontalAlignment="Stretch">
-                            <ComboBoxItem>ابتدائية</ComboBoxItem>
-                            <ComboBoxItem>متوسطة</ComboBoxItem>
-                            <ComboBoxItem>ثانوية</ComboBoxItem>
+                                  Foreground="{DynamicResource PrimaryTextColor}" HorizontalAlignment="Stretch" DataContextChanged="CombStage_DataContextChanged" SelectionChanged="CombStage_SelectionChanged" Margin="0,10,0,0" VerticalAlignment="Top">
+                           
+                   
                         </ComboBox>
                     </Grid>
 

@@ -12,7 +12,7 @@ namespace Interface.Pages.UserControles
         ctrlQustionListView? qusetionList = null;
         public clsQuestion? Questions = null;
         private TestScenarioGeneratorPage? Test = null;
-        AddQustiones _ctrladd;
+       // AddQustiones _ctrladd;
         clsTitle? title = null;
 
 
@@ -22,9 +22,9 @@ namespace Interface.Pages.UserControles
         {
             InitializeComponent();
             this.DataContext = this;
-            //btnPrintQustiones.IsEnabled= false;                  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+            //btnPrintQustiones.IsEnabled = false;                  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
             Test = test;
-            _ctrladd = ctrladd;
+         //   _ctrladd = ctrladd;
         }
 
         private void GetDataFromListView(object? sender, (bool IsCheck, string Qustion) e)
