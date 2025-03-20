@@ -6,12 +6,22 @@ namespace Interface.Pages.UserControles
    
     public partial class ctrlQustionListView : UserControl
     {
-        public event EventHandler<(bool IsChecked, string Qustion)>? QuestionIsSelected; 
+        public event EventHandler<(bool IsChecked, string Qustion)>? QuestionIsSelected;
 
-        public ctrlQustionListView()
+        QusetionCreater QusetionCreater;
+        ctrlAddBrach _ctrlAddBrach;
+
+        // خاصية لتحديد من استدعى الـ UserControl
+        public UserControl ParentControl { get; set; }
+
+        public ctrlQustionListView(QusetionCreater qustionpage,ctrlAddBrach ctrlAddbranch=null)
         {
             InitializeComponent();
             GentetListViewComponat();
+            QusetionCreater = qustionpage;
+            _ctrlAddBrach = ctrlAddbranch;
+            /// تحديد ParentControl بناءً على من استدعى الـ UserControl
+            ParentControl = ctrlAddbranch != null ? (UserControl)ctrlAddbranch : qustionpage;
         }
 
         private void GentetListViewComponat()
@@ -40,10 +50,25 @@ namespace Interface.Pages.UserControles
 
         private void btnChooesQustion_Click(object sender, RoutedEventArgs e)
         {
-            //هنا لا يتم تطبيق اي اجراء فقط اخفاء الليست والرجوع الى صفحة انشاء الاسئلة
-            this.Visibility= Visibility.Collapsed;
+            this.Visibility = Visibility.Collapsed;
 
- 
+            if (QusetionCreater.MainGrid.Visibility == Visibility.Collapsed)
+                QusetionCreater.MainGrid.Visibility = Visibility.Visible;
+
+            QusetionCreater.SubGrid.Visibility = Visibility.Collapsed;
+
+
+
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.Visibility= Visibility.Collapsed;
+            if (QusetionCreater.MainGrid.Visibility == Visibility.Collapsed)
+                QusetionCreater.MainGrid.Visibility = Visibility.Visible;
+
+            QusetionCreater.SubGrid.Visibility = Visibility.Collapsed;
+
         }
     }
 }

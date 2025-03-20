@@ -14,7 +14,6 @@ namespace Interface.Pages.UserControles
         {
             InitializeComponent();
             this.testpage = TestPage;
-
             GentetListViewComponat();
 
 
@@ -24,14 +23,25 @@ namespace Interface.Pages.UserControles
         {
             foreach (var question in TestScenarioGeneratorPage.QuestionsDictFromChatGPT)
             {
-                //إنشاء عنصر تحكم الليست فيو التي تحتوي على كنترول الجيك بوكس
-                ctrlDynamicListControl listView = new ctrlDynamicListControl(question.Key, question.Value);
+                
+                ItemsListBox.Items.Add(question.Key);
 
-                // الاشتراك في الحدث 
-                listView.QuestionStateChanged += ListView_QuestionStateChanged;
+                foreach (var item in question.Value)
+                {
+                    ItemsListBox.Items.Add(item);
 
-                //إضافة العنصر إلى الواجهة
-                ItemsListBox.Items.Add(listView);
+                }
+
+
+
+                ////إنشاء عنصر تحكم الليست فيو التي تحتوي على كنترول الجيك بوكس
+                //ctrlDynamicListControl listView = new ctrlDynamicListControl(question.Key, question.Value);
+
+                //// الاشتراك في الحدث 
+                //listView.QuestionStateChanged += ListView_QuestionStateChanged;
+
+                ////إضافة العنصر إلى الواجهة
+                //ItemsListBox.Items.Add(listView);
             }
         }
 
@@ -48,7 +58,7 @@ namespace Interface.Pages.UserControles
         //اختيار اسئلة بشكل يدوي
         private void btnAddQustion_Click(object sender, RoutedEventArgs e)
         {
-            QusetionCreater qusetionCreater = new QusetionCreater(ref testpage);
+            QusetionCreater qusetionCreater = new QusetionCreater(ref testpage,this);
             MainGrid.Visibility = Visibility.Collapsed;
             SubGrid.Visibility = Visibility.Visible;
             SubGrid.Children.Add(qusetionCreater);

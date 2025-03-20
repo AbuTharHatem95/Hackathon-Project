@@ -154,8 +154,10 @@ namespace Interface.Pages
 
            
             MainPageGrid.Visibility = Visibility.Collapsed;
-            QuestionsPage.Visibility = Visibility.Visible;
-            ContentFrame.Navigate(new AddQustiones(this));
+            SubMain.Visibility = Visibility.Visible;
+            SubMain.Children.Clear();
+            SubMain.Children.Add(new AddQustiones(this));
+           
         }
 
 

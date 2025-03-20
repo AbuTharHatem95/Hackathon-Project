@@ -15,7 +15,24 @@
 
         <!-- Header -->
         <Grid Grid.Row="0">
-            <Image Margin="0,25,0,0" Source="/Assets/school.png" Height="90" VerticalAlignment="Top" RenderTransformOrigin="0.479,0.187"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="1" Margin="0,0,60,0" Source="/Assets/school.png" Height="90" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.479,0.187"/>
+
+            <Grid Grid.Column="0">
+                <Button x:Name="btnRetuntomainmenue" 
+                        Click="btnRetuntomainmenue_Click" 
+                        Margin="0,0,0,0" 
+                        Height="50" 
+                        Style="{StaticResource BackButtonStyle}"
+                        Grid.Column="0"
+                        VerticalAlignment="Top"
+                        HorizontalContentAlignment="Left"
+                        />
+            </Grid>
         </Grid>
 
         <!-- Main Content -->
@@ -232,14 +249,10 @@
             </Grid>
         </Border>
 
-        <!-- Footer -->
-        <Grid Grid.Row="2" Margin="0,10,0,20">
-            <Button x:Name="btnRetuntomainmenue" Click="btnRetuntomainmenue_Click" Margin="0,-20,0,30" Height="50" Style="{StaticResource BackButtonStyle}"/>
-        </Grid>
+       
 
         <!-- Questions Page -->
-        <Grid x:Name="QuestionsPage" Visibility="Collapsed" Grid.Row="0" Grid.RowSpan="3">
-            <Frame x:Name="ContentFrame" NavigationUIVisibility="Hidden"/>
+        <Grid x:Name="SubMain" Visibility="Collapsed" Grid.Row="0" Grid.RowSpan="3">
         </Grid>
 
     </Grid>
