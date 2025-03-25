@@ -8,14 +8,14 @@
              d:DesignHeight="700" 
              d:DesignWidth="800"
              FlowDirection="{DynamicResource AppFlowDirection}"
-             Background="{StaticResource PrimaryBackgroundColor}"
+              Background="{DynamicResource PrimaryBackgroundColor}"
              >
 
-    <Grid>
+    <Grid >
         <Grid x:Name="MainGrid" >
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
@@ -25,11 +25,25 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-           
+
+            <!--الرجوع من الصفحة-->
+            <Viewbox Width="30" Height="30" Grid.Row="0" 
+                      RenderOptions.BitmapScalingMode="HighQuality" 
+                      VerticalAlignment="Top" 
+                      HorizontalAlignment="Left"
+                      Margin="10,2,0,0">
+                <Button x:Name="btnRetuntomainmenue" 
+                       Click="btnRetuntomainmenue_Click" 
+                       Style="{StaticResource BackButtonStyle}"
+                       Cursor="Hand"
+            
+                        />
+            </Viewbox>
+
             <!--Header-->
             <TextBlock Grid.Row="0" Text="اضافة الاسئلة" 
                        Style="{StaticResource CustomTextWithShadow_1}"
-                       Foreground="{StaticResource PrimaryTextColor}"
+                       Foreground="{DynamicResource PrimaryTextColor}"
                        FontSize="27"
                        FontWeight="ExtraLight"
                        >
@@ -37,22 +51,24 @@
             
             <!-- رقم السؤال -->
             <Grid Grid.Row="1" Margin="5">
-                <local:IQD_TextBox x:Name="txtQNum"  FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="رقم السؤال" Tag="رقم السؤال" HorizontalAlignment="Stretch"/>
+                <local:IQD_TextBox x:Name="txtQNum"  FontSize="20" Height="55" BorderBrushes="DarkBlue"  ToolTip="رقم السؤال"  Tag="رقم السؤال" HorizontalAlignment="Stretch"  Foreground="{DynamicResource PrimaryTextColor}"
+/>
             </Grid>
 
             <!-- عنوان السؤال -->
             <Grid Grid.Row="2" Margin="5">
-                <local:IQD_TextBox x:Name="txtQustionTitle"  FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="عنوان السؤال" Tag="عنوان السؤال" HorizontalAlignment="Stretch"/>
+                <local:IQD_TextBox x:Name="txtQustionTitle" Foreground="{DynamicResource PrimaryTextColor}"
+                                   FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="عنوان السؤال" Tag="عنوان السؤال" HorizontalAlignment="Stretch"/>
             </Grid>
 
             <!-- عدد الاجابات المطلوبه -->
             <Grid Grid.Row="3" Margin="5">
-                <local:IQD_TextBox x:Name="txtNumberOfAnswers"  FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="ادخل عدد الاجابات المطلوبه لهذا السؤال" Tag="عدد الاجابات" HorizontalAlignment="Stretch"/>
+                <local:IQD_TextBox x:Name="txtNumberOfAnswers" Foreground="{DynamicResource PrimaryTextColor}" FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="ادخل عدد الاجابات المطلوبه لهذا السؤال" Tag="عدد الاجابات" HorizontalAlignment="Stretch"/>
             </Grid>
             
             <!-- الدرجة -->
             <Grid Grid.Row="4" Margin="5">
-                <local:IQD_TextBox x:Name="txtQscore" FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="الدرجة" Tag="الدرجة" HorizontalAlignment="Stretch"/>
+                <local:IQD_TextBox x:Name="txtQscore" Foreground="{DynamicResource PrimaryTextColor}" FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="الدرجة" Tag="الدرجة" HorizontalAlignment="Stretch"/>
             </Grid>
 
             <!--اضافة نقاط-->
@@ -64,6 +80,7 @@
                   Content="إضافة نقاط"
                   Icon="/Assets/export.png"
                   Click="btnAddPointes_Click"
+                  Foreground="{DynamicResource PrimaryTextColor}"
                   >
             </local:IQD_Button>
 
@@ -76,6 +93,7 @@
                     Content="إضافة افرع"
                     Icon="/Assets/export.png"
                     Click="btnAddNewBrach_Click"
+                    Foreground="{DynamicResource PrimaryTextColor}"
                     >
             </local:IQD_Button>
 
@@ -88,6 +106,7 @@
                     Content=" إنشاء  السؤال"
                     Icon="/Assets/export.png"
                     Click="btnCreateQustion_Click"
+                    Foreground="{DynamicResource PrimaryTextColor}"
                     >
             </local:IQD_Button>
 
@@ -100,6 +119,7 @@
                     Content="'طباعة نموذج الاسئلة"
                     Icon="/Assets/export.png"
                     Click="btnPrintQustiones_Click"
+                    Foreground="{DynamicResource PrimaryTextColor}"
                   > 
             </local:IQD_Button>
 

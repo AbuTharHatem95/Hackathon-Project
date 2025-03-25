@@ -1,0 +1,90 @@
+﻿<Window x:Class="Interface.SettingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IQD_UI_Library;assembly=IQD_UI_Library"
+        mc:Ignorable="d"
+        Height="450" Width="800"
+        FlowDirection="{DynamicResource AppFlowDirection}"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        >
+    <Grid Background="{DynamicResource PrimaryBackgroundColor}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--Header-->
+        <Grid x:Name="GridHeader" Grid.Row="0" Grid.ColumnSpan="3" Background="{DynamicResource PrimaryBackgroundColor}" VerticalAlignment="Top" >
+            <!--Start: Button Close | Restore | Minimize-->
+            <StackPanel HorizontalAlignment="Right"  Margin="10"  Orientation="Horizontal" FlowDirection="{DynamicResource SPAppFlowDirection}">
+                <Button x:Name="btnClose" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton"/>
+                <Button x:Name="btnRestore" Click="btnRestore_Click">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonsStyle}">
+                            <Setter Property="Content" Value="{DynamicResource maximize}"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=home, Path=WindowState}" Value="Maximized">
+                                    <Setter Property="Content" Value="{StaticResource restore}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button x:Name="btnMinimize" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource minimize}" Click="btnMinimize_Click"/>
+            </StackPanel>
+            <!--End: Button Close | Restore | Minimize-->
+        </Grid>
+
+        <!-- الثيم -->
+        <GroupBox Grid.Row="1" Style="{StaticResource CustomShadowNaturalStyle_1}" Padding="0,12,0,0" BorderThickness="0.4" BorderBrush="{DynamicResource Coboxborder}" Height="120" Margin="8" FontWeight="Bold" FontSize="14">
+            <GroupBox.HeaderTemplate >
+                <DataTemplate>
+                    <TextBlock Text="{DynamicResource ThemeTitle}" Foreground="{DynamicResource PrimaryTextColor}" />
+                </DataTemplate>
+            </GroupBox.HeaderTemplate>
+            <StackPanel Margin="5">
+                <RadioButton  Name="rdLight" Margin="0,0,0,8" Checked="rdLight_Checked" Content="{DynamicResource rdLight}" GroupName="Theme" Foreground="{DynamicResource PrimaryTextColor}" FontWeight="Normal" />
+                <RadioButton Name="rdDark" Checked="rdDark_Checked" Content="{DynamicResource rdDark}" GroupName="Theme" Foreground="{DynamicResource PrimaryTextColor}" FontWeight="Normal" />
+            </StackPanel>
+        </GroupBox>
+
+        <!-- اللغة -->
+        <GroupBox Grid.Row="1" Style="{StaticResource CustomGlowStrongBlue}"  FlowDirection="{DynamicResource AppFlowDirection}" Grid.Column="1" Margin="8,10,8,8" Padding="0,12,0,0" BorderThickness="0.4" BorderBrush="{DynamicResource Coboxborder}" Height="120"  FontWeight="Bold" FontSize="14" >
+            <GroupBox.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{DynamicResource LanguageTitle}" Foreground="{DynamicResource PrimaryTextColor}" />
+                </DataTemplate>
+            </GroupBox.HeaderTemplate>
+            <StackPanel Margin="5">
+                <RadioButton Margin="0,0,0,8"  Name="rdEnglish" Checked="rdEnglish_Checked" Content="{DynamicResource rdEnglish}" GroupName="Language" Foreground="{DynamicResource PrimaryTextColor}" FontWeight="Normal" />
+                <RadioButton Name="rdArabic" Checked="rdArabic_Checked" Content="{DynamicResource rdArabic}" GroupName="Language" Foreground="{DynamicResource PrimaryTextColor}" FontWeight="Normal" />
+            </StackPanel>
+        </GroupBox>
+
+         
+        <!-- حفظ المعلومات -->
+        <GroupBox Grid.Row="1"  FlowDirection="{DynamicResource AppFlowDirection}" Style="{StaticResource CustomGlowMediumRed}" Grid.Column="2" Margin="8,10,8,8" Padding="0,12,0,0" BorderThickness="0.4" BorderBrush="{DynamicResource Coboxborder}" Height="120"  FontWeight="Bold" FontSize="14" >
+            <GroupBox.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{DynamicResource rdSaveDataText}" Foreground="{DynamicResource PrimaryTextColor}" />
+                </DataTemplate>
+            </GroupBox.HeaderTemplate>
+            <StackPanel>
+                <CheckBox   ToolTip="الاحتفاظ بمعلومات المدخلة" Margin="5" Name="checked" Checked="rchecked_Checked" Content="{DynamicResource rdCheckSaveData}" Style="{StaticResource ModernCheckBox}"  Foreground="{DynamicResource PrimaryTextColor}" FontWeight="Normal" />
+            </StackPanel>
+        </GroupBox>
+
+    </Grid>
+
+</Window>

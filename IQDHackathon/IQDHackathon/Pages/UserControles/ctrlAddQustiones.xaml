@@ -8,24 +8,42 @@
              d:DesignHeight="450" 
              d:DesignWidth="800"
              FlowDirection="{StaticResource AppFlowDirection}"
+             Background="{DynamicResource PrimaryBackgroundColor}"
              >
 
-    <Grid>
+    <Grid  >
         <Grid x:Name="MainGrid">
+            
+            
             <Grid.RowDefinitions>
+            <RowDefinition Height="AUTO"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-       
-            <ScrollViewer HorizontalScrollBarVisibility="Auto"  Grid.Row="0" VerticalScrollBarVisibility="Auto" >
+
+            <!--الرجوع من الصفحة-->
+            <Viewbox Width="30" Height="30" Grid.Row="0" 
+                     RenderOptions.BitmapScalingMode="HighQuality" 
+                     VerticalAlignment="Top" 
+                     HorizontalAlignment="Left"
+                     Margin="9,0,0,0">
+                <Button x:Name="btnRetuntomainmenue" 
+              Click="btnRetuntomainmenue_Click" 
+              Style="{StaticResource BackButtonStyle}"
+              Cursor="Hand"
+              />
+            </Viewbox>
+
+
+            <ScrollViewer HorizontalScrollBarVisibility="Auto"  Grid.Row="1" VerticalScrollBarVisibility="Auto" >
                 <ListBox x:Name="ItemsListBox" 
-                    Background="{StaticResource SecundaryBackgroundColor}"
+                    Background="{DynamicResource PrimaryBackgroundColor}"
                     HorizontalContentAlignment="Center"
                     HorizontalAlignment="Stretch"
                     FontSize="20"
-                    Foreground="{StaticResource SecundaryTextColor}"
+                    Foreground="{DynamicResource SecundaryTextColor}"
                     Padding="100"
                     >
                 </ListBox>
@@ -34,7 +52,7 @@
             <!-- اعادة توليد اسئلة -->
             <local:IQD_Button x:Name="btnRelodGenric"
                 Margin="10,10,0,10" 
-                Grid.Row="1" 
+                Grid.Row="2" 
                 Style="{StaticResource ButtonsWithIconStyle}"
                 HorizontalAlignment="Stretch"
                 Content="اعادة توليد اسئلة"
@@ -45,7 +63,7 @@
             <!-- انشاء اسئلة -->
         <local:IQD_Button x:Name="btnAddQustion"
         Margin="10,10,0,10" 
-        Grid.Row="2" 
+        Grid.Row="3" 
         Style="{StaticResource ButtonsWithIconStyle}"
         HorizontalAlignment="Stretch"
         Content="انشاء اسئلة"

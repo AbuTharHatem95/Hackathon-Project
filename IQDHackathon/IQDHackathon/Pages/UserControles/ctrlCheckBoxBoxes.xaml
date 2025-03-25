@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:IQD_UI_Library;assembly=IQD_UI_Library"
              mc:Ignorable="d" 
-             Background="{DynamicResource PrimaryBackgroundColor}" 
              Width="700" 
              Height="Auto"
+             Background="{DynamicResource PrimaryBackgroundColor}" 
              FlowDirection="{DynamicResource AppFlowDirection}"
              >
 
@@ -16,7 +16,7 @@
                 CornerRadius="15" 
                 Margin="5, 2, 5, 2" 
                 BorderThickness="1" 
-                BorderBrush="White" 
+                BorderBrush="{DynamicResource TertiaryTextColor}" 
                 Padding ="2"
                 Width="690"
                 >
@@ -26,8 +26,8 @@
                           Width="650"
                           FontSize="15" 
                           Style="{StaticResource ModernCheckBox}" 
-                          FlowDirection="{StaticResource AppFlowDirection}" 
-                          Foreground="Wheat" 
+                          FlowDirection="{DynamicResource AppFlowDirection}" 
+                          Foreground="{DynamicResource PrimaryTextColor}" 
                           IsChecked="{Binding IsCheckedProperty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           />
                 

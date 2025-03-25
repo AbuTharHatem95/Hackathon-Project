@@ -52,8 +52,13 @@
     <system:String x:Key="btnreturntooltio">Return</system:String>
     <system:String x:Key="btnPrintQuestions">Print Questions</system:String>
     <system:String x:Key="btnCreateQuastion">Create Questions</system:String>
-
     <system:String x:Key="txtEmapleDate">Exaple Date</system:String>
+
+    <system:String x:Key="btnGentertWithGPT">Model GPT</system:String>
+
+    <system:String x:Key="btnChooesQustiones">Chooes Qustiones</system:String>
+
+
 
 
 </ResourceDictionary>

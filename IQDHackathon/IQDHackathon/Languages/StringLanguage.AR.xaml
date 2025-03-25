@@ -57,6 +57,11 @@
     <system:String x:Key="btnCreateQuastion">انشاء الاسئلة</system:String>
 
 
+    <system:String x:Key="btnGentertWithGPT">نموذج GPT</system:String>
+    <system:String x:Key="btnChooesQustiones">اختيار الاسئلة</system:String>
+    
+
+
 
 
 

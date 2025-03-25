@@ -21,24 +21,17 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" MinHeight="655.238"></RowDefinition>
-            <RowDefinition Height="0*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <!--<Grid Background="{StaticResource PrimaryBackgroundColor}" Margin="0,0,0,-90" Grid.RowSpan="2">-->
-        <Grid Background="{DynamicResource PrimaryBackgroundColor}" Margin="0,0,0,-90" Grid.RowSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="43"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-        </Grid>
-
+      
         <!--Header-->
-        <Grid Grid.Column="0" Grid.Row="0">
+        <Grid x:Name="GridHeader" Grid.Row="0" Background="{DynamicResource PrimaryBackgroundColor}" VerticalAlignment="Top" >
             <!--Start: Button Close | Restore | Minimize-->
-            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0" Height="30" Orientation="Horizontal" FlowDirection="{DynamicResource SPAppFlowDirection}">
+            <StackPanel HorizontalAlignment="Right"  Margin="10"  Orientation="Horizontal" FlowDirection="{DynamicResource SPAppFlowDirection}">
                 <Button x:Name="btnClose" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton"/>
-                <Button x:Name="btnRestore" Margin="5 0" Click="btnRestore_Click">
+                <Button x:Name="btnRestore" Click="btnRestore_Click">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonsStyle}">
                             <Setter Property="Content" Value="{DynamicResource maximize}"/>
@@ -53,86 +46,88 @@
                 <Button x:Name="btnMinimize" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource minimize}" Click="btnMinimize_Click"/>
             </StackPanel>
             <!--End: Button Close | Restore | Minimize-->
+
+            <Button Name="btnSetting" Click="btnSetting_Click" Style="{StaticResource BackButtonStyle1}" Width="53" Height="53" HorizontalAlignment="Left" Cursor="Hand" FlowDirection="{StaticResource AppFlowDirection}" >
+
+            </Button>
         </Grid>
 
-        <Button Name="btnSetting" Click="btnSetting_Click" Style="{StaticResource BackButtonStyle1}" Width="53" Height="53" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6,-2,0,0" >
-         
-        </Button>
+        <Grid x:Name="GridMain" Grid.Row="1"  Background="{DynamicResource PrimaryBackgroundColor}" >
 
-        <!-- عنوان الترحيب -->
-        <Label Content="{DynamicResource MainTitle}" FontSize="40" Style="{StaticResource CustomLabelWithShadow}" Foreground="{DynamicResource PrimaryTextColor}"
-         Margin="0,60,0,0" VerticalAlignment="Top" Height="55" Width="432"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <!-- عنوان الترحيب -->
+            <Label Content="{DynamicResource MainTitle}" FontSize="40" Style="{StaticResource CustomLabelWithShadow}" Foreground="{DynamicResource PrimaryTextColor}"
+                 Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" />
 
-        <!-- الحاوية الرئيسية-->
-        <Viewbox Stretch="Uniform" Margin="30,130,30,30">
-            <UniformGrid Rows="3" Columns="3" Height="500">
+             <!--الحاوية-->
+            <Grid Grid.Row="1" >
 
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                 <!--العامود الاول-->
+                <StackPanel  Orientation="Vertical"  HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0">
                 <!--بطاقة - التحليل المالي الذكي-->
-                <StackPanel  Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <local:IQD_FinancialAnalyzerCard x:Name="SmartFinancialAnalysis"  StartPoint="0,0" EndPoint="1,1" Text="{DynamicResource IntelligentFinancialAnalysis}"
-                                                             GradientColor1="WhiteSmoke" GradientColor2="DarkBlue" 
-                                                              Width="350" Height="250" MouseDown="SmartFinancialAnalysis_MouseDown" />
-                </StackPanel>
+                <local:IQD_FinancialAnalyzerCard x:Name="SmartFinancialAnalysis"  StartPoint="0,0" EndPoint="1,1" Text="{DynamicResource IntelligentFinancialAnalysis}"
+                                                      GradientColor1="WhiteSmoke" GradientColor2="DarkBlue" 
+                                                        MouseDown="SmartFinancialAnalysis_MouseDown" />
 
-                <!--بطاقة - العروض التقديمية-->
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <local:IQD_FinancialAnalyzerCard x:Name="Presentations" Text="{DynamicResource Presentations}" StartPoint="0,0" EndPoint="1,1" 
-                                                             GradientColor1="#FFEBEE" GradientColor2="#E57373"
-                                                             Width="350" Height="250" MouseDown="Presentations_MouseDown"/>
-                </StackPanel>
+                 <!--بطاقة - العروض التقديمية-->
+                <local:IQD_FinancialAnalyzerCard x:Name="Presentations" Text="{DynamicResource Presentations}" StartPoint="0,0" EndPoint="1,1" 
+                                                      GradientColor1="#FFEBEE" GradientColor2="#E57373"
+                                                      MouseDown="Presentations_MouseDown"/>
+                
+                <!--  بطاقة - مساعد التقارير-->   
+                <local:IQD_FinancialAnalyzerCard x:Name="ReportingAssistant" Text="{DynamicResource ReportAssistant}" StartPoint="0,0" EndPoint="1,1" 
+                                                      GradientColor1="#EEEEEE" GradientColor2="#616161"
+                                                      MouseDown="ReportingAssistant_MouseDown"/>
+            </StackPanel>
+                 <!--العامود الثاني-->
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" >
+                <local:IQD_FinancialAnalyzerCard x:Name="TestScenarioGenerator" Text="{DynamicResource Testscenariosgenerator}" StartPoint="0,0" EndPoint="1,1" 
+                                                      GradientColor1="#FFFDE7" GradientColor2="#FFD54F"
+                                                       MouseDown="TestScenarioGenerator_MouseDown"/>
 
-                <!--  بطاقة - مساعد التقارير-->
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <local:IQD_FinancialAnalyzerCard x:Name="ReportingAssistant" Text="{DynamicResource ReportAssistant}" StartPoint="0,0" EndPoint="1,1" 
-                                                             GradientColor1="#EEEEEE" GradientColor2="#616161"
-                                                             Width="350" Height="250" MouseDown="ReportingAssistant_MouseDown"/>
-                </StackPanel>
+                <local:IQD_FinancialAnalyzerCard x:Name="CharacterCreator" Text="{DynamicResource Creatorofstorycharacters}" StartPoint="0,0" EndPoint="1,1" 
+                                                      GradientColor1="#FFF3E0" GradientColor2="#FFB74D"
+                                                      MouseDown="CharacterCreator_MouseDown"/>
 
-                <!--بطاقة - مولد سيناريوهات الاختبار-->
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <local:IQD_FinancialAnalyzerCard x:Name="TestScenarioGenerator" Text="{DynamicResource Testscenariosgenerator}" StartPoint="0,0" EndPoint="1,1" 
-                                                             GradientColor1="#FFFDE7" GradientColor2="#FFD54F"
-                                                             Width="350" Height="250" MouseDown="TestScenarioGenerator_MouseDown"/>
-                </StackPanel>
-
-                <!--  بطاقة - منشئ الشخصيات القصصية-->
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <local:IQD_FinancialAnalyzerCard x:Name="CharacterCreator" Text="{DynamicResource Creatorofstorycharacters}" StartPoint="0,0" EndPoint="1,1" 
-                                                             GradientColor1="#FFF3E0" GradientColor2="#FFB74D"
-                                                             Width="350" Height="250" MouseDown="CharacterCreator_MouseDown"/>
-                </StackPanel>
-
-                <!--  بطاقة - مساعد الصيانة-->
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <local:IQD_FinancialAnalyzerCard x:Name="MaintenanceAssistant" Text="{DynamicResource MaintenanceAssistant}" StartPoint="0,0" EndPoint="1,1" 
-                                                             GradientColor1="#FFEBEE" GradientColor2="#E57373" 
-                                                             Width="350" Height="250" MouseDown="MaintenanceAssistant_MouseDown"/>
+                                                      GradientColor1="#FFEBEE" GradientColor2="#E57373" 
+                                                      MouseDown="MaintenanceAssistant_MouseDown"/>
                 </StackPanel>
+                 <!--العامود الثالث--> 
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="2">
 
-                <!--  بطاقة - مساعد تصميم الواجهات-->
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <local:IQD_FinancialAnalyzerCard x:Name="InterfaceDesignAssistant"  Text="{DynamicResource FacadeDesignAssistant}" StartPoint="0,0" EndPoint="1,1" 
-                                                             GradientColor1="#EEEEEE" GradientColor2="#616161" 
-                                                             Width="350" Height="250" MouseDown="InterfaceDesignAssistant_MouseDown"/>
-                </StackPanel>
+                <local:IQD_FinancialAnalyzerCard x:Name="InterfaceDesignAssistant"  Text="{DynamicResource FacadeDesignAssistant}" StartPoint="0,0" EndPoint="1,1" 
+                                                      GradientColor1="#EEEEEE" GradientColor2="#616161" 
+                                                       MouseDown="InterfaceDesignAssistant_MouseDown"/>
+
+                <local:IQD_FinancialAnalyzerCard x:Name="ImageGeneration" Text="{DynamicResource ImageGenerator}" StartPoint="0,0" EndPoint="1,1" 
+                                                      GradientColor1="#F3E5F5" GradientColor2="#BA68C8"
+                                                      MouseDown="ImageGeneration_MouseDown"/>
+
+                <local:IQD_FinancialAnalyzerCard x:Name="EducationalMaterialCreator" Text="{DynamicResource EducationalMaterialsCreator}" StartPoint="0,0" EndPoint="1,1" 
+                                                      GradientColor1="#F3E5F5" GradientColor2="#8E24AA"
+                                                      MouseDown="EducationalMaterialCreator_MouseDown"/>
+
+            </StackPanel>
+            
+            </Grid>
+        
+        </Grid>
 
 
-                <!-- بطاقة - توليد الصور-->
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <local:IQD_FinancialAnalyzerCard x:Name="ImageGeneration" Text="{DynamicResource ImageGenerator}" StartPoint="0,0" EndPoint="1,1" 
-                                                             GradientColor1="#F3E5F5" GradientColor2="#BA68C8"
-                                                             Width="350" Height="250" MouseDown="ImageGeneration_MouseDown"/>
-                </StackPanel>
-
-                <!--بطاقة - منشئ المواد التعليمية-->
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <local:IQD_FinancialAnalyzerCard x:Name="EducationalMaterialCreator" Text="{DynamicResource EducationalMaterialsCreator}" StartPoint="0,0" EndPoint="1,1" 
-                                                             GradientColor1="#F3E5F5" GradientColor2="#8E24AA"
-                                                             Width="350" Height="250" MouseDown="EducationalMaterialCreator_MouseDown"/>
-                </StackPanel>
-
-            </UniformGrid>
-        </Viewbox>
+        <Grid x:Name="GridSubMain" Grid.Row="1" Visibility="Collapsed">
+            <Frame x:Name="MainFrame"/>
+        </Grid>
 
     </Grid>
 

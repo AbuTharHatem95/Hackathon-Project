@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
+using Microsoft.IdentityModel.Tokens;
 
 
 namespace Interface.LogicClasses
@@ -192,7 +193,6 @@ namespace Interface.LogicClasses
                             });
 
                             if (question.BranchzDict != null)
-                            if (question.BranchzDict != null)
                             {
                                 foreach (var branchEntry in question.BranchzDict)
                                 {
@@ -206,7 +206,8 @@ namespace Interface.LogicClasses
                                     {
                                         column.Item().Row(row =>
                                         {
-                                            row.RelativeItem().AlignRight().Text($"- {point.Text} (درجة {point.Score})").FontSize(12);
+                                            //تم التعديل هنا
+                                            row.RelativeItem().AlignRight().Text($"- {point.Text} (درجة {Math.Round(point.Score)})").FontSize(12);
                                         });
                                     }
 
@@ -221,7 +222,8 @@ namespace Interface.LogicClasses
                                 {
                                     column.Item().Row(row =>
                                     {
-                                        row.RelativeItem().AlignRight().Text($"- {point.Text} (درجة {point.Score})").FontSize(12);
+                                        //تم التعديل هنا
+                                        row.RelativeItem().AlignRight().Text($"- {point.Text} (درجة {Math.Round(point.Score)})").FontSize(12);
                                     });
                                 }
                             }
@@ -241,11 +243,10 @@ namespace Interface.LogicClasses
         }
 
 
-        public static async Task<Dictionary<string, List<string>>?> GenerateQuestionsFromPdfUsingAiGpt( List<string> QuestionTypes)
+        public static async Task<Dictionary<string, List<string>>?> GenerateQuestionsFromPdfUsingAiGpt( List<string> QuestionTypes,string FilePath)
         {
-            string pdfContent = ExtractPdfData();
-            if(string.IsNullOrEmpty(pdfContent)) return null;
-            return await clsGptManipulation.QuestionsWithTypes(QuestionTypes, pdfContent);
+            if (FilePath.Length <= 0)  return null;
+            return await clsGptManipulation.QuestionsWithTypes(QuestionTypes, FilePath);
         }
 
 

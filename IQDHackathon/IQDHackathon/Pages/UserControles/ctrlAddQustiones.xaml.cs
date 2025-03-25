@@ -34,7 +34,7 @@ namespace Interface.Pages.UserControles
         // اختيار اسئلة بشكل يدوي
         private void btnAddQustion_Click(object sender, RoutedEventArgs e)
         {
-            QusetionCreater qusetionCreater = new QusetionCreater(ref testpage);
+            QusetionCreater qusetionCreater = new QusetionCreater(ref testpage,this);
             MainGrid.Visibility = Visibility.Collapsed;
             SubGrid.Visibility = Visibility.Visible;
             SubGrid.Children.Add(qusetionCreater);
@@ -45,6 +45,13 @@ namespace Interface.Pages.UserControles
         {
             //هنا يكتب كود ليعيد ملئ دكشنري الاسئلة من خلال جات جي بي تي 
             //TestScenarioGeneratorPage.QuestionsDictFromChatGPT = clsGptManipulation.QuestionsWithTypes()
+        }
+
+        //الرجوع للصفحة السابقة
+        private void btnRetuntomainmenue_Click(object sender, RoutedEventArgs e)
+        {
+            this.Visibility = Visibility.Collapsed;
+            testpage.MainPageGrid.Visibility = Visibility.Visible;
         }
     }
 }

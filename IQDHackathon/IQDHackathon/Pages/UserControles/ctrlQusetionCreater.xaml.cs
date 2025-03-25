@@ -12,16 +12,18 @@ namespace Interface.Pages.UserControles
         ctrlQustionListView? qusetionList = null;
         public clsQuestion? Questions = null;
         private TestScenarioGeneratorPage? Test = null;
+        private AddQustiones addQustion = null;
         clsTitle? title = null;
 
 
         public event EventHandler<(string QustionNum, string QustionTitle, string QustionScor, string NumberOfAnswer)>? DataLoaded;
 
-        public QusetionCreater(ref TestScenarioGeneratorPage test)
+        public QusetionCreater(ref TestScenarioGeneratorPage test, AddQustiones AddQustion)
         {
             InitializeComponent();
             this.DataContext = this;
             Test = test;
+            this.addQustion = AddQustion;
         }
 
         private void GetDataFromListView(object? sender, (bool IsCheck, string Qustion) e)
@@ -130,7 +132,7 @@ namespace Interface.Pages.UserControles
             }
 
             this.Visibility=Visibility.Collapsed;
-            Test.MainPageGrid.Visibility = Visibility.Visible;
+            addQustion.MainGrid.Visibility = Visibility.Visible;
         }
 
         private void OpenPdf(string fullPath)
@@ -148,6 +150,13 @@ namespace Interface.Pages.UserControles
             {
                 MessageBox.Show($"Failed to open PDF: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void btnRetuntomainmenue_Click(object sender, RoutedEventArgs e)
+        {
+            this.Visibility= Visibility.Collapsed;
+            addQustion.SubGrid.Children.Clear();
+            addQustion.MainGrid.Visibility= Visibility.Visible;
         }
     }
 }

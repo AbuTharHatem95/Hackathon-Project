@@ -4,9 +4,11 @@
       xmlns:local="clr-namespace:IQD_UI_Library;assembly=IQD_UI_Library"
       Title="Test Scenario Generator"
       FlowDirection="{DynamicResource AppFlowDirection}"
-      FontFamily="Poppins">
+      FontFamily="Poppins"
+      Background="{DynamicResource PrimaryBackgroundColor}"
+      >
 
-    <Grid Background="{DynamicResource PrimaryBackgroundColor}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -20,23 +22,23 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="1" Margin="0,0,60,0" Source="/Assets/school.png" Height="90" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.479,0.187"/>
-
-            <Grid Grid.Column="0">
+            <!--Logo-->
+            <Viewbox Grid.Column="1" Height="90" RenderOptions.BitmapScalingMode="HighQuality">
+                <Image Source="/Assets/school.png" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+            </Viewbox>
+            <!--الرجوع من الصفحة-->
+            <Viewbox Width="30" Height="30" RenderOptions.BitmapScalingMode="HighQuality"  VerticalAlignment="Top" Margin="9,0,0,0">
                 <Button x:Name="btnRetuntomainmenue" 
                         Click="btnRetuntomainmenue_Click" 
-                        Margin="0,0,0,0" 
-                        Height="50" 
                         Style="{StaticResource BackButtonStyle}"
-                        Grid.Column="0"
-                        VerticalAlignment="Top"
-                        HorizontalContentAlignment="Left"
+                        Cursor="Hand"
                         />
-            </Grid>
+            </Viewbox>
+        
         </Grid>
 
         <!-- Main Content -->
-        <Border Grid.Row="1" Background="{DynamicResource PrimaryBackgroundColor}">
+        <Border Grid.Row="1">
             <Grid x:Name="MainPageGrid" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -57,36 +59,22 @@
 
                     <!-- اسم المدرسة -->
                     <Grid Grid.Row="0" Margin="5">
-
-                        <!--<local:IQD_TextBox x:Name="txtSchoolName" FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="اسم المدرسة" Tag="اسم المدرسة" HorizontalAlignment="Stretch"/>-->
-
                         <local:IQD_TextBox x:Name="txtSchoolName" FontSize="20" Height="55" BorderBrushes="DarkBlue" ToolTip="{DynamicResource txtSchoolName}" Tag="{DynamicResource txtSchoolName}" HorizontalAlignment="Stretch" TextChanged="txtSchoolName_TextChanged"/>
-
                     </Grid>
 
                     <!-- اسم الاستاذ -->
                     <Grid Grid.Row="1" Margin="5">
-
-                        <!--<local:IQD_TextBox x:Name="txtTeacherName" FontSize="20" ToolTip="اسم الاستاذ" Height="55" BorderBrushes="DarkBlue" Tag="اسم الاستاذ" HorizontalAlignment="Stretch"/>-->
-
                         <local:IQD_TextBox x:Name="txtTeacherName" FontSize="20" ToolTip="{DynamicResource txtThecherName}" Height="55" BorderBrushes="DarkBlue" Tag="{DynamicResource txtThecherName}" HorizontalAlignment="Stretch"/>
-
                     </Grid>
 
                     <!-- وقت الامتحان -->
                     <Grid Grid.Row="2" Margin="5">
-
-                        <!--<local:IQD_TextBox x:Name="txtExampleTime" FontSize="20" ToolTip="وقت الامتحان" BorderBrushes="DarkBlue" Height="55" Tag="وقت الامتحان" HorizontalAlignment="Stretch"/>-->
-
                         <local:IQD_TextBox x:Name="txtExampleTime" FontSize="20" ToolTip="{DynamicResource txtExamTime}" BorderBrushes="DarkBlue" Height="55" Tag="{DynamicResource txtExamTime}" HorizontalAlignment="Stretch"/>
-
                     </Grid>
 
                     <!-- نوع الامتحان -->
                     <Grid Grid.Row="3" Margin="5">
-
                         <local:IQD_TextBox x:Name="txtTypeQuze" FontSize="20" ToolTip="{DynamicResource txtExamType}" BorderBrushes="DarkBlue" Height="55" Tag="{DynamicResource txtExamType}" HorizontalAlignment="Stretch"/>
-
                     </Grid>
 
                     <!-- تاريخ الامتحان -->
@@ -98,13 +86,10 @@
                         <local:IQD_TextBox x:Name="txtExapleDate" FontSize="20" ToolTip="{DynamicResource txtEmapleDate}" BorderBrushes="DarkBlue" Height="55" Tag="{DynamicResource txtEmapleDate}" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
                     </Grid>
 
-
                     <!-- الملاحظة -->
                     <Grid Grid.Row="5" Margin="5">
                         <local:IQD_TextBox x:Name="txtNote" FontSize="20" ToolTip="{DynamicResource txtNote}" BorderBrushes="DarkBlue" Height="55" Tag="{DynamicResource txtNote}" HorizontalAlignment="Stretch"/>
                     </Grid>
-
-
 
                 </Grid>
 
@@ -120,12 +105,22 @@
                     <!-- المادة -->
                     <Grid Grid.Row="0" Margin="5">
 
-                        <!--<ComboBox x:Name="CombSubject" ToolTip="المادة" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
-                                  VerticalContentAlignment="Center" Height="55" Tag="المادة" />-->
-
                         <ComboBox x:Name="CombSubject" ToolTip="{DynamicResource cbxSubject1}" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
                                   VerticalContentAlignment="Center" Height="55" Tag="{DynamicResource cbxSubject1}" 
-                                  Foreground="{DynamicResource PrimaryTextColor}" HorizontalAlignment="Stretch" SelectionChanged="CombSubject_SelectionChanged"/>
+                                  Foreground="{DynamicResource PrimaryTextColor}" HorizontalAlignment="Stretch"
+                                  SelectionChanged="CombSubject_SelectionChanged"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                  >
+
+                            <ComboBox.Resources>
+                                <Style TargetType="ComboBoxItem">
+                                    <Setter Property="MinWidth" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ComboBox}}"/>
+                                    <Setter Property="MaxWidth" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ComboBox}}"/>
+                                </Style>
+                            </ComboBox.Resources>
+
+                        </ComboBox>
+                        
                     </Grid>
 
                     <!-- المرحلة -->
@@ -133,7 +128,9 @@
 
                         <ComboBox x:Name="CombStage" ToolTip="{DynamicResource cbxStage}" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
                                   VerticalContentAlignment="Center" Height="55" Tag="{DynamicResource cbxStage}" 
-                                  Foreground="{DynamicResource PrimaryTextColor}" HorizontalAlignment="Stretch" DataContextChanged="CombStage_DataContextChanged" SelectionChanged="CombStage_SelectionChanged" Margin="0,10,0,0" VerticalAlignment="Top">
+                                  Foreground="{DynamicResource PrimaryTextColor}" HorizontalAlignment="Stretch"
+                                  DataContextChanged="CombStage_DataContextChanged"
+                                  SelectionChanged="CombStage_SelectionChanged" Margin="0,10,0,0" VerticalAlignment="Top">
                            
                    
                         </ComboBox>
@@ -141,27 +138,23 @@
 
                     <!-- الصف -->
                     <Grid Grid.Row="2" Margin="5">
-                        <!--<ComboBox x:Name="CombGrade" ToolTip="الصف" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
-                                  VerticalContentAlignment="Center" Height="55" Tag="الصف" />-->
-
                         <ComboBox x:Name="CombGrade" ToolTip="{DynamicResource cbxClass}" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
                                   VerticalContentAlignment="Center" Height="55" Tag="{DynamicResource cbxClass}" 
-                                  Foreground="{DynamicResource PrimaryTextColor}" HorizontalAlignment="Stretch">
-                            <ComboBoxItem>اول</ComboBoxItem>
-                            <ComboBoxItem>ثاني</ComboBoxItem>
-                            <ComboBoxItem>ثالث</ComboBoxItem>
-                            <ComboBoxItem>رابع</ComboBoxItem>
+                                  Foreground="{DynamicResource PrimaryTextColor}" HorizontalAlignment="Stretch" SelectedIndex="0">
+                            <ComboBoxItem>الاول</ComboBoxItem>
+                            <ComboBoxItem>الثاني</ComboBoxItem>
+                            <ComboBoxItem>الثالث</ComboBoxItem>
+                            <ComboBoxItem>الرابع</ComboBoxItem>
+                            <ComboBoxItem>الخامس</ComboBoxItem>
+                            <ComboBoxItem>السادس</ComboBoxItem>
                         </ComboBox>
                     </Grid>
 
                     <!-- الشعبة -->
                     <Grid Grid.Row="3" Margin="5">
-                        <!--<ComboBox x:Name="CombClass" ToolTip="الشعبة" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
-                                  VerticalContentAlignment="Center" Height="55" Tag="الشعبة" />-->
-
                         <ComboBox x:Name="CombClass" ToolTip="{DynamicResource cbxDivision}" FontSize="20" Style="{StaticResource ComboBoxStyle1}" 
                                   VerticalContentAlignment="Center" Height="55" Tag="{DynamicResource cbxDivision}" 
-                                  Foreground="{DynamicResource PrimaryTextColor}" HorizontalAlignment="Stretch">
+                                  Foreground="{DynamicResource PrimaryTextColor}" HorizontalAlignment="Stretch" SelectedIndex="0">
                             <ComboBoxItem>ا</ComboBoxItem>
                             <ComboBoxItem>ب</ComboBoxItem>
                             <ComboBoxItem>ج</ComboBoxItem>
@@ -205,8 +198,6 @@
 
                     <!-- الانشاء والتصدير -->
                     <Grid Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <!--<GroupBox BorderBrush="DarkBlue" BorderThickness="0.2" FontSize="20" Header="الانشاء والتصدير" />-->
-
                         <Grid Grid.Row="1" Margin="0">
                             <GroupBox BorderBrush="DarkBlue" BorderThickness="0.2" FontSize="20" Header="{DynamicResource CreateAndDeploy}" 
                                   Foreground="{DynamicResource PrimaryTextColor}" Margin="0,2,10,0">
@@ -223,7 +214,7 @@
                                                       ToolTip="اختيار ملف المادة لانشاء نموذج باستخدام الذكاء الاصطناعي" 
                                                       Style="{StaticResource ButtonsWithIconStyle}"
                                                       Icon="/Assets/export.png"
-                                                      Content="نموذج GPT"
+                                                      Content="{StaticResource btnGentertWithGPT}"
                                                       
                                                       >
                                         </local:IQD_Button>
@@ -236,7 +227,7 @@
                                                       ToolTip="رفع الملف لاختيار الاسئلة بشكل يدوي"
                                                       Icon="/Assets/export.png"
                                                       Style="{StaticResource ButtonsWithIconStyle}"
-                                                      Content="اختيار الاسئلة"
+                                                      Content="{StaticResource btnChooesQustiones}"
                                                       >
                                         </local:IQD_Button>
                                     </Grid>
@@ -249,7 +240,6 @@
         </Border>
 
        
-
         <!-- Questions Page -->
         <Grid x:Name="SubMain" Visibility="Collapsed" Grid.Row="0" Grid.RowSpan="3">
         </Grid>

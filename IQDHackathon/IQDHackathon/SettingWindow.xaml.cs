@@ -1,6 +1,6 @@
 ﻿using Interface.Properties;
-using IQDHackathon.Themes;
 using IQDHackathon;
+using IQDHackathon.Themes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,18 +13,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Media.Media3D;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Interface.Pages
+namespace Interface
 {
     /// <summary>
-    /// Interaction logic for SettingPage.xaml
+    /// Interaction logic for SettingWindow.xaml
     /// </summary>
-    public partial class SettingPage : Page
+    public partial class SettingWindow : Window
     {
-        public SettingPage()
+        public SettingWindow()
         {
             InitializeComponent();
         }
@@ -49,14 +47,15 @@ namespace Interface.Pages
             }
         }
 
-        private void rdLight_Checked(object sender, RoutedEventArgs e)
-        {
-            ThemesController.SetTheme(ThemesController.ThemeTypes.Light);
-        }
-
         private void rdDark_Checked(object sender, RoutedEventArgs e)
         {
             ThemesController.SetTheme(ThemesController.ThemeTypes.Dark);
+
+        }
+
+        private void rdLight_Checked(object sender, RoutedEventArgs e)
+        {
+            ThemesController.SetTheme(ThemesController.ThemeTypes.Light);
         }
 
         private void rdEnglish_Checked(object sender, RoutedEventArgs e)
@@ -72,16 +71,27 @@ namespace Interface.Pages
         private void rchecked_Checked(object sender, RoutedEventArgs e)
         {
 
-           
+
 
         }
 
-        private void btnSetting_Click(object sender, RoutedEventArgs e)
-        {
-            var mainWindow = new MainWindow();
-            mainWindow.Show();
-            Window.GetWindow(this).Close();
 
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void btnRestore_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Normal)
+                WindowState = WindowState.Maximized;
+            else
+                WindowState = WindowState.Normal;
+        }
+
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
         }
     }
 }

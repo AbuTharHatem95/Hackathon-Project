@@ -28,9 +28,6 @@
     <Compile Update="Pages\ReportAssistantPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\SettingPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Pages\StoryCharacterPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -56,6 +53,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\UserControles\ctrlQustionListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="SettingWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

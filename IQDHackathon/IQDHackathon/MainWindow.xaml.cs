@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using BLL;
+using Interface;
 using Interface.Logic;
 using Interface.Pages;
 using IQD_UI_Library;
@@ -21,17 +22,6 @@ namespace IQDHackathon
         public MainWindow()
         {
             InitializeComponent();
-            try
-            {
-                var assembly = Assembly.Load("DAL");
-                // استمر في تنفيذ الكود
-            }
-            catch (FileNotFoundException ex)
-            {
-                MessageBox.Show("المكتبة DAL غير موجودة. الرجاء التحقق من المراجع.");
-            }
-
-
             DataTable dt = new DataTable();
             dt = clsSettings.GetAll();
             if (dt.Rows.Count>0)
@@ -165,7 +155,10 @@ namespace IQDHackathon
 
         private void TestScenarioGenerator_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Content = new TestScenarioGeneratorPage();
+            TestScenarioGeneratorPage test = new TestScenarioGeneratorPage();
+            GridMain.Visibility = Visibility.Collapsed;
+            GridSubMain.Visibility = Visibility.Visible;
+            MainFrame.Navigate(test);
         }
 
         private void CharacterCreator_MouseDown(object sender, MouseButtonEventArgs e)
@@ -200,17 +193,24 @@ namespace IQDHackathon
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
         }
 
         private void btnSetting_Click(object sender, RoutedEventArgs e)
         {
-            Content = new SettingPage();
+            SettingWindow setting = new SettingWindow();
+            setting.ShowDialog();
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
         }
     }
 }

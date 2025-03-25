@@ -45,12 +45,14 @@ namespace DVLD_DataAccess
             try
             {
                 _Connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                if (reader.HasRows)
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    dt.Load(reader);
-                    reader.Close();
+                    if (reader.HasRows)
+                    {
+                        dt.Load(reader);
+                    }
                 }
+                
             }
             catch (Exception ex)
             {

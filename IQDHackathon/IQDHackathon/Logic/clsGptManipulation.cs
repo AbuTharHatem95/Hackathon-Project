@@ -11,20 +11,28 @@ namespace Interface.LogicClasses
         public static StringBuilder GetGptPromptByPdfContent(string pdfContent, List<string> QuestionTypes)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append("قم بإنشاء 6 أسئلة لكل من الأنماط التالية: ");
+
+            stringBuilder.AppendLine("قم بإنشاء 6 أسئلة لكل من الأنماط التالية بناءً على هذا المحتوى دون إضافة أرقام تلقائية في بداية الأسئلة:");
+            stringBuilder.AppendLine("------------------------------------------------");
+            stringBuilder.AppendLine(pdfContent);
+            stringBuilder.AppendLine("------------------------------------------------");
+            stringBuilder.AppendLine("يجب أن يكون التنسيق كما يلي:");
+            stringBuilder.AppendLine("نمط السؤال: [اسم النمط]");
+            stringBuilder.AppendLine("- نص السؤال الأول");
+            stringBuilder.AppendLine("....");
+            stringBuilder.AppendLine("------------------------------------------------");
+
             foreach (string Type in QuestionTypes)
             {
-                stringBuilder.Append($"{Type}, ");
+                stringBuilder.AppendLine($"[نمط السؤال: {Type}]");
             }
-            stringBuilder.AppendLine($"بناءً على هذا المحتوى:\n{pdfContent}");
-            stringBuilder.AppendLine("بدون ترقيم الاسئلة");
 
             return stringBuilder;
-
         }
 
 
-        public  static async Task<string?> GenerateQuestionsByPrompt(string prompt)
+
+        public static async Task<string?> GenerateQuestionsByPrompt(string prompt)
         {
             if (string.IsNullOrEmpty(prompt)) return null;
             if (string.IsNullOrEmpty(clsGlobal.AISetting.ApiKey))
@@ -96,24 +104,37 @@ namespace Interface.LogicClasses
         }
 
 
-        public static async Task<Dictionary<string, List<string>>?> QuestionsWithTypes(List<string>QuestionTypes, string pdfContent)
+        public static async Task<Dictionary<string, List<string>>?> QuestionsWithTypes(List<string> QuestionTypes, string pdfContent)
         {
             Dictionary<string, List<string>> questionsDictFromChatGPT = new Dictionary<string, List<string>>();
-            List<string>? questions = await GenerateQuestionsInListByPdfContent(pdfContent, QuestionTypes);
-            if (questions == null || questions.Count == 0) return null;
-            int index = 0;
-            foreach (var style in QuestionTypes)
+
+            string? responseText = await GenerateQuestionsByPrompt(GetGptPromptByPdfContent(pdfContent, QuestionTypes).ToString());
+
+            if (string.IsNullOrEmpty(responseText)) return null;
+
+            // 🔍 طباعة النتيجة للتحقق من شكل البيانات القادمة من ChatGPT
+            Console.WriteLine("Response from ChatGPT:\n" + responseText);
+
+            // تقسيم النص بناءً على الأنماط
+            string[] sections = responseText.Split(new[] { "[نمط السؤال:" }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (var section in sections)
             {
-                if (!questionsDictFromChatGPT.ContainsKey(style))
-                {
-                    questionsDictFromChatGPT[style] = new List<string>();
-                }
+                string[] lines = section.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+                if (lines.Length < 2) continue;
 
-                // أخذ 6 أسئلة لكل نمط (إذا كانت متوفرة)
-                var styleQuestions = questions.Skip(index).Take(6).ToList();
-                questionsDictFromChatGPT[style].AddRange(styleQuestions);
+                // استخراج اسم النمط
+                string style = lines[0].Split(']').FirstOrDefault()?.Trim();
+                if (string.IsNullOrEmpty(style)) continue;
 
-                index += 6; // الانتقال إلى الأسئلة التالية لكل نمط
+                // البحث عن أقرب تطابق مع الأنماط المتاحة
+                string? matchedStyle = QuestionTypes.FirstOrDefault(qt => qt.Contains(style, StringComparison.OrdinalIgnoreCase));
+
+                if (string.IsNullOrEmpty(matchedStyle)) continue;
+
+                // استخراج الأسئلة
+                List<string> extractedQuestions = lines.Skip(1).Select(q => q.Trim()).Where(q => q.Length > 3).ToList();
+                questionsDictFromChatGPT[matchedStyle] = extractedQuestions;
             }
 
             return questionsDictFromChatGPT;

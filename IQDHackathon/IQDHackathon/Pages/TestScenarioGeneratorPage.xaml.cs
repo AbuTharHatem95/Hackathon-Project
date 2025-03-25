@@ -1,14 +1,13 @@
 ﻿using BLL;
-using Interface.Logic;
 using Interface.LogicClasses;
 using Interface.Pages.UserControles;
-using IQD_UI_Library;
 using IQDHackathon;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 using System.ComponentModel;
 using System.Data;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -18,7 +17,7 @@ namespace Interface.Pages
    
     public partial class TestScenarioGeneratorPage : Page
     {
-        private readonly string? __openAiApiKey =  Environment.GetEnvironmentVariable("OPENAI_API_KEY");
+      //  private readonly string? __openAiApiKey =  Environment.GetEnvironmentVariable("OPENAI_API_KEY");
 
         public List<StyleModel> Styles { get; set; }
 
@@ -49,6 +48,59 @@ namespace Interface.Pages
             return false;
         }
 
+        private void FillComboBox()
+        {
+            FillComboBoxStage();
+            FillComboBoxSubject((int)CombStage.SelectedValue);
+            FillQuestionTypes((int)CombSubject.SelectedValue);
+
+        }
+       
+        //المادة
+        private void FillComboBoxSubject(int stageId)
+        {
+            CombSubject.ItemsSource = null;
+            CombSubject.Items.Clear();
+            if (stageId != null)
+            {
+                CombSubject.ItemsSource = clsSubject.GetAllSubjectsByStage(stageId).DefaultView;
+                CombSubject.DisplayMemberPath = "SubjectName";
+                CombSubject.SelectedValuePath = "SubjectId";
+                CombSubject.SelectedIndex = 0;
+            }
+        }
+       
+        //المرحلة
+        private void FillComboBoxStage()
+        {
+            CombStage.ItemsSource = clsStage.GetAll().DefaultView;
+            CombStage.DisplayMemberPath = "StageName";
+            CombStage.SelectedValuePath = "StageId";
+
+            if (CombStage.Items.Count > 0)
+            {
+                CombStage.SelectedIndex = 0;
+                FillComboBoxSubject((int)CombStage.SelectedValue); // تحميل المواد مباشرة بعد تحديد المرحلة
+            }
+        }
+        
+        //انماط الاسئلة
+        private void FillQuestionTypes(int subjectId)
+        {
+            DataTable dt = clsQuestionsType.GetAllQuestionTypesBySubject(subjectId);
+            Styles = new List<StyleModel>();    
+            
+            foreach (DataRow dr in dt.Rows)
+            {
+                Styles.Add(new StyleModel { Name = dr[0].ToString()!, IsSelected = false });
+            }
+
+            CheckBoxList.ItemsSource = Styles; 
+
+        }
+        
+        
+
         //انشاء نموذج بشكل دينمايكي باستخدام GPT
         private async void GenretWithGPT_Click(object sender, RoutedEventArgs e)
         {
@@ -67,33 +119,28 @@ namespace Interface.Pages
 
             var selectedStyles = Styles.Where(style => style.IsSelected).Select(style => style.Name).ToList();
 
-            if(selectedStyles.Count == 0)
+            if (selectedStyles.Count == 0)
             {
-                MessageBox.Show("يجب اختيار انماط الاسئلة", "تحذير", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("يجب اختيار أنماط الأسئلة", "تحذير", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            MessageBox.Show("ارفق ملف مادة الامتحان", "رسالة", MessageBoxButton.OK, MessageBoxImage.Information);
-            MessageBox.Show("يرجى الانتظار بينما يقوم الذكاء الاصطناعي بتوليد الاسئلة", "رسالة", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("أرفق ملف مادة الامتحان", "رسالة", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            StringBuilder pdfContent = new StringBuilder();
+            pdfContent.Append(clsPdfManipulation.ExtractPdfData());
+            
+            IQD_UI_Library.IQD_LoadingControl load = new IQD_UI_Library.IQD_LoadingControl();
+            Task loadingTask = Task.Run(() => load.Dispatcher.Invoke(() => load.ShowDialog()));
+
+            await Task.Run(async () =>
+                QuestionsDictFromChatGPT = await clsPdfManipulation.GenerateQuestionsFromPdfUsingAiGpt(selectedStyles, pdfContent.ToString())
+            );
 
 
-            QuestionsDictFromChatGPT = await clsPdfManipulation.GenerateQuestionsFromPdfUsingAiGpt(selectedStyles);
 
+            load.Dispatcher.Invoke(() => load.Close());
 
-            byte Count = 5;
-
-            //while (QuestionsDictFromChatGPT.Count <= 0 && Count > 0) 
-            //{
-
-            //    QuestionsDictFromChatGPT = await clsPdfManipulation.GenerateQuestionsFromPdfUsingAiGpt(selectedStyles);
-            //    Count--;
-
-            //}
-            //if (Count == 0)
-            //{
-            //    MessageBox.Show("لم يتم تحميل الاسئلة بنجاح , هناك مشكلة في الاتصال!!", "خطأ",MessageBoxButton.OK, MessageBoxImage.Error);
-            //}
-           
             MainPageGrid.Visibility = Visibility.Collapsed;
             SubMain.Visibility = Visibility.Visible;
             SubMain.Children.Clear();
@@ -101,46 +148,6 @@ namespace Interface.Pages
         }
 
 
-        private void FillQuestionTypes(int subjectId)
-        {
-            DataTable dt = clsQuestionsType.GetAllQuestionTypesBySubject(subjectId);
-            Styles = new List<StyleModel>();    
-            
-            foreach (DataRow dr in dt.Rows)
-            {
-                Styles.Add(new StyleModel { Name = dr[0].ToString()!, IsSelected = false });
-            }
-
-            CheckBoxList.ItemsSource = Styles; 
-
-        }
-        private void FillComboBox()
-        {
-            FillComboBoxStage();
-            FillComboBoxSubject((int)CombStage.SelectedValue);
-            FillQuestionTypes((int)CombSubject.SelectedValue);
-
-        }
-        private void FillComboBoxStage()
-        {
-            CombStage.ItemsSource = clsStage.GetAll().DefaultView;
-            CombStage.DisplayMemberPath = "StageName";
-            CombStage.SelectedValuePath = "StageId";
-
-            CombStage.SelectedIndex = 0;
-        }
-        private void FillComboBoxSubject(int stageId)
-        {
-            CombSubject.ItemsSource = null;
-            CombSubject.Items.Clear();
-            if (stageId != null)
-            {
-                CombSubject.ItemsSource = clsSubject.GetAllSubjectsByStage(stageId).DefaultView;
-            }
-            CombSubject.DisplayMemberPath = "SubjectName";
-            CombSubject.SelectedValuePath = "SubjectId";
-            CombSubject.SelectedIndex = 0;
-        }
 
         //بناء نموذج الاسئلة
         public void GeneratePdf(ref string fullPath)
@@ -283,9 +290,10 @@ namespace Interface.Pages
 
         private void CombStage_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // FillComboBoxSubject(Convert.ToInt32(CombStage.SelectedValuePath));
-           
-           FillComboBoxSubject((int)CombStage.SelectedValue);
+            if (CombStage.SelectedValue != null)
+            {
+                FillComboBoxSubject((int)CombStage.SelectedValue);
+            }
         }
 
         private void txtSchoolName_TextChanged(object sender, TextChangedEventArgs e)
